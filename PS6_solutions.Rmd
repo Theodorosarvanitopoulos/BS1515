@@ -1,0 +1,267 @@
+---
+title: "Problem Set 6 - Introduction to statistics and descriptive statistics - Solutions"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+css: cardiff.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+  
+
+# Exercise
+
+**Identify each variable as categorical or quantitative:**
+
+a. Level of education (high school, bachelor’s, master…)  
+b. Number of times married.  
+c. Hair color.  
+d. Preferred type of exercise.  
+e. Type of residence (rented apartment, owned apartment, rented house, owned house).  
+f. Number of household members.  
+g. Height.  
+h. Field of studies (humanities, social sciences, natural sciences).  
+i. Number of close friends.
+
+**Answer:**  
+(a) categorical  
+(b) quantitative  
+(c) categorical  
+(d) categorical  
+(e) categorical  
+(f) quantitative  
+(g) quantitative  
+(h) categorical  
+(i) quantitative
+
+
+# Exercise 
+
+In June an investor purchased 300 shares of Oracle at $20 a share. In August she purchased an additional 400 shares at $25 per share. In November she purchased another 400 shares at $23. What is the mean price paid for shares by this investor?
+
+**Answer:**  
+
+Purchased shares:  
+- 300 shares at £20  
+- 400 shares at £25  
+- 400 shares at £23 
+
+Mean Price Paid:
+$$
+M \;=\; \frac{\sum_{i} (\text{price}_i \times \text{shares}_i)}{\sum_{i} \text{shares}_i}= \frac{(300*20 + 400*25 + 400*23)}{1100} = \frac{25200}{1100} = 22.91
+$$
+
+
+
+
+# Exercise 
+
+The five year annualised total returns of six mutual funds are given in the table below, What is the mean return, what is the median return, what is the geometric mean? Is the distribution of returns skewed?  
+
+| Name of funds       | return (r) |
+|:--------------------|:-----------|
+| PBHG                | 28.5%      |
+| Dean Witter         | 17.2%      |
+| AIM                 | 25.4%      |
+| Giftrust            | 28.6%      |
+| Robertson Stevens   | 22.6%      |
+| Seligman            | 21.0%      |
+
+**Answer:**  
+
+The number of funds is even (6).  
+
+Order the returns from the lowest to the highest:  
+
+17.2%  21.0% 22.6% 25.4% 28.5% 28.6% the median is between the 3rd and 4th returns, i.e. between 22.6 and 25.4.    
+
+Taking the mid-point of this interval, median = ((22.6+25.4)/2 = 24).  
+
+The arithmetic mean = $\sum(r)/6 = 23.88$    
+
+Geometric mean: $\bar{r_g}={(x_1 x_2  x_3...x_n)}^{1/2}-1=(28.5*17.2*25.4*28.6*22.6*21)^{1/6}-1=22.51$
+  
+Mean<median => the distribution is negatively skewed.
+
+---
+  
+
+# Exercise
+
+Your salary this year is £30,000, your employer promised you a 5% increase this year, and a 15% increase the year after – what will be your salary in two years time – what is the average annual salary increase over the period?  
+
+**Answer:**  
+
+Year 1: \(30000\times1.05 = 31500\)  
+
+Year 2: \(31500 \times 1.15 = 36225\)  
+
+The average salary increase is given by the geometric mean – not the arithmetic one  
+
+\[
+GM =  \big((1.05) (1.15)\big)^{1/2}-1=1.09886-1=0.09886=9.886% per year approx 
+\]
+
+You can check that \(30000 \times 1.09886 = 32965.80;\ 32965.8 \times 1.09886 = 36224.80\) – almost equal to 36225 calculated above.
+
+---
+
+
+# Exercise 
+
+The following are the earnings per share for a sample of 15 software companies for the year 2008. The earnings are ranked from the smallest to the largest.  
+
+0.09  0.13  0.41  0.51  1.12  1.20  1.49  3.18  3.50  6.36  7.83  8.92  10.13  12.99  16.40  
+
+Compute the mean, median and standard deviation. Is the distribution skewed?
+
+**Answer:**  
+
+Mean:
+$$
+\bar{x} \;=\; \frac{1}{n}\sum_{i=1}^n x_i=\frac{74.26}{15} \;=\; 4.951.
+$$
+Median:
+
+For odd \(n\), the median is the \(\frac{n+1}{2}\)-th value in the ordered list.
+
+$$
+\text{Median} \;=\; x_{(8)} \;=\; 3.18.
+$$
+Sample standard deviation
+
+$$
+s^2 \;=\; \sqrt{\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})^2} = \sqrt{\frac{381.7355}{14}}  =\sqrt{27.2668} =5.224
+$$
+
+Skewness 
+
+Since $\bar{x}=4.951$ is **greater** than the median \(3.18\), and there are several large EPS values in the right tail (e.g., 12.99, 16.40), the distribution is **positively (right) skewed**.
+
+
+
+---
+
+
+# Exercise 
+
+Listed below are the commissions earned last months by a sample of 15 brokers.  
+
+2,038    1,758   1,721   1,637   2,097   2,047   2,205   1,787   2,287   1,940   2,311   2,054  2,406   1,471   1,460  
+
+Locate the median, first quartile, third quartile for the commissions earned?  
+
+**Answer:**  
+
+First put the data from the smallest to the largest, the median is the value observed in the centre,  
+
+\ 1,460   1,471    1,637  1,721  1,758     1,787   1,940   2,038    2,047 2,054   2,097     2,205    2,287   2,311   2,406  \    
+
+In this case, the 8th value: 2,038 – half of the brokers have earned more than this amount, and half have earned less.  
+
+The first quartile is composed of the first 25% observation:  
+
+First quartile position: \((n+1) p/100 = 16 \times 25/100 = 4\), so the 4th observation is our 1st quartile value. \(Q1= 1,721\)  
+
+Similarly the third quartile position: \(16\times 75/100 =12,\ Q3= 2,205.\)  
+
+---
+
+
+
+# Exercise 
+
+The frequency distribution of the vehicle selling prices at Autoplex is the following?  
+
+| Selling price in £1,000 | Frequency |
+|:------------------------|----------:|
+| 15-18                   | 8         |
+| 18-21                   | 23        |
+| 21-24                   | 17        |
+| 24-27                   | 18        |
+| 27-30                   | 8         |
+| 30-33                   | 4         |
+| 33-36                   | 2         |
+| **Total**               | **80**    |
+
+What is the population mean price and variance of the vehicle sold?   
+
+**Answer:**  
+
+Construct the working table (e.g. using excel)
+
+| Selling price in £1,000 | Frequency (F) | mid point (m) | Cumulative frequency | $F*m$ | $(m-\bar{x})^2$ | $F*(m-\bar{x})^2$ |
+|:------------------------|----------:|----------:|---------------------:|----:|-----------:|-------------:|
+| 15-18                   | 8         | 16.5      | 8                    | 132 | 43.06640625 | 344.5313     |
+| 18-21                   | 23        | 19.5      | 31                   | 448.5 | 12.69140625 | 291.9023   |
+| 21-24                   | 17        | 22.5      | 48                   | 382.5 | 0.31640625  | 5.378906    |
+| 24-27                   | 18        | 25.5      | 66                   | 459 | 5.94140625  | 106.9453    |
+| 27-30                   | 8         | 28.5      | 74                   | 228 | 29.56640625 | 236.5313    |
+| 30-33                   | 4         | 31.5      | 78                   | 126 | 71.19140625 | 284.7656    |
+| 33-36                   | 2         | 34.5      | 80                   | 69  | 130.8164063 | 261.6328    |
+| **Total**               | **80**    |           |                      | **1845** |            | **1531.688** |
+
+ or using R 
+ 
+```{r, echo=TRUE}
+# Data
+classes <- c("15-18","18-21","21-24","24-27","27-30","30-33","33-36")
+freq    <- c(8,23,17,18,8,4,2)
+mid     <- c(16.5,19.5,22.5,25.5,28.5,31.5,34.5)
+
+# Totals
+N       <- sum(freq)
+fm      <- freq * mid
+mean_x  <- sum(fm)/N
+
+# Variance components
+sq_diff <- (mid - mean_x)^2
+f_sq    <- freq * sq_diff
+var_pop <- sum(f_sq)/N
+sd_pop  <- sqrt(var_pop)
+
+# Build table
+df <- data.frame(
+  Class = classes,
+  F = freq,
+  m = mid,
+  `F*m` = round(fm,2),
+  `(m - x̄)^2` = round(sq_diff,4),
+  `F*(m - x̄)^2` = round(f_sq,4)
+)
+df
+```
+
+Mean: 
+
+
+$$
+\bar{x} = \frac{\sum f_i m_i}{N} = \frac{1845}{80} = 23.0625 \;\; 
+$$
+
+Variance: 
+
+$$
+\sigma^2 = \frac{\sum f_i (m_i - \bar{x})^2}{N}= \frac{1531.6875}{80} = 19.1461 \;\; 
+$$
+
+Standard deviation:
+
+$$
+\sigma = \sqrt{\sigma^2}\ = \sqrt{19.1461} = 4.376 \;\; 
+$$
+
+
+- **Population mean:** \(23.06\) (thousand £) → £23,063  
+- **Population variance:** \(19.15\) (thousand £\(^2\))  
+- **Population standard deviation:** \(4.38\) (thousand £) → £4,376
+
+---
+
+

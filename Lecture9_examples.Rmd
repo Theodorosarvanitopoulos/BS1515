@@ -1,0 +1,295 @@
+---
+title: "Lecture 9: Examples"
+subtitle: "Mathematics and Statistics BS1515"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  slidy_presentation:
+    font_adjustment: 0
+    footer: "Arvanitopoulos T - Lecture 9: Examples"
+css: cardiff.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set( warning=FALSE, message=FALSE)
+library(ggplot2)
+```
+
+
+## Example 1 - Confidence intervals when $\sigma$ known {.smaller}
+
+### Problem overview 
+
+A sample of 11 circuits from a large normal population has a mean resistance of 2.20 ohms. We know from past testing that the population standard deviation is 0.35 ohms.  \
+
+Determine a 95% confidence interval for the true mean resistance of the population.
+
+---
+
+## Example 1 - Confidence intervals when $\sigma$ known {.smaller}
+
+### Problem overview 
+
+A sample of 11 circuits from a large normal population has a mean resistance of 2.20 ohms. We know from past testing that the population standard deviation is 0.35 ohms.  \
+
+Determine a 95% confidence interval for the true mean resistance of the population.
+
+### Problem solution
+
+We use the formula for the confidence interval of the population mean when $\sigma$ is known
+
+$$
+\bar{x} \pm \frac{\sigma}{\sqrt{n}} \\
+= 2.20 \pm 1.96 (0.35 / \sqrt{11}) \\
+= 2.20 \pm 0.2068 \\
+$$
+
+So, the interval is 
+$$
+1.9932 < \mu < 2.4068
+$$
+
+---
+
+## Example 1 - Confidence intervals when $\sigma$ known {.smaller}
+
+### Problem overview 
+
+A sample of 11 circuits from a large normal population has a mean resistance of 2.20 ohms. We know from past testing that the population standard deviation is 0.35 ohms.  \
+
+Determine a 95% confidence interval for the true mean resistance of the population.
+
+### Problem solution
+
+We use the formula for the confidence interval of the population mean when $\sigma$ is known
+
+$$
+\bar{x} \pm \frac{\sigma}{\sqrt{n}} \\
+= 2.20 \pm 1.96 (0.35 / \sqrt{11}) \\
+= 2.20 \pm 0.2068 \\
+$$
+
+So, the interval is 
+$$
+1.9932 < \mu < 2.4068
+$$
+
+### Interpretation  
+
+We are **95% confident** that the true mean resistance of the population lies between 1.9932 ohms and 2.4068 ohms.
+
+This does not mean the true mean is definitely in this range. It means that if we repeated this sampling method many times, 95% of such intervals would contain the true population mean.
+
+
+
+## Example 1 - Problem solution using R {.smaller}
+
+```{r ci-known-sigma, message=FALSE}
+# Known values from the problem
+x_bar <- 2.20        # Sample mean
+sigma <- 0.35        # Population standard deviation
+n <- 11              # Sample size
+z_critical <- 1.96   # Z value for 95% confidence level
+
+# Standard error
+se <- sigma / sqrt(n)
+
+# Margin of error
+margin_error <- z_critical * se
+
+# Confidence interval
+ci_lower <- x_bar - margin_error
+ci_upper <- x_bar + margin_error
+
+# Output the interval with explanation
+cat("95% Confidence Interval:\n")
+cat(sprintf("Lower bound: %.4f\n", ci_lower))
+cat(sprintf("Upper bound: %.4f\n", ci_upper))
+```
+
+
+
+## Example 2 - Confidence Interval when $\sigma$ unknown {.smaller}
+
+### Problem overview
+
+A random sample of 16 gas grills has a mean ignition time of 0.51 seconds and a sample standard deviation of 0.08 seconds.Assume ignition time is approximately normally distributed. 
+
+Construct a 95% confidence interval for the true mean ignition time.
+
+---
+
+## Example 2 - Confidence Interval when $\sigma$ unknown {.smaller}
+
+### Problem overview
+
+A random sample of 16 gas grills has a mean ignition time of 0.51 seconds and a sample standard deviation of 0.08 seconds.Assume ignition time is approximately normally distributed. 
+
+Construct a 95% confidence interval for the true mean ignition time.
+
+### Problem solution
+
+Since $\sigma$ is not known, we given this is approximately normally distributed, we use the t-distribution. Degrees of freedom: $df = n - 1 = 15$ and thus $t_{df=15, \ \alpha/2} = 2.131$ from t-table
+
+We use the formula for the confidence interval : \
+
+$$
+\bar{x} - t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} < \mu < \bar{x} + t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} \\
+0.51-(2.131) \frac{0.08}{4} < \mu < 0.51+(2.131) \frac{0.08}{4} \\
+$$
+
+So, the interval is 
+$$
+0.4673 < \mu < 0.5526
+$$
+
+---
+
+## Example 2 - Confidence Interval when $\sigma$ unknown {.smaller}
+
+### Problem overview
+
+A random sample of 16 gas grills has a mean ignition time of 0.51 seconds and a sample standard deviation of 0.08 seconds.Assume ignition time is approximately normally distributed. 
+
+Construct a 95% confidence interval for the true mean ignition time.
+
+### Problem solution
+
+Since $\sigma$ is not known, we given this is approximately normally distributed, we use the t-distribution. Degrees of freedom: $df = n - 1 = 15$ and thus $t_{df=15, \ \alpha/2} = 2.131$ from t-table
+
+We use the formula for the confidence interval : \
+
+$$
+\bar{x} - t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} < \mu < \bar{x} + t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} \\
+0.51-(2.131) \frac{0.08}{4} < \mu < 0.51+(2.131) \frac{0.08}{4} \\
+$$
+
+So, the interval is 
+$$
+0.4673 < \mu < 0.5526
+$$
+
+### Interpretation
+
+We are 95% confident that the true mean ignition time is between 0.4673 seconds and 0.5526 seconds. \
+
+This means that 95% of such intervals, computed in the same way from random samples of size 16, would contain the true population mean.
+
+
+
+## Example 2 - Problem solution using R {.smaller}
+
+
+
+```{r}
+# Sample statistics
+x_bar <- 0.51         # Sample mean
+s <- 0.08             # Sample standard deviation
+n <- 16               # Sample size
+df <- n - 1           # Degrees of freedom
+t_critical <- 2.131   # From t-table for 95% CI and df = 15
+
+# Standard error
+se <- s / sqrt(n)
+
+# Margin of error
+error_margin <- t_critical * se
+
+# Confidence interval bounds
+lower <- x_bar - error_margin
+upper <- x_bar + error_margin
+
+# Print formatted result
+cat("95% Confidence Interval (t-distribution):\n")
+cat(sprintf("Lower bound: %.4f\n", lower))
+cat(sprintf("Upper bound: %.4f\n", upper))
+``` 
+
+
+
+## Example 3 - Confidence Interval for a Population Proportion {.smaller}
+
+### Problem Overview
+
+A random sample of 100 people reveals that 25 are left-handed. 
+
+We are asked to construct a 95% confidence interval for the true proportion of left-handers in the population.
+
+---
+
+## Example 3 - Confidence Interval for a Population Proportion {.smaller}
+
+### Problem Overview
+
+A random sample of 100 people reveals that 25 are left-handed. 
+
+We are asked to construct a 95% confidence interval for the true proportion of left-handers in the population.
+
+### Problem solution
+
+We use the formula for the confidence interval for population proportions:
+$$
+\hat{p} - z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} < P < \hat{p} + z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} \\
+(or \  \hat{p} \pm z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n})  \\
+25/100 - 1.96 \sqrt{ \frac{0.25(0.75)}{100}} < P < 25/100 + 1.96 \sqrt{ \frac{0.25(0.75)}{100}}  \\
+0.1651 < P < 0.3349
+$$
+
+---
+
+## Example 3 - Confidence Interval for a Population Proportion {.smaller}
+
+### Problem Overview
+
+A random sample of 100 people reveals that 25 are left-handed. 
+
+We are asked to construct a 95% confidence interval for the true proportion of left-handers in the population.
+
+### Problem solution
+
+We use the formula for the confidence interval for population proportions:
+$$
+\hat{p} - z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} < P < \hat{p} + z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} \\
+(or \  \hat{p} \pm z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n})  \\
+25/100 - 1.96 \sqrt{ \frac{0.25(0.75)}{100}} < P < 25/100 + 1.96 \sqrt{ \frac{0.25(0.75)}{100}}  \\
+0.1651 < P < 0.3349
+$$
+
+
+### Interpretation
+
+We are 95% confident that the true proportion of left-handers in the population lies between  16.51% and 33.49%.
+
+That is, if we took many samples of 100 people and calculated confidence intervals in the same way, about 95% of them would contain the true population proportion.
+
+
+
+## Example 3 - Problem solution using R {.smaller}
+
+
+```{r}
+# Given values
+x <- 25                # Number of left-handers
+n <- 100               # Sample size
+phat <- x / n          # Sample proportion
+z <- 1.96              # Z-value for 95% confidence level
+
+# Standard error
+se <- sqrt(phat * (1 - phat) / n)
+
+# Margin of error
+me <- z * se
+
+# Confidence interval
+lower <- round(phat - me, 4)
+upper <- round(phat + me, 4)
+
+# Output results
+cat("95% Confidence Interval for Population Proportion:\n")
+cat(sprintf("Lower bound: %.4f\n", lower))
+cat(sprintf("Upper bound: %.4f\n", upper))
+```
+
+
+
+

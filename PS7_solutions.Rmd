@@ -1,0 +1,348 @@
+---
+title: "Problem Set 7 - Probability and probability distribution (discrete variables) - Solutions"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+css: cardiff.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Exercise
+
+**a)** What is a sample space?  
+
+
+**Answer:** A sample space is a list of all possible outcomes of a random experiment.
+
+**b)** What is the difference between an ‘event’ and an ‘outcome’?  
+
+**Answer:** An outcome is the result of a random experiment (or trial). An event is a collection of one or more of these outcomes.
+
+**c)** Explain the meaning of the term *mutually exclusive*.  
+
+If 2 events \(A\) and \(B\) are mutually exclusive, what can we say about \(\Pr(A \cup B)\)? What about \(\Pr(A \cap B)\)?  
+
+**Answer:** Two events are mutually exclusive if they cannot occur simultaneously. Hence:  
+\[
+\Pr(A \cap B) = 0 \quad \text{and} \quad \Pr(A \cup B) = \Pr(A) + \Pr(B)
+\]
+
+**d)** Define the term *independent*.  
+
+**Answer:** Two events are independent if the occurrence of one does not affect the probability of the other. Mathematically:  
+\[
+\Pr(A \mid B) = \Pr(A)
+\]
+
+**e)** What is Bayes’ Theorem and why is it useful?  
+
+**Answer:** Bayes’ Theorem provides a way to revise existing probabilities based on new information:  
+\[
+\Pr(A \mid B) = \frac{\Pr(B \mid A) \cdot \Pr(A)}{\Pr(B)}
+\]
+
+---
+
+# Exercise
+
+In the past, two contractors, A and B have competed for 20 building contracts of which 11 were awarded to A, 6 to B. The remaining 3 were awarded to neither. Three contracts for buildings of the kind they both specialize in are offered for tender. Assuming the market is unchanged, find the probability that:
+
+a) A obtains all 3 contracts
+b) B obtains at least one contract
+c) 2 contracts are not awarded to A or B
+d) A gets the 1st contract, B gets the 2nd contract and A gets the 3rd contract.
+
+**answer**
+
+Let:  
+\[
+\Pr(A) = \frac{11}{20}, \quad \Pr(B) = \frac{6}{20}, \quad \Pr(N) = \frac{3}{20}
+\]
+
+**a)** A obtains all 3 contracts  
+
+Let Pr(A wins 1st) denote the event that A wins the first contract, and other notation defined similarly. We assume that when choosing the contracts, the events are statistically independent, and that who wins the first contract has no bearing on who wins the second etc.
+
+Then: Pr(A wins 1st and A wins 2nd and A wins 3rd) = Pr(A wins 1st) * Pr(A wins 2nd) * Pr(A wins 3rd) (by formula for independent events)
+
+Therefore:
+\[
+\Pr(A_1 \cap A_2 \cap A_3) = \left(\frac{11}{20}\right)^3 = \frac{1331}{8000} = 0.166
+\]
+
+**b)** B obtains at least one contract  
+
+Pr(B wins at least 1) = 1 – Pr(B wins none), as the events “B wins at least 1” and “B wins none” are complements.
+
+But again, as the contracts are independent:
+Pr(not B and not B and not B) = Pr(not B) * Pr(not B) * Pr(not B) = 14/20 * 14/20 * 14/20 = 343/1000 = 0.343 So, using the complements formula, given:
+
+\[
+\Pr(\text{B gets ≥ 1}) = 1 - \left(\frac{14}{20}\right)^3 = 0.657
+\]
+
+**c)** 2 contracts are not awarded to A or B  
+
+Pr(2 not won by A or B) = Pr(A or B gets only 1) = Pr((A or B wins only 1st contract) or (A or B only wins 2nd contract) or (A or B wins only 3rd contract)). But the three events are mutually exclusive, so we can use the “special rule of addition” to get: Pr(2 not won by A or B) = Pr(A or B wins only 1st contract) + Pr(A or B only wins 2nd contract) + Pr(A or B wins only 3rd contract).
+
+Pr(A or B wins only 1st contract) = Pr(A or B wins 1st contract and neither wins other 2) = Pr(A or B) * Pr(Neither) * Pr(Neither) = 17/20 * 3/20 * 3/20 = 153/8000 = 0.019
+
+Pr(A or B wins only 2nd contract) = Pr(A or B wins 2nd contract and neither wins other 2) = Pr(Neither) * Pr(A or B) * Pr(Neither) = 3/20 * 17/20 * 3/20 = 153/8000 = 0.019
+
+Pr(A or B wins only 3rd contract) = Pr(A or B wins 3rd contract and neither wins other 2) = Pr(Neither) * Pr(Neither) * Pr(A or B) = 3/20 * 3/20 * 17/20 = 153/8000 = 0.019
+
+Therefore:
+\[
+\Pr = 3 \cdot \left(\frac{17}{20} \cdot \frac{3}{20} \cdot \frac{3}{20}\right) = 0.057
+\]
+
+**d)** A gets the 1st, B gets the 2nd, A gets the 3rd  
+\[
+\Pr = \frac{11}{20} \cdot \frac{6}{20} \cdot \frac{11}{20} = 0.091
+\]
+
+---
+
+# Exercise 
+
+The national origins of employees in a firm are recorded:
+
+| Nationality     | Frequency | Relative frequency |
+|:----------------|----------:|-------------------:|
+| English         | 486       | 486/984            |
+| Scottish        | 231       | 231/984            |
+| Irish           | 112       | 112/984            |
+| Welsh           | 109       | 109/984            |
+| American        | 33        | 33/984             |
+| Other European  | 13        | 13/984             |
+| Total           | 984       |                    |
+
+If 2 employees are chosen at random (without replacement), what is the probability that:
+**a)** Both are Other European
+
+**b)** Both are English
+
+**c)** Both are Irish or Welsh
+
+**d)** At least one of the two is Scottish
+
+**e)** One is Welsh and one is American
+
+
+**answer**
+
+We assume that when we choose employees at random, it is without replacement (i.e. we can’t choose the same person twice). Given the table, we work out the probabilities using relative frequencies. So, the probability of choosing an English person is, for example,  
+\[
+486/984 = 81/164
+\]
+
+**a)** Both are Other European  
+\[
+Pr(\text{Other European 1st and Other European 2nd}) 
+= Pr(\text{Other European 2nd | Other European 1st}) \times Pr(\text{Other European 1st}) \\
+= \frac{13}{984}\times\frac{12}{983} = 0.00016
+\]
+
+[This uses the conditional probability formula, Pr(A and B) = Pr(A | B) * Pr(B)).
+
+**b)** Both are English  
+\[
+\Pr = \frac{486}{984} \cdot \frac{485}{983} = 0.24
+\]
+
+**c)** Both are Irish or Welsh  
+
+Pr(Both Irish or Welsh) = Pr(Irish or Welsh 2nd | Irish or Welsh 1st) * Pr(Irish or Welsh first)
+
+\[
+Pr(\text{Irish or Welsh 1st}) = \frac{112}{984} + \frac{109}{984} = \frac{221}{984}
+\]
+
+\[
+Pr(\text{Irish or Welsh 2nd | Irish or Welsh 1st}) = \frac{220}{983}
+\]
+
+\[
+Pr(\text{Both Irish or Welsh}) = \frac{221}{984} \times \frac{220}{983} = 0.05
+\]
+
+**d)** At least one is Scottish  
+
+\[
+Pr(\text{At least one Scottish}) = 1 - Pr(\text{No Scottish})
+\]
+as the two events are complements. But, Pr(No Scottish) = Pr(2 nd not Scottish | 1st not Scottish) * Pr(1 st not Scottish), so that,
+
+\[
+Pr(\text{No Scottish}) = \frac{753}{984} \times \frac{752}{983} = 0.585
+\]
+
+Therefore,
+
+\[
+Pr(\text{At least one Scottish}) = 1 - 0.585 = 0.42
+\]
+
+**e)** One is Welsh and one is American  
+
+Pr(1 Welsh and 1 American) = Pr((Welsh then American) or (American then Welsh)). But these two events are mutually exclusive, so
+
+\[
+Pr(\text{1 Welsh and 1 American}) = Pr(\text{Welsh then American}) + Pr(\text{American then Welsh})
+\]
+
+\[
+= \frac{109}{984}\times\frac{33}{983} + \frac{33}{984}\times\frac{109}{983} = 0.0074
+\]
+
+---
+
+
+
+# Exercise 
+
+Suppose the following probabilities hold, for events A and B: Pr(A) = 0.6, Pr(B) = 0.3, Pr(A and B) = 0.2.  
+
+Find the following probabilities:  
+
+**a)** $Pr(\bar{A})$, where $\bar{A}$ represents the complement of A     
+
+**b)** $Pr(\bar{B})$, where $\bar{B}$ represents the complement of B    
+
+**c)** $Pr(A \ or \ B)$ 
+
+**d)** $Pr(neither \ A \ nor \ B)$  
+
+**Answer:**  
+
+**a)** 
+$Pr(A) = 0.6$, so  
+\[
+Pr(\bar{A}) = 1 - 0.6 = 0.4
+\]
+
+**b)** 
+$Pr(B) = 0.3$, so  
+\[
+Pr(\bar{B}) = 1 - 0.3 = 0.7
+\]
+
+**c)**
+\[
+Pr(A \cup B) = Pr(A) + Pr(B) - Pr(A \cap B) = 0.6 + 0.3 - 0.2 = 0.7
+\]
+
+**d)**  
+\[
+Pr(\text{neither A nor B}) = 1 - Pr(A \cup B) = 1 - 0.7 = 0.3
+\]
+
+
+
+# Exercise 
+
+There is a 0.45 probability that the Morgan company (a paper manufacturer) will send a sales rep. to call on the buyer for Brown Printing. If Morgan doesn’t send a rep., there is a 0.7 probability Brown will buy from Morgan’s competitor, Xerxes. If Morgan does send a sales rep., there is a 0.25 probability Brown will buy from Xerxes.  
+
+If Brown does buy from Xerxes, what is the probability that Morgan did not send a sales rep. to call on Brown?  
+
+**Answer:**  
+
+In this question, we are asked to find a “posterior” probability. i.e. We are asked to revise the given prior probability in light of some new information. Using Bayes’ Theorem:  
+
+\[
+Pr(A | B) = \frac{Pr(B | A)\,Pr(A)}{Pr(B | A)\,Pr(A) + Pr(B | \bar{A})\,Pr(\bar{A})}
+\]
+
+Here:  
+- A = “Morgan didn’t send a rep.”  
+- B = “Brown bought from Xerxes”  
+
+If you have doubts as to which event is A and B, you can check the question. Here, “given that brown bought from Xerxes, what is the probability that Morgan did not send a sales rep”? Hence, A must be the event “Morgan didn’t send a sales rep.” and B must be the event “Brown bought from Xerxes”.
+
+\[
+Pr(B|A) = 0.7, \quad Pr(A) = 0.55, \quad Pr(B|\bar{A})=0.25, \quad Pr(\bar{A})=0.45
+\]
+
+\[
+Pr(A|B) = \frac{0.7 \times 0.55}{0.7 \times 0.55 + 0.25 \times 0.45}
+= \frac{0.385}{0.4975} = 0.77
+\]
+
+
+# Exercise 
+
+In a sample of 1200 computer firms in London, 300 sell services to Germany (G), 200 sell services in France (F) and the remainder do not export and just sell to the domestic market (D). Some firms get an R&D tax credit (RD) and some do not (N). The following table shows the joint probabilities.
+
+Joint probability table:
+
+|              | Germany (G) | France (F) | Domestic (D) |
+|--------------|-------------|------------|--------------|
+| RD Credit    | 0.167       | 0.125      | 0.125        |
+| No RD Credit | 0.083       | 0.042      | 0.458        |
+
+
+What is the conditional probability that firms who export to Germany get a tax credit? Is this greater or less than the conditional probability that firms who export to France or firms that produce only for the domestic market get a tax credit?
+
+**Answer:**
+
+You want to calculate the conditional probability of RD given G,  
+\\[
+\\Pr(RD \\mid G) = \\frac{\\Pr(RD \\cap G)}{\\Pr(G)}
+\\]
+
+First calculate the marginal probabilities.
+
+ Joint Probability Table
+
+|        | G     | F     | D     | **Total** |
+|--------|-------|-------|-------|-----------|
+| **RD** | 0.167 | 0.125 | 0.125 | <span style="color:purple"><strong>0.417</strong></span> |
+| **N**  | 0.083 | 0.042 | 0.458 | <span style="color:purple"><strong>0.583</strong></span> |
+| **Total** | <span style="color:red"><strong>0.25</strong></span> | <span style="color:red"><strong>0.167</strong></span> | <span style="color:red"><strong>0.583</strong></span> | **1** |
+
+
+
+\\[
+\\Pr(RD \\mid G) = \\frac{\\Pr(RD \\cap G)}{\\Pr(G)} = \\frac{0.167}{0.25} = 0.667
+\\]
+
+Similarly:
+
+\[
+\Pr(RD \mid F) = \frac{0.125}{0.125 + 0.042} = 0.748 \\
+\Pr(RD \mid D) = \frac{0.125}{0.125 + 0.458} = 0.214
+\]
+
+
+# Exercise 
+
+A company receives a very large shipment of components. A random sample of 16 of these components will be checked, and the shipment will be accepted if fewer than 2 of these components are defective. If the probability of finding a defective component is 5%, what is the probability of accepting a shipment?
+
+**Answer:** 
+
+Using the binomial formula where \(n=16,\ P=0.05,\ 1-P=0.95,\ X=0\) and \(X=1\)
+
+For \(P(X=0)\):  
+
+$$P(X=0) = \binom{16}{0}(0.05)^0(0.95)^{16} = 1 \times 1 \times (0.95)^{16} = 0.4401$$
+
+[or $P(X=0)=\frac{16!}{0!(16-0)}0.05^0(1-0.05)^{16-0}$]
+
+For \(P(X=1)\):  
+
+$$P(X=1) = \binom{16}{1}(0.05)^1(0.95)^{15} = 16 \times 0.05 \times (0.95)^{15} = 0.3707$$
+
+[or $P(X=0)=\frac{16!}{0!(16-1)}0.05^1(1-0.05)^{16-1}$]
+
+Thus,  $P(\text{accept shipment}) = P(X=0)+P(X=1)=0.4401+0.3707=0.8108$
+
+
+
+

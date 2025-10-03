@@ -1,0 +1,412 @@
+---
+title: "Lecture 10: Examples"
+subtitle: "Mathematics and Statistics BS1515"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  slidy_presentation:
+    font_adjustment: 0
+    footer: "Arvanitopoulos T - Lecture 10: Examples"
+css: cardiff.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+ 
+
+## Example 1 - student test scores {.smaller}
+
+### Problem overview
+
+A sample of 49 student test scores from a large class has a sample mean of 76.4 and a standard deviation of 6.2.  
+
+➡️ We want to test whether the true population mean score is 75.
+
+$$
+H_0: \mu = 75 \\
+H_1: \mu \neq 75
+$$
+This is a **two-tailed test** at the  $\alpha = 0.05$ significance level. 
+
+---
+
+## Example 1 - student test scores {.smaller}
+
+### Problem overview
+
+A sample of 49 student test scores from a large class has a sample mean of 76.4 and a standard deviation of 6.2.  
+
+➡️ We want to test whether the true population mean score is 75.
+
+$$
+H_0: \mu = 75 \\
+H_1: \mu \neq 75
+$$
+This is a **two-tailed test** at the  $\alpha = 0.05$ significance level. 
+
+### Problem solution
+
+Use the formula to compute the test statistic with degrees of freedom $df = 49 - 1 = 48$:
+$$
+t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} = \frac{76.4 - 75}{6.2 / \sqrt{49}} = 1.58
+$$
+
+**Determine the critical value**
+
+From the t-distribution table  $t_{0.025, 48} \approx 2.01$. So, we reject the null hypothesis if $t<-2.01 \quad \text{or} \quad t>2.01$. 
+
+**Make a decision**
+
+Since $t = 1.57$ falls **between** -2.01 and 2.01, we **do not reject** the null hypothesis. There is **insufficient evidence** to conclude that the true mean differs from 75.
+
+
+## Example 1 - distribution plot 
+
+```{r example1_t_test, fig.align='center', message=FALSE, warning=FALSE, echo=FALSE,}
+
+# Parameters from slide example
+x_bar <- 76.4     # sample mean
+mu_0 <- 75        # hypothesized population mean
+s <- 6.2          # sample standard deviation
+n <- 49           # sample size
+df <- n - 1       # degrees of freedom
+alpha <- 0.05     # significance level (two-tailed)
+
+# Calculate test statistic
+t_stat <- (x_bar - mu_0) / (s / sqrt(n))
+t_crit <- qt(1 - alpha / 2, df)
+
+# Sequence for curve
+x_vals <- seq(-4, 4, length.out = 1000)
+t_dist <- dt(x_vals, df)
+
+# Plot
+plot(x_vals, t_dist, type = "l", lwd = 2, col = "black",
+     ylab = "Density", xlab = "t",
+     main = "Two-Tailed t-Test for Student Test Scores")
+
+# Shaded critical regions
+polygon(c(x_vals[x_vals <= -t_crit], -t_crit),
+        c(t_dist[x_vals <= -t_crit], 0),
+        col = rgb(1, 0, 0, 0.3), border = NA)
+polygon(c(x_vals[x_vals >= t_crit], rev(x_vals[x_vals >= t_crit])),
+        c(t_dist[x_vals >= t_crit], rep(0, sum(x_vals >= t_crit))),
+        col = rgb(1, 0, 0, 0.3), border = NA)
+
+# Non-rejection region
+polygon(c(x_vals[x_vals > -t_crit & x_vals < t_crit],
+          rev(x_vals[x_vals > -t_crit & x_vals < t_crit])),
+        c(t_dist[x_vals > -t_crit & x_vals < t_crit],
+          rep(0, sum(x_vals > -t_crit & x_vals < t_crit))),
+        col = rgb(0, 1, 0, 0.2), border = NA)
+
+# Draw test statistic line
+abline(v = t_stat, col = "blue", lty = 2, lwd = 2)
+
+# Legend
+legend("topright", legend = c("t-distribution", sprintf("t = %.2f", t_stat)),
+       col = c("black", "blue"), lwd = 2, lty = c(1, 2))
+
+# Annotate decision areas
+text(-3, 0.02, "Reject H₀", col = "red", cex = 0.9)
+text(3, 0.02, "Reject H₀", col = "red", cex = 0.9)
+text(0, 0.025, "Do Not\nReject H₀", col = "darkgreen", cex = 0.9)
+
+```
+
+## Example 1  - problem solution using R  {.smaller}
+
+**Compute the test statistic**
+
+```{r t-test1-example, echo=TRUE}
+# Given values
+x_bar <- 76.4     # sample mean
+mu_0 <- 75        # hypothesized population mean
+s <- 6.2          # sample standard deviation
+n <- 49           # sample size
+df <- n - 1       # degrees of freedom
+alpha <- 0.05     # significance level (two-tailed)
+
+# Calculate test statistic
+t_stat <- (x_bar - mu_0) / (s / sqrt(n))
+t_stat
+```
+
+**Determine critical values**
+
+```{r t critical1-values, echo=TRUE}
+t_crit <- qt(1 - alpha / 2, df)
+t_crit
+```
+
+## Example 2 - two-tailed t-test - average hotel room cost {.smaller}
+
+### Problem overview
+
+A travel website claims the average cost of a hotel room in Chicago is $130 per night. A sample of 25 hotels shows an average rate of $132 with a standard deviation of $9.20.  
+
+➡️ Test whether the true average cost differs from $135 using a significance level of **α = 0.05**. 
+
+$$
+H_0: \mu = 130 \\
+H_1: \mu \neq 130
+$$
+This is a **two-tailed test** at the  $\alpha = 0.05$ significance level. \
+
+
+---
+
+## Example 2 - two-tailed t-test - average hotel room cost {.smaller}
+
+### Problem overview
+
+A travel website claims the average cost of a hotel room in Chicago is $130 per night. A sample of 25 hotels shows an average rate of $132 with a standard deviation of $9.20.  
+
+➡️ Test whether the true average cost differs from $135 using a significance level of **α = 0.05**. 
+
+$$
+H_0: \mu = 130 \\
+H_1: \mu \neq 130
+$$
+This is a **two-tailed test** at the  $\alpha = 0.05$ significance level. \
+
+
+### Problem solution
+
+Use the formula to compute the test statistic with degrees of freedom $df = n - 1 = 24$
+$$
+t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} = \frac{130 - 135}{9.2 / \sqrt{25}} = \frac{-5}{1.84} \approx -2.72 
+$$
+
+**Determine the critical value**
+
+From the t-distribution table $t_{\alpha/2, df} = t_{0.025, 24} \approx 2.064$. So, we reject the null hypothesis if $t < -2.064 \quad \text{or} \quad t > 2.064$
+
+**Make a decision**
+
+Since $t = -2.72$ < -2.064,  we reject the null hypothesis.
+
+
+## Example 2  - distribution plot 
+
+```{r example2_two_tail_ttest, fig.align='center', echo=FALSE, message=FALSE, warning=FALSE}
+x_bar <- 130
+mu_0 <- 135
+s <- 9.2
+n <- 25
+df <- n - 1
+alpha <- 0.05
+
+t_stat <- (x_bar - mu_0) / (s / sqrt(n))
+t_crit <- qt(1 - alpha / 2, df)
+
+x_vals <- seq(-4, 4, length.out = 1000)
+t_dist <- dt(x_vals, df)
+
+plot(x_vals, t_dist, type = "l", lwd = 2, col = "black",
+     ylab = "Density", xlab = "t",
+     main = "Two-Tailed t-Test: Sample Mean = 130 (Reject H_0)")
+
+polygon(c(x_vals[x_vals <= -t_crit], -t_crit),
+        c(t_dist[x_vals <= -t_crit], 0),
+        col = rgb(1, 0, 0, 0.3), border = NA)
+polygon(c(x_vals[x_vals >= t_crit], rev(x_vals[x_vals >= t_crit])),
+        c(t_dist[x_vals >= t_crit], rep(0, sum(x_vals >= t_crit))),
+        col = rgb(1, 0, 0, 0.3), border = NA)
+polygon(c(x_vals[x_vals > -t_crit & x_vals < t_crit],
+          rev(x_vals[x_vals > -t_crit & x_vals < t_crit])),
+        c(t_dist[x_vals > -t_crit & x_vals < t_crit],
+          rep(0, sum(x_vals > -t_crit & x_vals < t_crit))),
+        col = rgb(0, 1, 0, 0.2), border = NA)
+
+abline(v = t_stat, col = "blue", lty = 2, lwd = 2)
+
+text(-3.2, 0.02, "Reject H_0", col = "red", cex = 0.9)
+text(0, 0.025, "Do Not Reject H_0", col = "darkgreen", cex = 0.9)
+text(3.2, 0.02, "Reject H_0", col = "red", cex = 0.9)
+
+legend("bottom", legend = c("t-distribution", sprintf("t = %.2f", t_stat)),
+       col = c("black", "blue"), lwd = 2, lty = c(1, 2))
+```
+
+
+
+## Example 2  - problem solution using R  {.smaller}
+
+**Compute the test statistic**
+
+```{r t-test-example, echo=TRUE}
+# Given values
+x_bar <- 130     # Sample mean
+mu_0 <- 135      # Hypothesized population mean
+s <- 9.2         # Sample standard deviation
+n <- 25          # Sample size
+df <- n - 1      # Degrees of freedom
+alpha <- 0.05    # Significance level
+
+# Calculate z statistic
+t_stat <- (x_bar - mu_0) / (s / sqrt(n))
+t_stat
+```
+
+**Determine critical values**
+
+```{r t critical-values, echo=TRUE}
+t_crit <- qt(1 - alpha / 2, df)
+t_crit
+```
+
+
+
+## Example 3 - two-tailed Z-test using p-value {.smaller}
+
+### Problem overview
+
+Assume the population standard deviation is $\sigma=0.8$ and a sample of size $n = 100$ results in a sample mean $\bar{x} = 2.84$.
+
+➡️ We want to test whether the average number of TV sets in US homes is equal to 3 test at significance level $\aplha = 0.05$.
+
+$$
+H_0 : \mu = 3 \\
+H_1 : \mu \neq 3
+$$
+This is a **two-tailed test** at the  $\alpha = 0.05$ significance level.
+
+---
+
+## Example 3 - two-tailed Z-test using p-value {.smaller}
+
+### Problem overview
+
+Assume the population standard deviation is $\sigma=0.8$ and a sample of size $n = 100$ results in a sample mean $\bar{x} = 2.84$.
+
+➡️ We want to test whether the average number of TV sets in US homes is equal to 3 test at significance level $\aplha = 0.05$.
+
+$$
+H_0 : \mu = 3 \\
+H_1 : \mu \neq 3
+$$
+This is a **two-tailed test** at the  $\alpha = 0.05$ significance level.
+
+### Problem solution
+
+Use the formula to compute the test statistic:
+$$
+Z=\frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}}=\frac{2.84-3}{\frac{0.8}{\sqrt{100}}}=-0.16/0.08=-2.0
+$$
+
+**Determine the critical value**
+
+From the z-distribution table, we reject the null hypothesis if $z<-1.96$ or $Z>1.96$; otherwise, do not reject the null.
+
+**Make a decision**
+
+Here, $z=-2.0<-1.96$, so the test statistics is in rejection area. Thus, we reject the null  and conclude that there is sufficient evidence that the mean number of TVs in US homes is not equal to 3.
+
+
+## Example 3 - calculate the *p*-value {.smaller}
+
+➡️ How likely is it to see a sample mean of 2.84 (or something further from the mean, in either direction) if the true mean is $\mu = 3.0$?
+
+$\bar{x} = 2.84$ is translated to a $z$ score of $z = -2.0$:
+
+$$
+P(z<-2.0)=0.0228 \\
+P(z>2.0)=0.0228
+$$
+
+So, $p-value=0.0228+0.0228=0.0456$ and given *p*-value$<0.05$,
+
+&rarr; this means that we can reject the null at significance level $\alpha=0.05$
+
+
+More general: 
+
+- If *p*-value $< \alpha$, reject $H_0$ 
+
+- If *p*-value $> \alpha$, do not reject $H_0$ 
+
+- Since *p*-value $< 0.05$, we **reject the null hypothesis** 
+
+- Conclusion: There is evidence the average number of TVs is **not equal to 3** 
+
+
+
+## Example 3  - distribution plot  {.smaller}
+
+```{r plot-z-test, fig.align='center', fig.width=8, fig.height=4.5, message=FALSE, warning=FALSE, echo=FALSE}
+library(ggplot2)
+
+# Given values
+mu_0 <- 3         # Hypothesized population mean
+sigma <- 0.8      # Population standard deviation
+x_bar <- 2.84     # Sample mean
+n <- 100          # Sample size
+alpha <- 0.05     # Significance level
+
+# Calculate z statistic
+z_stat <- (x_bar - mu_0) / (sigma / sqrt(n))
+
+# Calculate z critical values
+z_crit <- qnorm(1 - alpha / 2)
+
+# Create data for standard normal distribution
+x_vals <- seq(-4, 4, length.out = 1000)
+y_vals <- dnorm(x_vals)
+
+df <- data.frame(x = x_vals, y = y_vals)
+
+# Critical z-values
+z_crit_left <- -z_crit
+z_crit_right <- z_crit
+
+# Plot
+ggplot(df, aes(x, y)) +
+  geom_line(color = "black", size = 1) +
+  geom_area(data = subset(df, x <= z_crit_left), aes(y = y), fill = "red", alpha = 0.3) +
+  geom_area(data = subset(df, x >= z_crit_right), aes(y = y), fill = "red", alpha = 0.3) +
+  geom_area(data = subset(df, x > z_crit_left & x < z_crit_right), aes(y = y), fill = "green", alpha = 0.2) +
+  geom_vline(xintercept = z_stat, color = "blue", linetype = "dashed", linewidth = 1) +
+  annotate("text", x = z_stat, y = 0.02, label = paste0("z = ", round(z_stat, 2)), vjust = -1, color = "blue") +
+  annotate("text", x = -3, y = 0.05, label = "Reject H_0", color = "red") +
+  annotate("text", x = 0, y = 0.05, label = "Do Not Reject H_0", color = "darkgreen") +
+  annotate("text", x = 3, y = 0.05, label = "Reject H_0", color = "red") +
+  labs(title = "Two-Tailed Z-Test: Rejection Regions and Test Statistic",
+       x = "Z", y = "Density") +
+  theme_minimal()
+```
+
+## Example 3  - problem solution using R  {.smaller}
+
+**Compute the test statistic**
+
+```{r z-test-example, echo=TRUE}
+# Given values
+mu_0 <- 3         # Hypothesized population mean
+sigma <- 0.8      # Population standard deviation
+x_bar <- 2.84     # Sample mean
+n <- 100          # Sample size
+alpha <- 0.05     # Significance level
+
+# Calculate z statistic
+z_stat <- (x_bar - mu_0) / (sigma / sqrt(n))
+z_stat
+```
+
+**Determine critical values**
+
+```{r z critical-values, echo=TRUE}
+z_crit <- qnorm(1 - alpha / 2)
+z_crit
+```
+
+**Determine p-values**
+
+```{r z p-value, echo=TRUE}
+p_val <- 2 * pnorm(-abs(z_stat))  # Two-tailed test
+p_val
+```
+

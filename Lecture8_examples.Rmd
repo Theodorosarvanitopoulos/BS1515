@@ -1,0 +1,300 @@
+---
+title: "Lecture 8: Examples"
+subtitle: "Mathematics and Statistics BS1515"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  slidy_presentation:
+    font_adjustment: 0
+    footer: "Arvanitopoulos T - Lecture 8: Examples"
+css: cardiff.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Importance of Standard Normal Distribution tables (Z-tables)
+
+- Z-tables provide quick, manual lookups and build intuition about probabilities.
+
+- Crucial for exam settings or when statistical software is unavailable.
+
+- Helps understanding normal distributions visually.
+
+
+
+## Example 1 – light bulb lifetimes
+
+### Problem Overview
+
+An electrical firm makes light bulbs with lives which are normally distributed. \
+
+The firm claims they have a mean life of 800 hours and a standard deviation of 40 hours . \
+
+> What is the probability that a sample of 16 bulbs has mean life less than 775?
+
+---
+
+## Example 1 – light bulb lifetimes
+
+### Problem Overview
+
+An electrical firm makes light bulbs with lives which are normally distributed. \
+
+The firm claims they have a mean life of 800 hours and a standard deviation of 40 hours . \
+
+> What is the probability that a sample of 16 bulbs has mean life less than 775?
+
+### Problem solution 
+
+Since $X \sim N(800, 40^2)$, then $\bar{X}  \sim N(800, \frac{40^2}{16})$
+
+Hence
+
+$$
+P(\bar{X}<775) = P(Z< \frac{775-800} {\sqrt{\frac{40^2}{16}}} ) \\
+=P(Z<-25/10)=P(Z<-2.5)
+$$
+
+So, we need to look up at the Standard Normal Table for the value of 2.5, which is 0.9938. \
+
+## Example 1 – light bulb lifetimes {.smaller}
+
+### Using Standard Normal Table (textbook appendix)
+
+So, if $Z = -2.50$, from Z-table in the textbook appendix: $(P(Z < -2.50) = 0.9938$
+
+To get the probability: $1 - 0.9938=0.0062$
+
+![](negative-z-table.png){ width=40% } \
+
+*(Highlighted value at Z = -2.50)*
+
+## Example 1 – light bulb lifetimes {.smaller}
+### Problem solution using R
+
+```{r}
+
+# Population parameters and sample info
+mu    <- 800   # Population mean (hours)
+sigma <- 40    # Population standard deviation (hours)
+n     <- 16    # Sample size
+x_bar <- 775   # Observed sample mean
+
+# Standard error of the mean:  SE = σ / √n
+se <- sigma / sqrt(n)
+
+# Convert sample mean to its Z‑score
+#     Z = (x̄ − μ) / SE
+z <- (x_bar - mu) / se      # Will be negative (775 < 800)
+
+# Compute one‑tail probability
+#     pnorm(z) gives  P(Z ≤ observed z)
+prob <- pnorm(z)
+
+#  Display results
+list(
+  Z_score    = round(z, 2),
+  Probability_Xbar_below_775 = round(prob, 4)
+)
+```
+
+
+
+## Example 2 – between two values {.smaller}
+
+
+### Problem overview
+
+Suppose a large population has mean $\mu = 8$, and standard deviation $\sigma = 3$. Suppose a random sample of size $n = 36$ is selected. \
+
+> What is the probability that the sample ena is between 7.8 and 8.2 &rarr; $(P(7.8 \leq \bar{X} \leq 8.2)$? \
+
+---
+
+## Example 2 – between two values {.smaller}
+
+### Problem overview
+
+Suppose a large population has mean $\mu = 8$, and standard deviation $\sigma = 3$. Suppose a random sample of size $n = 36$ is selected. \
+
+> What is the probability that the sample ena is between 7.8 and 8.2  &rarr; $(P(7.8 \leq \bar{X} \leq 8.2)$? \
+
+### Problem solution
+
+We do not know whether the population is normally distributed, but sample size large enough to assume that  CLT holds. \
+
+
+$$
+P(7.8<\bar(X)<8.2)=P(\frac{7.8-8}{3/\sqrt{36}}<\frac{\bar{X}-\mu}{{\sigma}{/\sqrt{n}}}<\frac{8.2-8}{{3}{/\sqrt{36}}}) \\
+P(-0.4<Z<0.4)=0.3108
+$$
+
+
+![](example3.png){ width=40%}
+
+
+## Example 2 – between two values {.smaller}
+### Using Standard Normal Table (textbook appendix)
+
+So, if $Z= \pm 0.40$, from Z-table in the textbook appendix, then  $P(Z < 0.40) = 0.6554$, and from symmetry: $P(Z < -0.40) = 0.3446$,  \
+
+To get the probability: $P(-0.40 < Z < 0.40) = 0.6554 - 0.3446 = 0.3108$.
+
+
+![](positive-z-table.png){ width=40% } \
+
+*(Highlighted values at Z = ±0.40)*
+
+ 
+## Example 2 – between two values {.smaller}
+### Problem solution using R
+
+```{r}
+# Parameters
+mu <- 8         # Population mean
+sigma <- 3      # Population standard deviation
+n <- 36         # Sample size
+
+# Step 1: Compute standard error (SE = σ / √n)
+se <- sigma / sqrt(n)
+
+# Step 2: Convert the bounds of the interval (7.8 and 8.2) to Z-scores
+z_lower <- (7.8 - mu) / se     # Z for lower bound
+z_upper <- (8.2 - mu) / se     # Z for upper bound
+
+# Step 3: Compute probability that sample mean falls between 7.8 and 8.2
+# This is P(7.8 < X̄ < 8.2) = P(Z_lower < Z < Z_upper)
+prob <- pnorm(z_upper) - pnorm(z_lower)
+
+# Step 4: Output Z-scores and final probability
+list(Z_lower = z_lower, Z_upper = z_upper, Probability = prob)
+```
+
+
+
+
+## Example 3 – Sample Proportions {.smaller}
+
+### Problem overview
+
+Population proportion $P = 0.4$ and sample size $n = 200$.
+
+Find the probability that the sample proportion $\hat{p}$ is between 0.40 and 0.45; $P(0.40 \leq \hat{p} \leq 0.45)$
+
+---
+
+
+## Example 3 – Sample Proportions {.smaller}
+
+### Problem overview
+
+Population proportion $P = 0.4$ and sample size $n = 200$.
+
+Find the probability that the sample proportion $\hat{p}$ is between 0.40 and 0.45; $P(0.40 \leq \hat{p} \leq 0.45)$
+
+### Problem solution
+
+We use the sampling distribution of the sample proportion $\hat{p} \sim N\left(P, \sqrt{P(1 - P)/n}\right)$
+
+$$
+ \sigma_{\hat{p}}= SE =\sqrt{\frac{P(1 - P)}{n}} = \sqrt{\frac{0.4 \cdot 0.6}{200}} \approx 0.0346
+$$
+we convert the proportions 0.40 and 0.45 into **Z-scores** (standard normal):
+
+$$
+Z = \frac{\hat{p} - P}{\sqrt{P(1 - P)/n}}
+$$
+which gives us:
+$$
+Z_{lower} = \frac{0.40 - 0.4}{0.0346} = 0.00 \\
+Z_{upper} = \frac{0.45 - 0.4}{0.0346} \approx 1.44
+$$
+
+
+## Example 3 – Sample Proportions {.smaller}
+
+### Standard Normal Distribution
+
+and from the z-table 
+
+- $Z = 0.00$ &rarr; $(P(Z < 0.00) = 0.5000)$
+- $Z = 1.44$ &rarr; $(P(Z < 1.44) = 0.9251)$
+
+So the probability between the two values is:  
+$$
+P(0.00 < Z < 1.44) = 0.9251 - 0.5000 = 0.4251
+$$
+
+**Answer**: Probability = **0.4251**
+
+### Distribution table
+
+```{r, fig.width=8, fig.height=4.5, warning=FALSE, echo=FALSE}
+# Parameters
+P <- 0.4
+n <- 200
+se <- sqrt(P * (1 - P) / n)
+
+z1 <- 0
+z2 <- (0.45 - P) / se  # Z = 1.44
+
+# Plot range
+x_vals <- seq(-3, 3, length.out = 1000)
+y_vals <- dnorm(x_vals)
+
+# Base plot
+plot(x_vals, y_vals, type = "l", lwd = 2, col = "black",
+     xlab = "Z", ylab = "Density",
+     main = "Standard Normal Distribution")
+
+# Shaded area between Z = 0 and Z = 1.44
+polygon(c(z1, x_vals[x_vals >= z1 & x_vals <= z2], z2),
+        c(0, y_vals[x_vals >= z1 & x_vals <= z2], 0),
+        col = rgb(0, 1, 0, 0.3), border = NA)
+
+# Add lines at Z = 0 and Z = 1.44
+abline(v = z1, col = "blue", lty = 2)
+abline(v = z2, col = "blue", lty = 2)
+
+# Add labels
+text(z1, dnorm(z1) + 0.01, "Z = 0", pos = 3)
+text(z2, dnorm(z2) + 0.01, "Z = 1.44", pos = 3)
+
+# Legend
+legend("topright",
+       legend = c("Standard Normal", "Shaded Area = 0.4251"),
+       col = c("black", rgb(0, 1, 0, 0.3)),
+       lwd = 2, pt.cex = 2, pch = 15, bty = "n")
+```
+
+
+ 
+## Example 3 – Sample Proportions {.smaller}
+### Problem solution using R
+
+```{r}
+# Define known values
+P <- 0.4        # Population proportion
+n <- 200        # Sample size
+
+# Calculate standard error
+se <- sqrt(P * (1 - P) / n)
+
+# Calculate Z-scores for sample proportions 0.40 and 0.45
+z_lower <- (0.40 - P) / se
+z_upper <- (0.45 - P) / se
+
+# Calculate probability using standard normal distribution
+prob <- pnorm(z_upper) - pnorm(z_lower)
+
+# Output results
+list(
+  Z_lower = round(z_lower, 2),
+  Z_upper = round(z_upper, 2),
+  Probability = round(prob, 4)
+)
+```
+
+

@@ -1,0 +1,199 @@
+---
+title: "Problem Set 9 - Confidence intervals - Solutions"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+css: cardiff.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Exercise
+
+Assume a normal distribution with known population variance. Calculate the margin of error to estimate the population mean for the following.  
+
+a. 98% confidence level; \(n=64;\ \text{variance}=144\)  
+
+**Answer:**  
+
+$$
+ME = z_{\alpha/2}\,\frac{\sigma}{\sqrt{n}} = 2.33\left(\frac{12}{\sqrt{64}}\right)=3.495
+$$
+
+b. 99% confidence level; \(n=120;\ \sigma=100\)  
+
+**Answer:**  
+
+$$
+ME = z_{\alpha/2}\,\frac{\sigma}{\sqrt{n}} = 2.58\left(\frac{100}{\sqrt{120}}\right)=23.552
+$$
+
+---
+
+# Exercise
+
+Assume a normal distribution with known population variance. Calculate the LCL and UCL for each of the following.  
+
+a. \(\bar{x}=50;\ n=64;\ \sigma=40;\ \alpha=0.05\)  
+
+**Answer:**  
+
+$$
+\bar{x} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}} = 50 \pm 1.96\frac{40}{\sqrt{64}} = 40.2 \ \text{to}\ 59.8
+$$
+
+b. \(\bar{x}=85;\ n=225;\ \sigma^2=400;\ \alpha=0.01\)  
+
+**Answer:**  
+
+$$
+\bar{x} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}} = 85 \pm 2.58\frac{20}{\sqrt{225}} = 81.56 \ \text{to}\ 88.44
+$$
+
+c. \(\bar{x}=510;\ n=485;\ \sigma=50;\ \alpha=0.10\)  
+
+**Answer:**  
+
+$$
+\bar{x} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}} = 510 \pm 1.645\frac{50}{\sqrt{485}} = 506.27 \ \text{to}\ 513.73
+$$
+
+---
+
+# Exercise
+
+A personal manager has found that historically the scores on aptitude tests given to applicants for entry-level positions follow a normal distribution with a population standard deviation of 32.4 points. A random sample of nine test scores from the current group of applicants had a mean score of 187.9 points.  
+
+a. Find an 80% confidence interval for the population mean score of the current group of applicants.  
+
+**Answer:**  
+
+Given: normal population, known $\sigma = 32.4$, sample size $n = 9$, sample mean \(\bar{x}=187.9\), and $\alpha = 0.20$
+
+$$
+\bar{x} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+= 187.9 \pm 1.28 \times \frac{32.4}{\sqrt{9}}
+= 187.9 \pm 13.824
+= (174.076,\;201.724).
+$$
+
+We are 80% confident that the current applicants’ population mean score lies between **174.076** and **201.724** points.
+
+
+b. Based on these sample results a statistician found for the population mean a confidence interval extending from 165.8 to 210.0 points. Find the confidence level of this interval.  
+
+**Answer:**  
+
+First, we compute the interval, which effectively is the Margin of Error:
+$$
+210.0 - 187.9 = 22.1 = z_{\alpha/2}\left(\frac{32.4}{3}\right), \quad thus\quad z_{\alpha/2}=2.05
+$$
+
+but we need both sides of the distribution, so 
+$$
+\alpha=2[1-F_z(2.05)]=0.0404
+$$
+
+so $$\text{Confidence level} = 1-\alpha = 100\,(1-0.0404)= 95.96\%.$$
+
+The given interval corresponds to about a **96% confidence level**.
+
+---
+
+# Exercise
+
+A business school placement director wants to estimate the mean annual salaries 5 years after students graduate. A random sample of 25 such graduates found a sample mean of £42,740 and a sample standard deviation of £4,780. 
+
+a. Calculate the margin of error for a 90% confidence interval 
+
+  **Answer:**  
+  
+  $n=25, \bar{x}=42,740,  s=4,780, s=df=24, t_{.05, 24}=1.711$.
+  
+  Population \(\sigma\) unknown ⇒ use \(t\) with \(df=n-1=24\).  
+  
+  Critical value for 90% CI: $t_{\alpha/2,\,24}=t_{0.05,24}= 1.711$. 
+  
+  $$
+  ME = t_{\alpha/2,\,24}\frac{s}{\sqrt{n}}=1.711\frac{4780}{\sqrt{25}}=1.711 \cdot 956=£1,635.72 \quad (approx)
+  $$
+
+
+ 
+b)  Find the UCL and LCL of a 90% confidence interval estimate. .  
+
+**Answer:**  
+
+90% confidence interval:
+
+
+
+
+$$
+\bar{x} \pm t_{\alpha/2,\,24}\frac{s}{\sqrt{n}} = 42,740 \pm 1.711\left(\frac{4780}{5}\right)= 42,740 \pm 1,635.72=£41,104.28 (LCL) \ \text{to}\ £44,375.72 (UCL)
+$$
+
+We are 90% confident the true mean salary lies between £41,104.28 (LCL) and £44,375.72 (UCL).
+
+---
+
+# Exercise
+
+From a random sample of 400 registered voters in one city, 320 indicated that they would vote in favour of a proposed policy.  
+
+a. Calculate the LCL for a 98% confidence interval estimate for the population proportion in favour.  
+
+**Answer:**  
+
+$$
+\hat{p}=320/400=0.80,\ n=400,\ z_{\alpha/2}=2.326
+$$
+$$
+LCL = \hat{p} - z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = .80-2.326 \sqrt{\frac{0.8(1-80)}{400}}= 0.75348
+$$
+
+b. Calculate the width of a 90% confidence interval estimate for the population proportion.  
+
+**Answer:**  
+
+The width is the total distance from the lower bound to the upper bound. Margin of error is equal to half-width, while width is the full length of the interval. So, the width of a 90% confidence interval is:
+
+$$
+width=2ME=2 z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}=2(1.645)(0.0329)=0.0658
+$$
+
+---
+
+# Exercise
+
+It is important for airlines to follow the published scheduled departure times of flights. Suppose that one airline that recently sampled the records of 246 flights originating in  Orlando found that 10 flights were delayed for severe weather, 4 flights were delayed for maintenance concerns, and all the other flights were on time 
+
+a. Estimate the percentage of on-time departures using a 98% confidence level.  
+
+**Answer:**  
+
+$$
+\hat{p}=232/246=0.9431,\ n=246,\ z_{\alpha/2}=Z_{0.01}=2.326
+$$
+$$
+CI: \hat{p} \pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = 0.9431 \pm 2.326 \sqrt{\frac{0.9431(0.0569)}{246}} = 0.9087 \ \text{to}\ 0.9775
+$$
+
+b. Estimate the percentage of flights delayed for severe weather using a 98% confidence level.  
+
+**Answer:**  
+
+$$
+\hat{p}=10/246=0.0407,\ n=246,\ z_{\alpha/2}=2.326
+$$
+$$
+CI: \hat{p} \pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} =  0.0407 \pm 2.326\sqrt{\frac{0.0407(0.9593)}{246}} = 0.0114 \ \text{to}\ 0.0699
+$$

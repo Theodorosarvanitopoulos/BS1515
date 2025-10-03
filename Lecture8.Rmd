@@ -1,0 +1,737 @@
+---
+title: "Lecture 8: Probability distribution (continuous variables) and sampling distributions"
+subtitle: "Mathematics and Statistics"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  slidy_presentation:
+    font_adjustment: 0
+    footer: "Arvanitopoulos T - Lecture 8"
+css: cardiff.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Learning Objectives
+
+### Probability distributions (continuous variables)
+
+- Understand how the shape of the normal distribution is affected by the mean and standard deviation of the data.
+
+- Be able to use the binomial distribution table. 
+
+- Calculate probabilities and expected values using R. 
+
+### Sampling distributions
+
+- Define the concept of a sampling distribution. 
+
+- Understand the relationship between sample and population estimates.
+
+- Be able to calculate the best estimates of the population mean and population proportion
+
+- Understand the importance and application of the Central Limit Theory
+
+### 📚 Reading
+
+Newbold et al. (2020), *Statistics for Business and Economics*, Ch. 5-6
+
+
+
+##  Probability distribution (continuous variables)
+
+In the previous lecture we discussed about probability distribution for discreet variables
+
+For continuous variables, probabilities are computed as areas under a curve.
+
+```{r}
+curve(dnorm(x, mean = 0, sd = 1), from = -4, to = 4, main = "Standard Normal PDF")
+```
+
+
+## Cumulative Distribution Function (CDF) {.smaller}
+
+The **CDF** of a continuous random variable X, denoted $F(x)$, gives the probability that $X$ does not exceed the value of $x$:
+
+$$
+F(x) = P(X \leq x)
+$$
+
+---
+
+## Cumulative Distribution Function (CDF) {.smaller}
+
+The **CDF** of a continuous random variable X, denoted $F(x)$, gives the probability that $X$ does not exceed the value of $x$:
+
+$$
+F(x) = P(X \leq x)
+$$
+
+So, if a and b are two possible values for $X$, with $a<b$, then the probability that $X$ lies between $a$ and $b$ is 
+
+$$
+P(a<X<b)=F(b)-F(a)=\int_{-\infty}^{b}f(x)dx
+$$
+
+---
+
+## Cumulative Distribution Function (CDF) {.smaller}
+
+The **CDF** of a continuous random variable X, denoted $F(x)$, gives the probability that $X$ does not exceed the value of $x$:
+
+$$
+F(x) = P(X \leq x)
+$$
+
+So, if a and b are two possible values for $X$, with $a<b$, then the probability that $X$ lies between $a$ and $b$ is 
+
+$$
+P(a<X<b)=F(b)-F(a)=\int_{-\infty}^{b}f(x)dx
+$$
+
+For discrete variables, this is a step function. 
+
+For continuous variables, it's the **integral of the PDF**, and computes the area under the probability density function f(x) over all values of the random variable X within its range, is equal to 1.0. \
+
+Thus, the cumulative function $F(x_0$) is the area under the probability density function $f(x)$ from the minimum value $x_m$  up to maximum value $x_0$
+
+
+$$
+F(x) = \int_{x_m}^{x_0} f(x) \, dx
+$$
+
+
+
+## Cumulative Distribution Function (CDF)
+
+The cumulative function $F(x_0)$ is the area under the probability density function $f(x)$ from the minimum value $x_m$  up to maximum value $x_0$
+
+$$
+F(x) = \int_{x_m}^{x_0} f(x) \, dx
+$$
+
+### CDF plot using R
+
+```{r plot-cdf,  fig.width=8, fig.height=4.5, echo=FALSE}
+x <- seq(-4, 4, length = 1000)
+cdf_vals <- pnorm(x)
+plot(x, cdf_vals, type = "l", col = "blue", lwd = 2,
+     main = "Cumulative Distribution Function (CDF)",
+     ylab = "F(x)", xlab = "x")
+```
+
+
+## Probability Density Function (PDF) {.smaller}
+
+The **PDF** describes how dense the probability is around a point. The height of the curve is **not** probability.
+
+**Shared area under the curve is the probability** that $X$ is between two points $a$ and $b$. 
+
+To compute $P(a \leq X \leq b)$, we integrate: $P(a \leq X \leq b) = \int_{a}^{b} f(x) \, dx$
+
+```{r shaded-area, fig.width=7, fig.height=4.5, echo=FALSE}
+a <- -1
+b <- 1
+x <- seq(-4, 4, length = 1000)
+y <- dnorm(x)
+
+plot(x, y, type = "l", lwd = 2,
+     main = "Probability as Area: P(-1 ≤ X ≤ 1)",
+     xlab = "x", ylab = "f(x)")
+polygon(c(x[x >= a & x <= b], b, a),
+        c(y[x >= a & x <= b], 0, 0),
+        col = "skyblue", border = NA)
+```
+
+*Note*: The total area under the curve f(x) is 1, while the probability of any individual value is zero.
+
+The area represents $P(-1 \leq X \leq 1)$, computed as:
+
+```{r integrate-pnorm}
+pnorm(1) - pnorm(-1)
+```
+
+
+## Standard Normal Distribution {.smaller}
+
+Standard Normal Distribution is continuous, bell-shaped, and symmetric. It is often used to model natural phenomena due to its characteristics.
+
+**Measures of Central Tendency**: 
+
+- central location is determined by the mean $\mu$ 
+
+- spread is determined by the standard deviation $\sigma$ 
+
+- the random variable has an infinite theoretical range from $-\infty$ to $+\infty$ 
+
+- mean, median, and mode are **equal** 
+
+
+Given the mean $\mu$ and variance $\sigma^2$, we define the normal distribution using the following notation: $X$ sim $N(\mu, \sigma^2)$ 
+
+
+For example, a **normal distribution** with $\mu = 0$, $\sigma = 1$ looks like this:
+
+```{r plot-normal, fig.width=7, fig.height=4.5, echo=FALSE}
+curve(dnorm(x), from = -4, to = 4, lwd = 2,
+      main = "Standard Normal Distribution", ylab = "Density")
+abline(v = 0, col = "red", lty = 2)
+```
+
+
+## Standard Normal Distribution
+
+By varying the parameters $\mu$ and $\sigma$, we can obtain different normal distributions:
+
+```{r,fig.width=8, fig.height=5, echo=FALSE}
+# Create sequence of x values
+x_vals <- seq(-10, 10, length.out = 1000)
+
+# Define three distributions with different means and standard deviations
+dist1 <- dnorm(x_vals, mean = 0, sd = 1)     # Standard Normal
+dist2 <- dnorm(x_vals, mean = 0, sd = 3)     # Standard Normal, wider
+dist3 <- dnorm(x_vals, mean = 1, sd = 4)  # Shifted right, wider
+
+# Combine into a data frame
+df <- data.frame(
+  x = x_vals,
+  `Mean = 0, SD = 1`   = dist1,
+  `Mean = 0, SD = 3`   = dist2,
+  `Mean = 2, SD = 4` = dist3
+)
+
+# Load library
+library(ggplot2)
+library(tidyr)
+
+# Reshape data for ggplot
+df_long <- pivot_longer(df, cols = -x, names_to = "Distribution", values_to = "Density")
+
+# Plot
+ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(linewidth = 1.2) +
+  labs(
+    title = "Normal Distributions with Different Means and Standard Deviations",
+    x = "x", y = "Density"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
+
+
+##  Shading Area Under Normal Curve
+
+For a normal random variable $X$ with mean $\mu$ and variance $\sigma^2$, i.e $X$ sim $N(\mu,\sigma^2)$, the cumulative distribution function (CDF) is:
+
+$$
+F(x_0)=P(X \leq x_0)
+$$
+
+and the probability for values $a$ and $b$ is measured by the area under the curve 
+
+$$
+P(a \leq x \leq b) = F(b)-F(a)
+$$
+
+```{r,fig.width=7, fig.height=4.5, warning=FALSE, echo=FALSE}
+library(ggplot2)
+
+# Define the range of x values
+x_vals <- seq(-4, 4, length.out = 1000)
+y_vals <- dnorm(x_vals)
+
+# Define area A and B
+z_a <- -1.5
+z_b <- 1.5
+
+# Create data frame
+df <- data.frame(x = x_vals, y = y_vals)
+
+# Shading for Area A
+df_a <- subset(df, x <= z_a)
+
+# Shading for Area B
+df_b <- subset(df, x >= z_b)
+
+# Central region
+df_center <- subset(df, x > z_a & x < z_b)
+
+# Compute probabilities
+p_a <- pnorm(z_a)
+p_b <- 1 - pnorm(z_b)
+p_center <- pnorm(z_b) - pnorm(z_a)
+
+# Plot
+ggplot(df, aes(x, y)) +
+  geom_line(color = "black", size = 1) +
+  geom_area(data = df_a, aes(x, y), fill = "red", alpha = 0.4) +
+  geom_area(data = df_b, aes(x, y), fill = "red", alpha = 0.4) +
+  geom_area(data = df_center, aes(x, y), fill = "green", alpha = 0.3) +
+  geom_vline(xintercept = c(z_a, z_b), linetype = "dashed", color = "blue") +
+  annotate("text", x = -2.8, y = 0.05, label = paste0("Area A = ", round(p_a, 4)), color = "red") +
+  annotate("text", x = 2.3, y = 0.05, label = paste0("Area B = ", round(p_b, 4)), color = "red") +
+  annotate("text", x = 0, y = 0.35, label = paste0("Center = ", round(p_center, 4)), color = "darkgreen") +
+  labs(title = "Standard Normal Distribution",
+       subtitle = "Shaded Areas: A (left tail), B (right tail), Center",
+       x = "Z-score", y = "Density") +
+  theme_minimal()
+```
+
+
+
+## Z-scores
+
+Any normal distribution (with any mean and variance combination) can be transformed into the standardized normal distribution (Z), with mean $\mu=0$ and variance $\sigma=1$, denoted as:
+
+$$  
+Z \sim N(0,1)
+$$
+To do that, we need to transform $X$ units into $Z$ units by using the following formula:
+
+$$
+Z = \frac{X - \mu}{\sigma}
+$$
+
+For example, if $X$ is distributed normally with mean of 100 and standard deviation of 50, the $Z$ value for $X = 200$ is
+
+
+$$
+Z = \frac{X - \mu}{\sigma}=\frac{200 - 100}{50}= 2 
+$$
+which says that $X = 200$ is two standard deviations (2 increments of 50 units) above the mean of 100.
+
+
+## The standard normal table {.smaller}
+
+So, finding normal probabilities 
+
+$$
+P(a<X<b)=P(\frac{a-\mu}{\sigma}<Z<\frac{b-\mu}{\sigma}) \\
+=F(\frac{b-\mu}{\sigma})-F(\frac{a-\mu}{\sigma})
+$$
+
+The Standard Normal Distribution table shows values of the cumulative normal distribution function
+
+For a given $Z$-value, the table shows the value for $F(a)$: *e.g.* $P(Z<2.00)=0.9772$
+
+For the negative $Z$-values, use the fact that the distribution is symmetric to find the needed probability:  
+
+$P(Z<-2.00)=1-0.9772=0.0228$
+
+```{r,fig.width=7, fig.height=4.5, warning=FALSE, echo=FALSE}
+mu <- 0
+sigma <- 1
+x_vals <- seq(-4, 4, length.out = 1000)
+y_vals <- dnorm(x_vals, mean = mu, sd = sigma)
+
+a <- -2
+b <- 2
+
+plot(x_vals, y_vals, type = "l", lwd = 2, col = "black",
+     xlab = "Z", ylab = "Density",
+     main = "Standard Normal Distribution")
+
+polygon(c(x_vals[x_vals >= a & x_vals <= b], rev(x_vals[x_vals >= a & x_vals <= b])),
+        c(y_vals[x_vals >= a & x_vals <= b], rep(0, sum(x_vals >= a & x_vals <= b))),
+        col = rgb(0.4, 0.8, 1, 0.5), border = NA)
+
+abline(v = c(a, b), col = "red", lty = 2)
+text(b + 0.2, 0.02, "F(b) = 0.9772")
+text(a - 0.6, 0.02, "F(a) = 0.0228")
+text(0, 0.1, "Shaded = F(b) - F(a) = 0.9544", cex = 1)
+legend("topright", legend = c("a = -2", "b = 2"),
+ col = "red", lty = 2, cex = 0.8)
+```
+
+
+## Inferential Statistics
+
+Using sample results to make statements about populations, i.e. **sample statistics** (known) 
+
+&rarr; **population parameters** (unknown, but can be estimated from sample evidence)
+
+---
+
+## Inferential Statistics 
+
+Using sample results to make statements about populations, i.e. **sample statistics** (known) 
+
+&rarr; **population parameters** (unknown, but can be estimated from sample evidence)
+
+Two main tools:
+
+  - **Estimation** &rarr; estimate population mean using sample mean
+  
+  - **Hypothesis testing** &rarr; use sample evidence to test a hypothesis (e.g. the population mean height is 1.8m/5.9feet)
+  
+
+
+## Random sampling
+
+Why Sampling? 
+
+- Entire population is often too costly, impractical, or even not possible to get information about (examples include the UK census)
+
+- Instead, it is possible to get statistical results of sufficiently high precision using samples
+
+- So, a **random sample** can be used to infer about the population
+
+---
+
+## Random sampling
+
+Why Sampling? 
+
+- Entire population is often too costly, impractical, or even not possible to get information about (examples include the UK census)
+
+- Instead, it is possible to get statistical results of sufficiently high precision using samples
+
+- So, a **random sample** can be used to infer about the population
+
+
+Simple Random Sample (SRS): 
+
+- each individual has equal chance of selection
+
+- objects are selected independently
+
+```{r}
+# Simulating a simple random sample
+set.seed(123)
+population <- rnorm(10000, mean = 100, sd = 15)
+sample <- sample(population, 50)
+mean(sample)
+```
+
+
+## Sampling Distribution of the Mean
+
+A **sampling distribution** is a probability distribution of a **sample statistic** across many random samples $X_1. X_2. X_3,..., X_n from a population.
+
+If you take many samples of size $n$, then the sample mean value for these observations is 
+
+$$ \bar{X}=\frac 1 n \sum_{i=1}^{n}X_i $$
+
+---
+
+## Sampling Distribution of the Mean
+
+A **sampling distribution** is a probability distribution of a **sample statistic** across many random samples $X_1. X_2. X_3,..., X_n from a population.
+
+If you take many samples of size $n$, then the sample mean value for these observations is 
+
+$$ \bar{X}=\frac 1 n \sum_{i=1}^{n}X_i $$
+
+
+The mean of the sampling distribution of the sample means is the population mean:
+
+$$ E(\bar{X}) = \mu $$
+
+
+---
+
+## Sampling Distribution of the Mean
+
+A **sampling distribution** is a probability distribution of a **sample statistic** across many random samples $X_1. X_2. X_3,..., X_n from a population.
+
+If you take many samples of size $n$, then the sample mean value for these observations is 
+
+$$ \bar{X}=\frac 1 n \sum_{i=1}^{n}X_i $$
+The mean of the sampling distribution of the sample means is the population mean:
+
+$$ E(\bar{X}) = \mu $$
+
+Different samples of the same size from the same population will yield different sample means. 
+
+The standard error of the mean is a measure of the variability in the mean from sample to sample:
+
+$$ \sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}} $$
+
+## Standard Error (SE) of the Mean
+
+*Note*: The standard error of the mean decreases as the sample size increases. 
+
+This means that as our sample size increase, we can produce be more confident of the actual mean of the population.
+
+```{r, fig.width=6, fig.height=5.0, echo=FALSE}
+set.seed(123)  # for reproducibility
+
+# Simulate population data (normally distributed)
+population <- rnorm(10000, mean = 100, sd = 15)
+
+# Sample sizes to compare
+n1 <- 10
+n2 <- 50
+
+# Generate sampling distributions
+samp_means_n10 <- replicate(1000, mean(sample(population, n1)))
+samp_means_n50 <- replicate(1000, mean(sample(population, n2)))
+
+# Plot both histograms
+par(mfrow = c(1, 2))  # side-by-side layout
+
+hist(samp_means_n10, breaks = 30, col = "lightblue", main = paste("Sample Size =", n1),
+     xlab = "Sample Means", xlim = c(90, 110), ylim = c(0, 200))
+abline(v = mean(samp_means_n10), col = "red", lwd = 2, lty = 2)
+
+hist(samp_means_n50, breaks = 30, col = "lightgreen", main = paste("Sample Size =", n2),
+     xlab = "Sample Means", xlim = c(90, 110), ylim = c(0, 200))
+abline(v = mean(samp_means_n50), col = "red", lwd = 2, lty = 2)
+
+par(mfrow = c(1, 1))  # reset layout
+```
+
+
+The two histograms above show the sampling distribution of the mean for two different sample sizes: n = 10 and n = 50.
+
+Notice how the distribution with larger sample size (n = 50) is narrower. 
+
+&rarr; This is because the standard error decreases as n increases, making our estimate of the population mean more precise.
+
+
+## Central Limit Theorem (CLT) {.smaller}
+
+### Sampling distribution of means and properties
+> For large enough $n$, the sampling distribution of the mean becomes approximately **normal**, regardless of the population shape.
+
+$$
+\mu_\bar{X}=\mu \ \ \ \ and \ \ \ \ \sigma_\bar{x}=\frac{\sigma}{\sqrt{n}}
+$$
+so that 
+$$
+\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right) 
+$$
+
+and as $n$ increases, $\sigma_\bar{X}$ decreases.
+
+```{r, fig.width=6, fig.height=4.5, echo=FALSE}
+library(ggplot2)
+
+x_vals <- seq(-10, 10, length.out = 1000)
+mu <- 0
+sd1 <- 1
+sd2 <- 3
+
+df <- data.frame(
+  x = rep(x_vals, 2),
+  Density = c(dnorm(x_vals, mean = mu, sd = sd1),
+              dnorm(x_vals, mean = mu, sd = sd2)),
+  Distribution = factor(rep(c("SD = 1", "SD = 3"), each = length(x_vals)))
+)
+
+ggplot(df, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(linewidth = 1.0) +  # changed from size to linewidth
+  labs(
+    title = "Normal Distributions with Different Standard Deviations",
+    x = "x", y = "Density"
+  ) +
+  theme_minimal()
+```
+
+
+## Standard normal distribution for the sample mean
+
+If the sampling distribution of the sample means is a normal distribution, 
+
+then we can compute a standardised normal random variable $Z$ :
+
+$$ 
+Z= \frac{\bar{X}-\mu}{\sigma_\bar{X}}= \frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}} 
+$$
+
+where 
+
+- $\bar{X}$ is the sample mean 
+
+- $\mu$ is the population mean 
+
+- $\sigma_\bar{X}$ is the standard error of the mean. 
+
+So, the $Z$-value with mean 0 and variance 1 for the sampling distribution of $\bar{X}$ is 
+$$ 
+Z= \frac{\bar{X}-\mu}{\sqrt{\sigma^2/n}} \sim N(0,1)
+$$
+
+
+## Central Limit Theorem (CLT) {.smaller}
+
+Even if the population is not normal, sample means from the population will be approximately normal as long as the sample size is large enough.
+
+$$\bar{X} \sim N(\mu,\frac{\sigma^2}{n})$$
+
+As $n$ becomes large, the central limit theorem states that the $Z$ transformation for \bar{X} approaches the standard normal distribution.
+
+$$
+Z=\frac{\bar{X}-\mu}{\sqrt{\sigma^2/n}} \sim N(0,1)
+$$
+
+---
+
+## Central Limit Theorem (CLT) {.smaller}
+
+Even if the population is not normal, sample means from the population will be approximately normal as long as the sample size is large enough.
+
+$$
+\bar{X} \sim N(\mu,\frac{\sigma^2}{n})
+$$
+
+As $n$ becomes large, the central limit theorem states that the $Z$ transformation for \bar{X} approaches the standard normal distribution.
+
+$$
+Z=\frac{\bar{X}-\mu}{\sqrt{\sigma^2/n}} \sim N(0,1)
+$$
+
+
+Under the CLT:
+
+- the mean of all possible sample means equals the population mean $\mu=\mu_x$
+
+- the standard deviation for all sample means is less than the standard deviation of the population $\sigma_x<\sigma$
+
+
+```{r clt-comparison, fig.width=7, fig.height=4, echo=FALSE}
+set.seed(42)
+
+# Left-skewed population
+population <- rexp(10000, rate = 1)
+
+# Sampling distributions
+samp_means_small <- replicate(1000, mean(sample(population, 5)))
+samp_means_large <- replicate(1000, mean(sample(population, 50)))
+
+# Plot
+par(mfrow = c(1, 2), mar = c(4, 4, 3, 1))
+
+hist(samp_means_small, breaks = 30, col = "tomato", main = "n = 5",
+     xlab = "Sample Mean", xlim = range(c(samp_means_small, samp_means_large)))
+
+hist(samp_means_large, breaks = 30, col = "skyblue", main = "n = 50",
+     xlab = "Sample Mean", xlim = range(c(samp_means_small, samp_means_large)))
+
+mtext("Central Limit Theorem: Sampling Distribution of the Mean", outer = TRUE, line = -1.5, cex = 1.2)
+```
+
+
+## Sampling distribution of sample proportions
+
+Let $X$ be the number of successes in a binomial sample of $n$ observations with probability of success $P$. 
+
+The sample proportion \hat{p} provides an estimate of $P$
+
+$$\hat{p} = X / n$$
+where $0 \leq \hat{p}  \leq 1$ and \hat{p} has a binomial distribution.
+
+---
+
+## Sampling distribution of sample proportions
+
+Let $X$ be the number of successes in a binomial sample of $n$ observations with probability of success $P$. 
+
+The sample proportion \hat{p} provides an estimate of $P$
+
+$$\hat{p} = X / n$$
+where $0 \leq \hat{p}  \leq 1$ and \hat{p} has a binomial distribution.
+
+Suppose we are sampling from a population in which the probability of a ‘success’ on any trial is $P$, and $P$ is unknown.
+
+Then for all possible samples of size $n$ sufficiently large, the distribution of sample proportions will be
+
+$$
+\hat{p} \sim N \ (P, \ \ \sigma_{\hat{p}} = \sqrt{ \frac{P(1 - P)}{n}})
+$$
+
+---
+
+## Sampling distribution of sample proportions
+
+Let $X$ be the number of successes in a binomial sample of $n$ observations with probability of success $P$. 
+
+The sample proportion \hat{p} provides an estimate of $P$
+
+$$\hat{p} = X / n$$
+where $0 \leq \hat{p}  \leq 1$ and \hat{p} has a binomial distribution.
+
+Suppose we are sampling from a population in which the probability of a ‘success’ on any trial is $P$, and $P$ is unknown.
+
+Then for all possible samples of size $n$ sufficiently large, the distribution of sample proportions will be
+
+$$
+\hat{p} \sim N \ (P, \ \ \sigma_{\hat{p}} = \sqrt{ \frac{P(1 - P)}{n}})
+$$
+
+Given sample size is large enough, and based on CLT,
+
+$$
+Z = \frac{\hat{p}-P}{\sqrt{ \frac{P(1 - P)}{n}}} = \frac{\hat{p}-P}{\sigma_\hat{p}}
+$$
+So, the \hat{p} has binomial distribution, but can be approximated by a standard normal distribution when $nP(1 – P) > 5$
+
+
+## Sampling Distribution of the Proportion - R Example {.smaller}
+
+> In a population, 40% support a policy. Sample size = 200.  
+> What is the probability that less than 35% in the sample support th epolicy ?
+
+So, $P(\hat{p}<0.35)$ where $\hat{p}$ is the sample proportion
+
+This is a normal approximation problem using the sampling distribution of the proportion $Z = \frac{\hat{p}-P}{\sigma_\hat{p}}$
+
+```{r}
+# Set known parameters
+P <- 0.4       # true population proportion
+n <- 200       # sample size
+phat <- 0.35   # sample proportion for which we compute the probability
+
+# Calculate standard error of sample proportion
+se <- sqrt(P * (1 - P) / n)
+
+# Compute Z-score
+z <- (phat - P) / se
+
+# Find probability using standard normal distribution
+probability <- pnorm(z)
+
+# Output results
+list(Z_score = round(z, 2), Probability = round(probability, 4))
+```
+
+
+## Sampling Distribution of the Proportion - Visualisation using R
+
+We used the central limit theorem to approximate the sampling distribution of the sample proportion with a normal distribution.
+
+Since the population proportion is known to be 0.4, we computed the probability that the observed sample proportion would be less than 0.35, 
+
+i.e. $P(\hat{p} < 0.35)$ &rarr; this is visually represented by the shaded area.
+
+
+```{r, fig.width=7, fig.height=4, echo=FALSE}
+# Create range for x-axis (plausible sample proportions)
+x_vals <- seq(0.2, 0.6, length = 1000)
+y_vals <- dnorm(x_vals, mean = P, sd = se)
+
+# Plot the sampling distribution
+plot(x_vals, y_vals, type = "l", lwd = 2, col = "darkblue",
+     main = "Sampling Distribution of the Sample Proportion",
+     xlab = expression(hat(p)), ylab = "Density")
+
+# Shade area where sample proportion is less than 0.35
+polygon(c(x_vals[x_vals <= phat], phat),
+        c(y_vals[x_vals <= phat], 0),
+        col = rgb(0.2, 0.6, 1, 0.3), border = NA)
+
+# Add a vertical line at sample phat
+abline(v = phat, col = "red", lwd = 2, lty = 2)
+
+# Add labels
+legend("topright",
+       legend = c(expression(P(hat(p) < 0.35))),
+       fill = rgb(0.2, 0.6, 1, 0.3), border = NA, bty = "n")
+```
+
+

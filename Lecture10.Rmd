@@ -1,0 +1,640 @@
+---
+title: "Lecture 10: Hypothesis testing"
+subtitle: "Mathematics and Statistics BS1515"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  slidy_presentation:
+    font_adjustment: 0
+    footer: "Arvanitopoulos T - Lecture 10"
+css: cardiff.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+
+
+## Learning outcomes
+
+- Understand how to make decisions about the hypothesis tests.  
+
+- Formulate a decision rule for testing a hypothesis.  
+
+- Understand the concept of error and the different types of error in decision making.
+
+- Know how to use the critical value and p-value approaches to test the null hypothesis. 
+
+- Know what Type I and Type II errors are.
+
+
+### 📚 Reading
+
+Newbold et al. (2020), *Statistics for Business and Economics*, Ch. 9
+
+
+
+## Hypothesis testing
+
+
+A **hypothesis** is a claim (assumption) about a **population parameter**:
+
+- *population mean* 
+
+e.g. The mean monthly cell phone bill of this city is $\mu=£52$   
+
+- *population proportion*  
+
+e.g. The proportion of adults in this city with cell phones is $P=0.88$ 
+
+
+We use our **sample** to assess the truth or validity of some assertion about the population.
+
+
+## The Null Hypothesis ($H_0$) vs the Alternative Hypothesis ($H_1$) 
+
+**Null Hypothesis ($H_0$)**
+ 
+- States the **assumption** (numerical) to be tested &rarr; always about a population parameter not a sample statistic
+
+- Begin with the assumption that the null hypothesis is **true**  
+
+- Refers to the **status quo**  
+
+- Always contains “=”, “≤” or “≥”  
+
+- May or may not be **rejected**
+
+---
+
+## The Null Hypothesis ($H_0$) vs the Alternative Hypothesis ($H_1$) 
+
+**Null Hypothesis ($H_0$)**
+ 
+- States the **assumption** (numerical) to be tested &rarr; always about a population parameter not a sample statistic
+
+- Begin with the assumption that the null hypothesis is **true**  
+
+- Refers to the **status quo**  
+
+- Always contains “=”, “≤” or “≥”  
+
+- May or may not be **rejected**
+
+**Alternative Hypothesis ($H_1$)**
+
+- Opposite of the null hypothesis  
+
+- Challenges the **status quo**  
+
+- May or may not be **supported**  
+
+- Is generally the hypothesis that the researcher is trying to **support**
+
+
+
+## Hypothesis testing process
+
+1. Set up the hypotheses  &rarr; what's the value of the population parameter 
+
+  e.g. Hypothesis: the population mean age is $50$  &rarr; $H_0$: $\mu=50$ 
+  
+
+---
+
+## Hypothesis testing process
+
+1. Set up the hypotheses  &rarr; what's the value of the population parameter 
+
+  e.g. Hypothesis: the population mean age is $50$  &rarr; $H_0$: $\mu=50$ 
+ 
+2. Set the significance level $\alpha$ &rarr; provides critical values of the test 
+
+  e.g. to reject the null, traditionally researchers choose $\alpha=5%$ (or $1-\alpha=95\%$) 
+  
+---
+
+## Hypothesis testing process
+
+1. Set up the hypotheses  &rarr; what's the value of the population parameter 
+
+  e.g. Hypothesis: the population mean age is $50$  &rarr; $H_0$: $\mu=50$ 
+ 
+2. Set the significance level $\alpha$ &rarr; provides critical values of the test 
+
+  e.g. to reject the null, traditionally researchers choose $\alpha=5%$ (or $1-\alpha=95\%$) 
+
+3. Collect a random sample and compute test statistic  
+
+  e.g. find data source and prepare data for analysis 
+  
+---
+
+## Hypothesis testing process
+
+1. Set up the hypotheses  &rarr; what's the value of the population parameter 
+
+  e.g. Hypothesis: the population mean age is $50$  &rarr; $H_0$: $\mu=50$ 
+ 
+2. Set the significance level $\alpha$ &rarr; provides critical values of the test 
+
+  e.g. to reject the null, traditionally researchers choose $\alpha=5%$ (or $1-\alpha=95\%$) 
+
+3. Collect a random sample and compute test statistic  
+
+  e.g. find data source and prepare data for analysis 
+
+4. Make decision: reject or do not reject $H_0$ 
+
+  e.g. if $H_0$ rejected, then $H_1$ true, meaning mean age is not $50$ 
+
+
+
+## Hypothesis testing process - visual example
+
+![](Hyp_test_ch9.png){ width=50%}
+
+## Reasons for rejecting $H_0$ - visual example
+
+![](Hyp_test_ch9_v2.png){ width=50%}
+
+
+
+## Level of significance $\alpha$ and the rejection area {.smaller}
+
+The level of significance defines the unlikely values of the sample statistic if the null hypothesis is true.
+
+In other words, it defines **rejection region** of the sampling distribution.
+
+So, rejection areas is designated by the level of significance &rarr; typical values of $\alpha$ : $0.01, 0.05, 0.10$. 
+
+$\alpha$ provides the critical values of the test the inform the research of when to reject the null $H_0$ and accept the alternative $H_1$
+
+
+$$Confidence \ \ level  = ( 1 - \alpha)$$  
+
+
+---
+
+## Level of significance $\alpha$ and the rejection area {.smaller}
+
+The level of significance defines the unlikely values of the sample statistic if the null hypothesis is true.
+
+In other words, it defines **rejection region** of the sampling distribution.
+
+So, rejection areas is designated by the level of significance &rarr; typical values of $\alpha$ : $0.01, 0.05, 0.10$. 
+
+$\alpha$ provides the critical values of the test the inform the research of when to reject the null $H_0$ and accept the alternative $H_1$
+
+
+$$Confidence \ \ level  = ( 1 - \alpha)$$  
+
+
+
+![](alpha_chapter9.png){width=45%}
+
+
+
+## Type I and Type II Errors 
+
+There are common errors in making decisions that we outline below.
+
+**Type I error**:
+
+- this happens when we reject a true null hypothesis  &rarr; this is a serious error!
+
+- the probability of Type I error is $\alpha$ and is called the level of significance of the test
+
+**Type II error**:  
+
+- fail to reject a false null hypothesis
+
+- the probability of Type II error is $\beta$, and $1-\beta$ the power of the test
+
+
+## Possible hypothesis test outcomes and probabilities
+
+| **Decision**            | **$H_0$ True**         | **$H_0$ False**            |
+|-------------------------|------------------------|----------------------------|
+| Do not reject $H_0$     | Correct decision       | Type II error ($\beta$)    |
+|                         | (True negative)        | (false negative)           |
+|                         | Probability=$1-\alpha$ | Probability=$\beta$        |
+|                         |                        |                            |
+| Reject $H_0$            |  Type I error          | Correct decision           |
+|                         |  (False positive)      | (true positive)            |
+|                         |  Probability=$\alpha$  | Probability=$1-\beta$      |
+
+
+
+
+## Type I and Type II Errors - example  {.smaller}
+
+### Example
+
+Test to indicate whether someone is pregnant  
+
+- **$H_0$**: you are not pregnant  
+
+- **$H_1$**: you are pregnant 
+
+### Hypothesis testing 
+
+- **Type I error**: false positive indicates you are pregnant, when you're not 
+
+- **Type II error**: false negative indicates you are not pregnant, when you are 
+
+![](type1error.jpg){ width=35%}
+
+
+
+
+## Type I and II error relationship
+
+Type I and Type II errors cannot happen at the same time 
+
+- Type I error can only occur if $H_0$ is true 
+
+- Type II error can only occur if $H_0$ is false  
+
+If Type I error probability ($\alpha$) &uarr;, then Type II error probability ($\beta$) &darr; &rarr; trade-off between Type I and II errors.
+
+---
+
+
+## Type I and II error relationship
+
+Type I and Type II errors cannot happen at the same time 
+
+- Type I error can only occur if $H_0$ is true 
+
+- Type II error can only occur if $H_0$ is false  
+
+If Type I error probability ($\alpha$) &uarr;, then Type II error probability ($\beta$) &darr; &rarr; trade-off between Type I and II errors.
+
+
+### Factors affecting type II error
+
+Ceteris Paribus (all else equal)
+
+- $\beta$ &uarr; when the differnece between hypothesised parameters and its true value &darr;
+
+- $\beta$ &uarr;when $\alpha$ &darr;
+
+- $\beta$ &uarr;when $\sigma$ &uarr;
+
+- $\beta$ &uarr;when $n$ &darr;
+
+
+
+## Hypothesis tests for the mean
+
+### Test statistic
+
+If the sample statistic is far from the stated population parameter, the null hypothesis is rejected. 
+
+How far is “far enough” to reject $H_0$? 
+
+---
+
+## Hypothesis tests for the mean
+
+### Test statistic
+
+If the sample statistic is far from the stated population parameter, the null hypothesis is rejected. 
+
+How far is “far enough” to reject $H_0$? 
+
+The test statistic is a sample statistic, computed from information provided in the sample.
+
+The researcher uses the sample statistic to decide between the null $H_0$ and alternative $H_1$. \
+
+The power of the test is the probability of rejecting a null hypothesis $H_0$.
+
+The power of the test increases as the sample size increases.
+
+$$Power = P \ ( \ Reject \ \ H_0 \  | \ H_1 \ \ is \ \ true)$$
+Test statistics for the mean differs when $\sigma$ is known ($Z$ statistic) vs when is unknown ($t$ statistic).
+
+
+
+## $Z$-Test for the mean ($\sigma$ known)
+
+We start with the case that $\sigma$ is known. \
+
+This means that we convert sample statistic $\bar{x}$ to a $Z-stat$ test statistic. \
+
+Assume the population is normal and consider the test: \
+
+$H_0$: $\mu=\mu_0$ \
+
+$H_1$: $\mu>\mu_0$ \
+
+The decision rule is:
+
+Reject $H_0$ if  $Z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}> z_{\alpha}$
+
+
+
+## $t$-Test for the mean ($\sigma$ uknown)
+
+What if $\sigma$ is unknown? \
+
+This means that we convert sample statistic $\bar{x}$ to a $t-stat$ test statistic. \
+
+Assume the population is normal and consider the test: \
+
+$H_0$: $\mu=\mu_0$ \
+
+$H_1$: $\mu>\mu_0$ \
+
+The decision rule is:
+
+Reject $H_0$ if  $t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}> t_{n-1, \ \alpha}$
+
+
+
+## Two-tailed type of test
+
+Two-tailed test ($t$-stat or $z$-stat):  
+
+ $H_0: \mu = \mu_0$ vs. $H_1: \mu \neq \mu_0$
+ 
+- We assign half of $\alpha$ to testing the statistical significance in either direction. 
+
+- This means that 0.025 in each tail of the distribution of the test statistic. 
+
+- Regardless of the direction of the relationship hypothesised, the test is for the possibility of the relationship in both directions. 
+
+  
+```{r two_tail_annotated, fig.asp=0.6, fig.align='center', echo=FALSE, message=FALSE, warning=FALSE}
+
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(dplyr))
+
+x <- seq(-4, 4, length.out = 1000)
+df <- 10
+z_crit <- 1.96
+
+df_plot <- data.frame(
+  x = rep(x, 2),
+  Density = c(dnorm(x), dt(x, df = df)),
+  Distribution = rep(c("Standard Normal (Z)", paste0("t-distribution (df = ", df, ")")), each = length(x))
+)
+
+ggplot(df_plot, aes(x = x, y = Density, color = Distribution, linetype = Distribution)) +
+  geom_line(linewidth = 1.2) +
+  
+  # Fill rejection regions (left and right)
+  geom_area(data = subset(df_plot, x <= -z_crit & Distribution == paste0("t-distribution (df = ", df, ")")),
+            aes(x = x, y = Density), fill = "red", alpha = 0.3, inherit.aes = FALSE) +
+  geom_area(data = subset(df_plot, x >= z_crit & Distribution == paste0("t-distribution (df = ", df, ")")),
+            aes(x = x, y = Density), fill = "red", alpha = 0.3, inherit.aes = FALSE) +
+
+  # Fill non-rejection region (middle)
+  geom_area(data = subset(df_plot, x > -z_crit & x < z_crit & Distribution == paste0("t-distribution (df = ", df, ")")),
+            aes(x = x, y = Density), fill = "green", alpha = 0.2, inherit.aes = FALSE) +
+
+  # Add critical value lines and labels
+  geom_vline(xintercept = c(-z_crit, z_crit), color = "blue", linetype = "dashed") +
+  annotate("text", x = -z_crit - 0.3, y = 0.02, label = "-1.96", color = "blue") +
+  annotate("text", x = z_crit + 0.1, y = 0.02, label = "1.96", color = "blue") +
+
+  # Region labels
+  annotate("text", x = -3.2, y = 0.05, label = "Reject H_0\n(α/2 = 0.025)", color = "red", size = 4) +
+  annotate("text", x = 3.2, y = 0.05, label = "Reject H_0\n(α/2 = 0.025)", color = "red", size = 4) +
+  annotate("text", x = 0, y = 0.05, label = "Do Not Reject H_0", color = "darkgreen", size = 4.2) +
+
+  labs(title = "Two-Tailed Test – Comparison of Z and t Distributions",
+       x = "Test Statistic Value", y = "Density") +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+  
+
+
+## One-tailed  type of test {.smaller}
+
+**One-tailed (greater)** test ($t$-stat or $z$-stat):   
+
+  $H_0: \mu \leq \mu_0$ vs. $H_1: \mu > \mu_0$ 
+
+**One-tailed (less)** test ($t$-stat or $z$-stat):   
+
+ $H_0: \mu \geq \mu_0$ vs. $H_1: \mu < \mu_0$ 
+
+
+- We assign all $\alpha$ to testing the statistical significance in one direction. 
+
+- This means that  0.05 is in one tail of the distribution of the test statistic. 
+
+- For one tailed test, you disregard the possibility of a relationship in the other direction.  
+
+- We rarely use one tailed tests as we do not know in advance if the values we are interested in should be above or below $\mu$  
+
+```{r , fig.asp=0.6, fig.align='center', echo=FALSE, message=FALSE, warning=FALSE}
+
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(dplyr))
+library(gridExtra)
+library(grid)
+
+# Function to extract legend from ggplot
+get_legend <- function(a.gplot) {
+  tmp <- ggplotGrob(a.gplot)
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  tmp$grobs[[leg]]
+}
+
+x <- seq(-4, 4, length.out = 1000)
+df <- 10
+z_crit <- 1.645
+
+df_plot <- data.frame(
+  x = x,
+  norm = dnorm(x),
+  t_dist = dt(x, df = df)
+)
+
+cols <- c("Z (Standard Normal)" = "black", "t (df = 10)" = "darkorange")
+
+# Base plot with legend
+p_base <- ggplot(df_plot, aes(x = x)) +
+  geom_line(aes(y = norm, color = "Z (Standard Normal)"), linewidth = 1) +
+  geom_line(aes(y = t_dist, color = "t (df = 10)"), linetype = "dashed", linewidth = 1) +
+  scale_color_manual(values = cols) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+# Extract legend
+legend <- get_legend(p_base)
+
+# Left-tailed plot
+p_left <- ggplot(df_plot, aes(x = x)) +
+  geom_line(aes(y = norm, color = "Z (Standard Normal)"), linewidth = 1) +
+  geom_line(aes(y = t_dist, color = "t (df = 10)"), linetype = "dashed", linewidth = 1) +
+  geom_area(data = subset(df_plot, x <= -z_crit), aes(y = t_dist), fill = "red", alpha = 0.3) +
+  geom_area(data = subset(df_plot, x > -z_crit), aes(y = t_dist), fill = "green", alpha = 0.2) +
+  geom_vline(xintercept = -z_crit, linetype = "dashed", color = "blue") +
+  annotate("text", x = -z_crit - 0.3, y = 0.08, label = "-1.645", color = "blue", size = 4) +
+  annotate("text", x = -2.8, y = 0.12, label = "Reject H_0\n(α = 0.05)", color = "red", size = 4, hjust = 0.5) +
+  annotate("text", x = 0, y = 0.12, label = "Do Not Reject H_0", color = "darkgreen", size = 4.2) +
+  labs(title = "Left-Tailed Test (α = 0.05)", x = "Test Statistic", y = "Density") +
+  scale_color_manual(values = cols) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Right-tailed plot
+p_right <- ggplot(df_plot, aes(x = x)) +
+  geom_line(aes(y = norm, color = "Z (Standard Normal)"), linewidth = 1) +
+  geom_line(aes(y = t_dist, color = "t (df = 10)"), linetype = "dashed", linewidth = 1) +
+  geom_area(data = subset(df_plot, x >= z_crit), aes(y = t_dist), fill = "red", alpha = 0.3) +
+  geom_area(data = subset(df_plot, x < z_crit), aes(y = t_dist), fill = "green", alpha = 0.2) +
+  geom_vline(xintercept = z_crit, linetype = "dashed", color = "blue") +
+  annotate("text", x = z_crit + 0.3, y = 0.08, label = "1.645", color = "blue", size = 4) +
+  annotate("text", x = 2.8, y = 0.12, label = "Reject H_0\n(α = 0.05)", color = "red", size = 4, hjust = 0.5) +
+  annotate("text", x = 0, y = 0.12, label = "Do Not Reject H_0", color = "darkgreen", size = 4.2) +
+  labs(title = "Right-Tailed Test (α = 0.05)", x = "Test Statistic", y = "Density") +
+  scale_color_manual(values = cols) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Arrange with legend at bottom
+grid.arrange(
+  arrangeGrob(p_left, p_right, ncol = 2),
+  legend,
+  heights = c(10, 1)
+)
+```
+
+
+
+## Critical Value Approach (Two-Tailed Test)
+
+### Step 1
+
+Set up hypotheses (about the value of the parameter): 
+
+- Null hypothesis ($H_0$): a statement that parameter(s) take(s) specific values. 
+
+- Alternative hypothesis ($H_1$): states that parameter value(s) fall(s) in some alternative range of values.
+
+### Step 2
+
+Set the level of significance $\alpha$\.
+
+### Step 3
+
+Calculate the test statistic and critical $t$-stat (same for $z$-stat)
+
+### Step 4
+
+Decide whether to accept or reject the Null Hypothesis $H_0$. Conclude that we reject $H_0$ if:
+
+$$
+t > t_{\alpha/2, \ df} \quad \text{or} \quad t < -t_{\alpha/2, \ df}
+$$
+
+
+## $p$-value approach to testing
+
+**$p$-value** is the probability of obtaining a test statistics equal to or more extreme than the observed sample value given $H_0$ is true.
+
+It is also called observed level of significance &rarr; researchers often say they found *"statistically significant findings"*.
+
+**$p$-value** is the smallest value of $\alpha$ for which $H_0$ can be rejected.
+
+In practice, this is the most common approach for deciding whether $H_0$ can be rejected, and you will find it widely reported in statistical software (Stata, R, etc).
+
+---
+
+## $p$-value approach to testing
+
+**$p$-value** is the probability of obtaining a test statistics equal to or more extreme than the observed sample value given $H_0$ is true.
+
+It is also called observed level of significance &rarr; researchers often say they found *"statistically significant findings"*.
+
+**$p$-value** is the smallest value of $\alpha$ for which $H_0$ can be rejected.
+
+In practice, this is the most common approach for deciding whether $H_0$ can be rejected, and you will find it widely reported in statistical software (Stata, R, etc).
+
+To obtain the $p$-value for an upper tail test:
+
+$$
+p-value = P(z> \frac{\bar{x}-\mu}{\sigma/\sqrt{n}}, \ \  given \ \ that \ \ H_0 \ \ is \ \ true) \\
+        = P(z> \frac{\bar{x}-\mu}{\sigma/\sqrt{n}} \ | \  \mu=\mu_0)
+$$
+
+**Decision rule** : compare $p$-value to $\alpha$
+
+  - if $p$-value $< \alpha$, then reject $H_0$ 
+  
+  - if $p$-value $> \alpha$, then do not reject $H_0$ 
+
+
+## $p$-value example  {.smaller}
+
+### Decision rule
+
+  - $p < 0.10$: some evidence against $H_0$ but not accepted as robust evidence by applied researchers
+  
+  - $p < 0.05$: strong evidence against $H_0$
+  
+  - $p < 0.01$: very strong evidence against $H_0$
+  
+### Example
+
+The example assumes a two-tailed test with a given test statistic and highlights the area of the $p$-value, visually comparing it to the significance level $\alpha=0.05$
+
+The plot below illustrates rejection of the null hypothesis using the $p$-value approach. &rarr; $p$-value=$0.022$, and given $p<0.05$, then we reject $H_0$.
+
+```{r, fig.width=6, fig.height=4, fig.align='center', warning=FALSE, echo=FALSE}
+library(ggplot2)
+
+# Parameters
+df <- 20                # degrees of freedom
+alpha <- 0.05           # significance level (two-tailed)
+t_stat <- 2.5           # observed t statistic
+
+# Critical t value
+t_crit <- qt(1 - alpha / 2, df)
+
+# Data for t-distribution
+x_vals <- seq(-4, 4, length.out = 1000)
+y_vals <- dt(x_vals, df)
+df_plot <- data.frame(x = x_vals, y = y_vals)
+
+# Plot
+ggplot(df_plot, aes(x = x, y = y)) +
+  geom_line(linewidth = 1.2) +
+  
+  # Shaded rejection regions
+  geom_area(data = subset(df_plot, x <= -t_crit), aes(x, y), fill = "red", alpha = 0.3) +
+  geom_area(data = subset(df_plot, x >= t_crit), aes(x, y), fill = "red", alpha = 0.3) +
+  
+  # Shaded non-rejection region
+  geom_area(data = subset(df_plot, x > -t_crit & x < t_crit), aes(x, y), fill = "green", alpha = 0.2) +
+  
+  # Dashed black lines for critical values
+  geom_vline(xintercept = c(-t_crit, t_crit), linetype = "dashed", color = "black", linewidth = 1) +
+
+  # Dashed blue line for test statistic
+  geom_vline(xintercept = t_stat, color = "blue", linetype = "dashed", linewidth = 1.2) +
+  
+  # Annotations
+  annotate("text", x = t_stat + 0.3, y = 0.05, label = paste0("t = ", t_stat), color = "blue", size = 4, hjust = 0) +
+  annotate("text", x = 3.2, y = 0.10, label = "Rejection Region\n(p < 0.05)", color = "red", size = 4) +
+  annotate("text", x = 0, y = 0.15, label = "Do Not Reject H₀", color = "darkgreen", size = 4) +
+  
+  labs(
+    title = "Two-Tailed t-Test: p-Value Approach",
+    x = "t",
+    y = "Density"
+  ) +
+  theme_minimal()
+```
+
+
+

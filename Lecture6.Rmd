@@ -1,0 +1,986 @@
+---
+title: "Lecture 6: Introduction to statistics and descriptive statistics"
+subtitle: "Mathematics and Statistics BS1515"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  slidy_presentation:
+    font_adjustment: 0
+    footer: "Arvanitopoulos T - Lecture 6"
+css: cardiff.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Learning objectives
+
+### Introduction to statistics
+
+-   Understand what statistics is and why it is useful.
+
+-   To be able to distinguish between different types of variables and
+    data.
+
+-   To understand the use of diagrams/graphs and to how to draw
+    conclusions.
+
+### Numerical data
+
+-   To understand measures of central tendency, location, and variation
+    in the data.
+
+-   To understand the advantages and disadvantages of different
+    measures.
+
+-   To understand which measures to use and how to interpret them.
+
+### 📚 Reading
+
+Newbold et al. (2020), *Statistics for Business and Economics*, Ch. 1–2.
+
+## What is statistics?
+
+Statistics is the science of collecting, organizing, presenting,
+analysing, and interpreting data to assist in making more effective
+decisions.\
+
+Economists use statistics to test assumptions and inform policy making.\
+
+*Example*: The BoE uses data on inflation and employment to inform
+decision on interest rates.
+
+Two branches of statistics:
+
+**Descriptive statistics**
+
+Graphical and numerical procedures to summarize and process data.\
+
+**Inferential statistics**:
+
+Using data to make predictions, forecasts, and estimates to assist
+decision making (estimation and hypothesis testing)
+
+## Key statistical concepts
+
+**Population (**$N$) is the complete group under study.
+
+-   $N$ represents the population size
+
+-   values calculated using population data are called **parameters**
+
+-   *example*: census or population of a country.
+
+**Sample (**$n$) is an observed subset of the population.
+
+-   n represents the sample size
+
+-   values computed from sample data are called **statistics**
+
+-   *example*: 2 millions from the population
+
+![](pop_sample.png){width="35%"}
+
+## Sampling methods
+
+**Simple random sampling** → **random sample**
+
+-   select randomly a sample of $n$ objects from a population
+
+-   each member of the population is equally likely to be chosen
+
+-   selection of one doesn’t affect the selection of any other member
+
+**Systematic sampling** → **systematic sample**
+
+-   population is arranged so that is not related to the subject of
+    interest
+
+-   select randomly an item every $j= N/n$ of the population
+
+**Inference** is the process of drawing conclusions or making decisions
+about a population based on sample results.
+
+## Types of data {.smaller}
+
+A **variable** has two characteristics:
+
+1.  it is an attribute/characteristic that describes a person, place,
+    thing, or idea
+
+2.  its value can "*vary*" from one entity to another
+
+------------------------------------------------------------------------
+
+## Types of data {.smaller}
+
+A **variable** has two characteristics:
+
+1.  it is an attribute/characteristic that describes a person, place,
+    thing, or idea
+
+2.  its value can "*vary*" from one entity to another
+
+Types of variables:
+
+**Qualitative/Categorical** variables take non numerical values (e.g.,
+the colour of a ball).
+
+-   *discrete*: (positive) integer values (e.g., number of children per
+    household)
+
+-   *continuous*: any real numerical values (e.g., weight)\
+
+**Quantitative/Numerical** variables take numerical values (e.g. the
+number of children per family).
+
+-   *nominal*: non-measurable categories (e.g. colours: red, blue,
+    yellow, etc)
+
+-   *ordinal*: categories with meaningful order (e.g. education level:
+    high school, bachelor's, master's, PhD)
+
+------------------------------------------------------------------------
+
+## Types of data {.smaller}
+
+A **variable** has two characteristics:
+
+1.  it is an attribute/characteristic that describes a person, place,
+    thing, or idea
+
+2.  its value can "*vary*" from one entity to another
+
+Types of variables:
+
+**Qualitative/Categorical** variables take non numerical values (e.g.,
+the colour of a ball).
+
+-   *discrete*: (positive) integer values (e.g., number of children per
+    household)
+
+-   *continuous*: any real numerical values (e.g., weight)\
+
+**Quantitative/Numerical** variables take numerical values (e.g. the
+number of children per family).
+
+-   *nominal*: non-measurable categories (e.g. colours: red, blue,
+    yellow, etc)
+
+-   *ordinal*: categories with meaningful order (e.g. education level:
+    high school, bachelor's, master's, PhD)
+
+| Data Type   | Subtype    | Description        | Example             |
+|-------------|------------|--------------------|---------------------|
+| Categorical | Nominal    | No order           | Gender, Blood Type  |
+|             | Ordinal    | Ordered categories | Education Level     |
+| Numerical   | Discrete   | Countable          | Number of Children  |
+|             | Continuous | Measurable         | Weight, Temperature |
+
+## Visualizing categorical data
+
+### Bar chart (NHS Wales data)
+
+```{r, fig.width=8, fig.height=5, message=FALSE, warning=FALSE,  echo=FALSE}
+library(ggplot2)
+
+# Data from Welsh NHS 2022–23 key facts:
+# Total admission episodes (first in spell): 796,300
+# Emergency: 364,400 (46%)
+# Elective/waiting-list: 310,700 (39%)
+# Maternity: 21,100 (3%)
+# Mental Health: ~8% (63,700)
+# Day Cases: ~4% (31,900)
+
+admissions_wales <- data.frame(
+  Type = c("Emergency", "Elective", "Maternity", "Mental Health", "Day Cases"),
+  Count = c(364400, 310700, 21100, 63700, 31900)
+)
+
+# Bar chart
+ggplot(admissions_wales, aes(x = Type, y = Count, fill = Type)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(
+    title = "NHS Wales Admissions by Type (2022–23)",
+    x = "Admission Type",
+    y = "Number of Episodes"
+  ) +
+  theme(legend.position = "none")
+```
+
+## Visualizing categorical data
+
+### Pie charts (NHS Wales data)
+
+```{r, fig.width=8, fig.height=5,  message=FALSE, warning=FALSE,  echo=FALSE}
+library(ggplot2)
+
+# Data from Welsh NHS 2022–23 key facts:
+# Total admission episodes (first in spell): 796,300
+# Emergency: 364,400 (46%)
+# Elective/waiting-list: 310,700 (39%)
+# Maternity: 21,100 (3%)
+# Mental Health: ~8% (63,700)
+# Day Cases: ~4% (31,900)
+
+admissions_wales <- data.frame(
+  Type = c("Emergency", "Elective", "Maternity", "Mental Health", "Day Cases"),
+  Count = c(364400, 310700, 21100, 63700, 31900)
+)
+
+# Pie chart
+admissions_wales$Pct <- admissions_wales$Count / sum(admissions_wales$Count) * 100
+ggplot(admissions_wales, aes(x = "", y = Pct, fill = Type)) +
+  geom_col(width = 1) +
+  coord_polar(theta = "y") +
+  theme_void() +
+  labs(title = "Admission Type Shares – Wales (2022–23)")
+
+```
+
+## Visualizing numerical data
+
+### Line plot (financial data)
+
+Comparing the **natural logarithm of daily closing prices** for the
+**FTSE 100** and **S&P 500** since 2016.
+
+```{r, fig.width=8, fig.height=5, message=FALSE, warning=FALSE, echo=FALSE}
+# Load libraries
+library(quantmod)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Set date range
+start_date <- as.Date("2016-01-01")
+end_date   <- Sys.Date()
+
+# Download index data (return as objects, not auto-assigned)
+ftse_xts  <- getSymbols("^FTSE", src = "yahoo", from = start_date, to = end_date, auto.assign = FALSE)
+sp500_xts <- getSymbols("^GSPC", src = "yahoo", from = start_date, to = end_date, auto.assign = FALSE)
+
+# Extract closing prices
+ftse  <- Cl(ftse_xts)
+sp500 <- Cl(sp500_xts)
+
+# Combine series and name columns
+price_data <- merge(ftse, sp500)
+colnames(price_data) <- c("FTSE", "SP500")
+
+# Compute natural logs and convert to data.frame
+log_prices <- log(price_data)
+log_df <- data.frame(Date = zoo::index(log_prices), zoo::coredata(log_prices))
+
+# Reshape to long format
+plot_data <- pivot_longer(
+  log_df,
+  cols = c("FTSE", "SP500"),
+  names_to = "Index",
+  values_to = "Log_Closing_Price"
+)
+
+# Plot log prices
+ggplot(plot_data, aes(x = Date, y = Log_Closing_Price, color = Index)) +
+  geom_line(size = 1) +  # use 'size' for broader compatibility; change to linewidth=1 if ggplot2 >= 3.4
+  labs(
+    title = "Natural Log of FTSE 100 and S&P 500 Daily Closing Prices",
+    x = "Date", y = "ln(Price)"
+  ) +
+  theme_minimal()
+```
+
+*Note*: We often use a **log scale** to compare assets with different
+price levels, making relative growth more interpretable. Taking the
+natural log helps stabilise variance and compare relative returns.
+
+## Measures of Central Tendency {.smaller}
+
+1.  **Mean**: Arithmetic average
+
+2.  **Median**: Midpoint of ranked values
+
+3.  **Mode**: Most frequently observed value (if one exists)
+
+------------------------------------------------------------------------
+
+## Measures of Central Tendency {.smaller}
+
+1.  **Mean**: Arithmetic average
+
+2.  **Median**: Midpoint of ranked values
+
+3.  **Mode**: Most frequently observed value (if one exists)
+
+*Example*: consider the following random sample and its measures of
+central tendency.
+
+```{r}
+# Using R to find measures of central tendency
+x <- c(24, 35, 17, 21, 24, 37, 26, 46, 58, 30, 32, 13, 12, 38, 41, 43, 44, 27, 53, 27)
+mean(x)
+median(x)
+Mode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+Mode(x)
+```
+
+## Mean (arithmetic average)
+
+The arithmetic mean (mean) is the most common measure of central
+tendency.
+
+The mean is the sum of values divided by the number of values.
+
+For a **population** of $N$ values:
+
+$$
+\mu = \frac{1}{N} \sum_{i=1}^{N} x_i = \frac{x_1+x_2+...+x_N} {N}
+$$
+
+where $x$ are the population values and $N$ the population size.
+
+------------------------------------------------------------------------
+
+## Mean (arithmetic average)
+
+The arithmetic mean (mean) is the most common measure of central
+tendency.
+
+The mean is the sum of values divided by the number of values.
+
+For a **population** of $N$ values:
+
+$$
+\mu = \frac{1}{N} \sum_{i=1}^{N} x_i = \frac{x_1+x_2+...+x_N} {N}
+$$
+
+where $x$ are the population values and $N$ the population size.
+
+For a **sample** of size $n$:
+
+$$
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i = \frac{x_1+x_2+...+x_n} {n}
+$$
+
+where $x$ are the observed values and $n$ is the sample size.
+
+## Mean - Example using R
+
+```{r}
+# Example using R
+values1 <- c(1, 2, 3, 4, 5)
+mean(values1)  # mean = 3
+
+values2 <- c(1, 2, 3, 4, 10)
+mean(values2)  # mean = 4
+```
+
+So, $\frac{1+2+3+4+5}{5}=\frac{15}{5}=3$ and
+$\frac{1+2+3+4+10}{5}=\frac{20}{5}=4$
+
+![](mean.png){width="40%"}
+
+**Note:** The mean is sensitive to outliers.
+
+## Median
+
+The **median** is the "middle" value of an ordered dataset (50% above,
+50% below).
+
+-   If the number of values is odd, the median is the middle number
+
+-   If the number of values is even, the median is the average of the
+    two middle numbers
+
+The location of the median:
+
+$$
+Median \ \ position \ \ = (\frac{n+1}{2})^{th} \ \ position \ \ in \ \ the \ \ ordered \ \ data
+$$ Note that $\frac{n+1}{2}$ is not the value of the median, only the
+position of the median in the ranked data.
+
+## Median - Example using R
+
+```{r}
+# Median Example using R
+median(values1)  # median = 3
+median(values2)  # median = 3
+```
+
+![](median.png){width="40%"}
+
+*Note*: The **median is not affected by extreme values**, making it more
+robust than the mean in skewed data.
+
+## Mode {.smaller}
+
+The **mode** is the most frequently occurring value in a dataset.
+
+The mode is not affected by extreme values and can be used for either
+numerical or categorical data.
+
+However, if all numbers in the sample have the same frequency of
+occurrence, then there is no mode.
+
+![](mode.png){width="40%"}
+
+------------------------------------------------------------------------
+
+## Mode {.smaller}
+
+The **mode** is the most frequently occurring value in a dataset.
+
+The mode is not affected by extreme values and can be used for either
+numerical or categorical data.
+
+However, if all numbers in the sample have the same frequency of
+occurrence, then there is no mode.
+
+![](mode.png){width="40%"}
+
+### Example using R
+
+```{r}
+# Mode function using R
+Mode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+values3 <- c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 9)
+Mode(values3)  # mode = 9
+
+values4 <- c(0, 1, 2, 3, 4, 5, 6)
+Mode(values4)  # no mode (all unique)
+```
+
+## Which measure is best?
+
+### Mean
+
+-   It is generally used unless extreme values (outliers) exist.
+
+-   Most common starting point for analysing descriptive statistics for
+    datasets.
+
+### Median
+
+-   It is often used when there are extreme values (outliers) or data
+    skewed.
+
+-   e.g. You often see discussions about median income in the UK, and
+    not mean income.
+
+### Mode
+
+-   It is often preferred when when dealing with categorical data or
+    when the most frequent item is relevant.
+
+## Skewness - Shape of Distribution
+
+The shape of a distribution describes how data are distributed and it's
+a measure of shape.
+
+**Left-skewed**: Mean \< Median
+
+**Symmetric**: Mean ≈ Median
+
+**Right-skewed**: Mean \> Median
+
+```{r skewness-improved, fig.width=8, fig.height=6, message=FALSE, warning=FALSE, echo=FALSE}
+library(ggplot2)
+library(gridExtra)
+
+set.seed(123)
+
+# Left-skewed: 1 - Beta(right)
+left_skewed <- data.frame(x = (1 - rbeta(1000, 2, 5)) * 100)
+
+# Symmetric: Normal with higher SD
+symmetric <- data.frame(x = rnorm(1000, mean = 50, sd = 20))
+
+# Right-skewed: Exponential scaled
+right_skewed <- data.frame(x = rexp(1000, rate = 1/30))  # mean 30
+
+# Histograms
+p1 <- ggplot(left_skewed, aes(x = x)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white") +
+  labs(title = "Left-Skewed", x = "", y = "") +
+  theme_minimal()
+
+p2 <- ggplot(symmetric, aes(x = x)) +
+  geom_histogram(bins = 30, fill = "forestgreen", color = "white") +
+  labs(title = "Symmetric", x = "", y = "") +
+  theme_minimal()
+
+p3 <- ggplot(right_skewed, aes(x = x)) +
+  geom_histogram(bins = 30, fill = "firebrick", color = "white") +
+  labs(title = "Right-Skewed", x = "", y = "") +
+  theme_minimal()
+
+# Arrange side-by-side
+gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
+
+```
+
+## Geometric mean {.smaller}
+
+Geometric mean is used to measure the rate of change of a variable over
+time
+
+$$
+\bar{x}_g=\sqrt[n]{x_1x_2... x_n}=(x_1x_2... x_n)^{1/2}
+$$ The geometric mean rate of return measures the status of an
+investment over time
+
+$$
+\bar{r}_g=(x_1x_2... x_n)^{1/2}-1
+$$
+
+where $x_i$ is the rare of return in the time period $i$
+
+------------------------------------------------------------------------
+
+## Geometric mean {.smaller}
+
+Geometric mean is used to measure the rate of change of a variable over
+time
+
+$$
+\bar{x}_g=\sqrt[n]{x_1x_2... x_n}=(x_1x_2... x_n)^{1/2}
+$$ The geometric mean rate of return measures the status of an
+investment over time
+
+$$
+\bar{r}_g=(x_1x_2... x_n)^{1/2}-1
+$$
+
+where $x_i$ is the rare of return in the time period $i$
+
+### Example
+
+An investment of \$100,000 rose to \$150,000 at the end of year one and
+increased to \$180,000 at end of year two.
+
+> What is the mean percentage return over time
+
+**Misleading results**: Using the arithmetic mean rate of return →
+$\bar{X} = \frac{(50\%)+(20\%)}{2}=35%$
+
+**Accurate results**: Geometric mean rate of return → 
+$$
+\bar{r}_g=(x_1x_2... x_n)^{1/2}-1= [(50)(20)]^{1/2}-1=(1000)^{1/2}-1=31.623-1=30.623% 
+$$
+
+## Percentiles and quartiles {.smaller}
+
+Percentiles and quartiles indicate the position of a value relative to
+the entire set of data
+
+-   Generally used to describe large data sets
+
+-   Example: An IQ score at the $90^{th}$ percentile means that $10\%$
+    of the population has a higher IQ score and $90\%$ have a lower IQ
+    score.
+
+$P^{th}$ percentile= value located in the $(P/100)(n+1)^{th}$ ordered position
+
+------------------------------------------------------------------------
+
+## Percentiles and quartiles {.smaller}
+
+Percentiles and quartiles indicate the position of a value relative to
+the entire set of data
+
+-   Generally used to describe large data sets
+
+-   Example: An IQ score at the $90^{th}$ percentile means that $10\%$
+    of the population has a higher IQ score and $90\%$ have a lower IQ
+    score.
+
+$P^{th}$ percentile= value located in the $(P/100)(n+1)^{th}$ ordered position
+
+### Quartiles
+
+Quartiles split the ranked data into 4 segments with an equal number of
+values per segment (note that the widths of the segments may be
+different)
+
+Find a quartile by determining the value in the appropriate position in
+the ranked data, where
+
+-   $1^{st}$ quartile position: $Q_1=0.25(n+1)$ \arr; $Q_1$ is the value for which 25% of the observations are smaller and 75% are larger
+
+-   $2^{nd}$ quartile position: $Q_1=0.50(n+1)$ \arr; $Q_2$ is the same as the median (50% are smaller, 50% are larger)
+
+-   $3^{rd}$ quartile position: $Q_2=0.75(n+1)$ \arr; only 25% of the observations are greater than $Q_3$
+
+## Quartile example using R {.smaller}
+
+Find the first quartile of the following sample ranked data:
+
+```{r}
+# Define the sample data (unsorted)
+sample_data <- c(11, 12, 13, 16, 16, 17, 18, 21, 22)
+
+# Sort the data
+sorted_data <- sort(sample_data)
+
+# Calculate the first quartile (25th percentile)
+Q1 <- quantile(sorted_data, 0.25)
+
+# Display output
+list(
+  Sorted_Data = sorted_data,
+  First_Quartile = Q1
+)
+```
+
+Given $n=9$, then $Q_1$ is in the $0.25(9+1) = 2.5$ position of the
+ranked data, so use the value half way between the $2^{nd}$ and $3^{rd}$
+values.
+
+So $Q_1=12.5$
+
+## Measures of Variability {.smaller}
+
+-   Range (*more info on textbook*)
+
+-   Interquartile range (*more info on textbook*)
+
+-   Variance
+
+-   Standard deviation
+
+-   Coefficient of variation (*more info on textbook*)
+
+Same center, different variation. Measures of variation give information
+on the spread of variability of the data values.
+
+```{r, fig.width=6.5, fig.height=5, warning=FALSE, echo=FALSE}
+x_vals <- seq(-10, 10, length.out = 1000)
+mu <- 0
+sd1 <- 1
+sd2 <- 3
+
+df <- data.frame(
+  x = rep(x_vals, 2),
+  Density = c(dnorm(x_vals, mean = mu, sd = sd1),
+              dnorm(x_vals, mean = mu, sd = sd2)),
+  Distribution = factor(rep(c("SD = 1", "SD = 3"), each = length(x_vals)))
+)
+
+ggplot(df, aes(x = x, y = Density, color = Distribution)) +
+  geom_line(size = 1.2) +
+  labs(
+    title = "Normal distributions with same mean but different variance",
+    x = "x", y = "Density"
+  ) +
+  theme_minimal()
+```
+
+
+<div class="hidden"> 
+      #remove line above and </div> at the end for slides to appear in html
+      
+      ## Range
+      
+      Simplest measure of variation
+      
+      Difference between the largest and the smallest observations: $$
+      Range = X_{largest} − X_{smallest}
+      $$ 
+      ---
+      
+      ## Range
+      
+      Simplest measure of variation
+      
+      Difference between the largest and the smallest observations: $$
+      Range = X_{largest} − X_{smallest}
+      $$
+      
+      ### Example
+      
+      ![](range.png){width="30%"}
+      
+      Disadvantages of the range:
+      
+      -   it ignores the way in which data are distributed
+      
+      -   is sensitive to outliers
+      
+      ![](range2.png){width="35%"}
+      
+      ## Interquantile range
+      
+      Can eliminate some outlier problems by using the interquartile range.
+      
+      Eliminate high-and low-valued observations and calculate the range of
+      the middle $50\%$ of the data
+      
+      Defined as the difference between the observation at the $3^{rd}$
+      quartile and the observation at the $1^{st}$ quartile
+      
+      $$
+      IQR = Q_3 - Q_1
+      $$
+      
+      The interquartile range (IQR) measures the spread in the middle $50/%$ of the data
+</div>
+
+
+## Variance
+
+### Population variance
+
+Average of squared deviations of values from the mean
+
+$$
+  \sigma^2 = \frac{1}{N} \sum_{i=1}^{N}(x_i - \mu)^2
+$$ 
+  
+  where $\mu$ is the population mean, $N$ is the population size, and
+$x_i$ is the $i^{th}$ value of variable $x$.
+
+------------------------------------------------------------------------
+
+## Variance
+
+### Population variance
+
+Average of squared deviations of values from the mean
+
+$$
+  \sigma^2 = \frac{1}{N} \sum_{i=1}^{N}(x_i - \mu)^2
+$$ 
+  where $\mu$ is the population mean, $N$ is the population size, and
+$x_i$ is the $i^{th}$ value of variable $x$.
+
+### Sample variance
+
+Average (approximately) of squared deviations of values from the mean
+
+$$
+  s^2 = \frac{1}{n - 1} \sum_{i=1}^{n}(x_i - \bar{x})^2
+$$ 
+
+where $\bar{x}$ is the sample mean, $n$ is the sample size, and
+$x_i$ is the $i^{th}$ value of variable $x$
+
+## Standard deviation {.smaller}
+
+### Population standard deviation
+
+$$
+  \sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N}(x_i - \mu)^2}
+$$ 
+  where $\mu$ is the population mean, $N$ is the population size, and
+$x_i$ is the $i^{th}$ value of variable $x$.
+
+------------------------------------------------------------------------
+
+## Standard deviation {.smaller}
+
+### Population standard deviation
+
+$$
+  \sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N}(x_i - \mu)^2}
+$$ 
+  where $\mu$ is the population mean, $N$ is the population size, and
+$x_i$ is the $i^{th}$ value of variable $x$.
+
+### Sample standard deviation
+
+$$
+  s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^{n}(x_i - \bar{x})^2}
+$$ 
+  where $\bar{x}$ is the sample mean, $n$ is the sample size, and
+$x_i$ is the $i^{th}$ value of variable $x$.\
+
+Standard deviation is the most commonly used measure of variation.
+
+It shows variation around the mean and has the same units as the
+original data
+
+------------------------------------------------------------------------
+
+## Standard deviation {.smaller}
+
+### Population standard deviation
+
+$$
+  \sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N}(x_i - \mu)^2}
+$$ 
+  where $\mu$ is the population mean, $N$ is the population size, and
+$x_i$ is the $i^{th}$ value of variable $x$.
+
+### Sample standard deviation
+
+$$
+  s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^{n}(x_i - \bar{x})^2}
+$$ 
+  where $\bar{x}$ is the sample mean, $n$ is the sample size, and
+$x_i$ is the $i^{th}$ value of variable $x$.\
+
+Standard deviation is the most commonly used measure of variation.
+
+It shows variation around the mean and has the same units as the
+original data
+
+**Advantages of variance and SD**
+
+each value in the data set is used in the calculation
+
+**Disadvantages of variance and SD**
+
+Values far from the mean are given extra weight → because deviations from the mean are squared
+
+## Standard deviation example {.smaller}
+
+sample (10, 12, 14, 15, 17, 18, 18, 24)
+
+We have $n=8$ and mean $\bar{x}=16$, so the standard devation is
+
+$$
+s=\sqrt{\frac{(10-\bar{x})^2+(12-\bar{x})^2+(14-\bar{x})^2+...+(24-\bar{x})^2)}{n-1}}= \\
+\sqrt{\frac{(10-16)^2+(12-16)^2+(14-16)^2+...+(24-16)^2)}{8-1}}= \\
+\sqrt{\frac{130}{7}}=4.3095
+$$
+
+This is a measure of the "average" scatter around the mean.
+
+## Standard deviation example using R {.smaller}
+
+```{r}
+# Step 1: Define the sample data
+sample_data <- c(10, 12, 14, 15, 17, 18, 18, 24)
+
+# Step 2: Calculate the mean
+mean_x <- mean(sample_data)
+
+# Step 3: Manually compute the variance
+# Formula: variance = sum of squared deviations from the mean divided by (n - 1)
+var_manual <- sum((sample_data - mean_x)^2) / (length(sample_data) - 1)
+
+# Step 4: Take the square root of the variance to get the standard deviation
+sd_manual <- sqrt(var_manual)
+
+# Step 5: Compare with built-in R functions
+var_builtin <- var(sample_data)
+sd_builtin <- sd(sample_data)
+
+# Step 6: Output results
+list(  Mean = mean_x,  Manual_Variance = var_manual,  Manual_SD = sd_manual,  BuiltIn_Variance = var_builtin,  BuiltIn_SD = sd_builtin)
+```
+
+
+<div class="hidden"> 
+
+    ## Coefficient of Variation (CV) {.smaller}
+    
+    ### Population coefficient of variation
+    
+    $$
+    CV = \frac{\sigma}{\bar{\mu}} \times 100\%
+    $$ where $\sigma$ is the population standard deviation and $\mu$ the
+    population mean
+    
+    ------------------------------------------------------------------------
+    
+    ## Coefficient of Variation (CV) {.smaller}
+    
+    ### Population coefficient of variation
+    
+    $$
+    CV = \frac{\sigma}{\bar{\mu}} \times 100\%
+    $$ where $\sigma$ is the population standard deviation and $\mu$ the
+    population mean
+    
+    ### Sample coefficient of variation
+    
+    $$
+    CV = \frac{s}{\bar{x}} \times 100\%
+    $$ where $s$ is the sample standard deviation and $\bar{x}$ the sample
+    mean\
+    
+    ------------------------------------------------------------------------
+    
+    ## Coefficient of Variation (CV) {.smaller}
+    
+    ### Population coefficient of variation
+    
+    $$
+    CV = \frac{\sigma}{\bar{\mu}} \times 100\%
+    $$ where $\sigma$ is the population standard deviation and $\mu$ the
+    population mean
+    
+    ### Sample coefficient of variation
+    
+    $$
+    CV = \frac{s}{\bar{x}} \times 100\%
+    $$ where $s$ is the sample standard deviation and $\bar{x}$ the sample
+    mean\
+    
+    CV measures relative variation in %, i.e. variation relative to the
+    mean.Use the CV when you want to compare variability between:
+    
+    -   datasets with different units of measurements
+    
+    -   datasets that have means of very different magnitude
+    
+    ```{r}
+    cv <- (sd(x) / mean(x)) * 100
+    cv
+    ```
+
+</div>
+
+## Visualisation types {.smaller}
+
+### Boxplot
+
+A box-and-whisker plot is a graph that describes the shape of a
+distribution in terms of the five-number summary:
+
+1.  the minimum value
+
+2.  first quartile (25th percentile)
+
+3.  the median (a line in the box)
+
+4.  the third quartile (75th percentile)
+
+5.  and the maximum value.
+
+There are two “whiskers.” One whisker is the line from the 25th
+percentile to the minimum value; the other whisker is the line from the
+75th percentile to the maximum value.
+
+```{r, fig.width=6, fig.height=4,  echo=FALSE}
+boxplot(x, main = "Boxplot", ylab = "Value")
+
+```
+
+## Visualisation types
+
+### Histogram
+
+A histogram consists of vertical bars constructed on a horizontal line
+that is marked off with intervals for the variable being displayed.\
+
+The intervals correspond to the classes in a frequency distribution
+table. So, higher bar, higher frequency of this observation in our
+sample.
+
+```{r, fig.width=6, fig.height=4,  echo=FALSE}
+
+hist(x, breaks = 5, col = "lightblue", border = "white")
+```

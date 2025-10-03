@@ -1,0 +1,231 @@
+---
+title: "Problem Set 8 - Probability distribution (continuous variables) and sampling distributions - Solutions"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+css: cardiff.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Exercise 
+
+Let the random variable \(Z\) follow a standard normal distribution:
+
+a. \(P(Z < 1.20) = 0.8849\)  
+
+b. \(P(Z > 1.33) = 1 - F_Z(1.33) = 1 - .9082 = 0.0918\)  
+
+c. \(P(Z > -1.70) = 1 - F_Z(-1.70) = F_Z(1.70) = 0.9554\)  
+
+d. \(P(Z > -1.00) = F_Z(1) = 0.8413\)  
+
+e. \(P(1.20 < Z < 1.33) = F_Z(1.33) - F_Z(1.20) = 0.9082 - 0.8849 = 0.0233\)  
+
+f. \(P(-1.70 < Z < 1.20) = F_Z(1.20) - [1 - F_Z(1.70)] = 0.8849 - 0.0446 = 0.8403\)
+
+g. \(P(-1.70 < Z < -1.00) = F_Z(1.70) - F_Z(1.00) = 0.9554 - 0.8413 = 0.1141\). 
+
+**Reminder**: \(F(z)\) in the standard normal table is the cumulative probability: $F(z) = P(Z \leq z) \quad \text{(area to the left of \(z\))}$. 
+
+- For right–tail probabilities, use \(1-F(z)\).  
+- For negative z, apply symmetry: \(P(Z>-a)=P(Z<a)\), or equivalently \(F(-z)=1-F(z)\)
+
+
+---
+
+# Exercise 
+
+Suppose \(X \sim N(10, 9)\). Need to apply the Z transformation: \(Z=\dfrac{X-\mu}{\sigma}\) and then check the standard normal table.
+
+a. \(P(X > 11)\)  
+
+**Answer:** 
+
+$z=11-10)/3 = 0.33 \Rightarrow P(X > 11) = P(Z>0.33)=1-F_z(0.33)=1-0.6293 = 0.3707$
+
+b. \(P(X < 7)\)  
+
+**Answer:** 
+
+$$z=(7-10)/3 = -1 \Rightarrow P(X < 7) = P(Z<-1)= 0.1587$$
+
+For negative \(z\)-scores, remember that the table  gives \(F(z)=P(Z\le z)\) for positive values of \(z\). To handle negatives, use symmetry:  $P(Z<-1) = F(-1) = 1 - F(1) = 0.1587.$
+
+c. \(P(8 < X < 15)\)  
+
+**Answer:** 
+
+$$(P(8 < X < 15) =(P(\frac{8-10}{3} < X < \frac{15-10}{{3}}) = (P(-0.67 < X < 1.67) $$
+$$F_z(1.67)-F_z(-0.67)=F_z(1.67)-(1-F_z(0.67))=0.9525-(1-0.7486)=0.9525−0.2514 \Rightarrow P=0.7011$$
+
+
+d. \(P(X > 8)\)  
+
+**Answer:**  
+$$
+z = \frac{8 - 10}{3} = -0.67 \Rightarrow P(X > 8) = P(Z > -0.67)
+$$
+
+By symmetry of the normal distribution:  
+$$
+P(Z > -0.67) = P(Z < 0.67) = F_Z(0.67) = 0.7486
+$$
+
+---
+
+
+# Exercise 
+
+The hourly wage has mean £16.50 and standard deviation £3.50 and is normally distributed. For a worker selected at random, find the probability that he earns: 
+
+a) Between £16.50 and £20.00 per hour  
+
+**Answer:** 
+
+$$Pr(16.5<x<20) = P(\frac{20-16.5}{3.5}<z<\frac{16.50-16.5}{3.5}) $$
+$$P(0<z<1) = 0.8413 - 0.5 = 0.3413$$
+
+b) More than £20.00 per hour  
+
+**Answer:** 
+
+$$Pr(x>20) = P(Z>1)= 1 - 0.8413 = 0.1587$$
+
+c) Less than £15.00 per hour  
+
+**Answer:** 
+
+$$Pr(x<15) = P(z< \frac{15-16.5}{3.5}= P(z< -0.43) = 1-0.6664 = 0.3336$$
+
+
+---
+
+# Exercise
+
+Given a population with mean \(\mu=400\) and variance \(\sigma^2 = 1{,}600\), the central limit theorem applies when the sample size is \(n \ge 25\). A random sample of size \(n=35\) is obtained.
+
+a. What is the mean and variance of the sampling distribution of the sample means?  
+
+b. What is the probability that \(\bar{x} > 412\)?  
+
+c. What is the probability that \(393 \le \bar{x} \le 407\)?  
+
+d. What is the probability that \(\bar{x} < 202\)?
+
+**Answer:**
+
+a. Mean and variance of the sampling distribution for the sample mean  
+$$
+\mu_{\bar{x}}=\mu=400,\qquad \sigma_{\bar{x}}^2=\frac{\sigma^2}{n}=\frac{1600}{35}=45.7143,\quad
+\sigma_{\bar{x}}=\sqrt{45.7143}=6.7612
+$$
+
+b. $P(\bar X>412)$
+
+$$
+z=\frac{412-400}{\sqrt{45.7143}}=1.77,\quad
+P(\bar{x}>412)=1-F_Z(1.77)=1-0.9616=0.0384
+$$
+
+c. $P(393\le \bar X\le 407)$
+
+If we break it to the upper and lower part:
+
+$$
+z_u=\frac{407-400}{\sqrt{45.7143}}=1.04 \Rightarrow F_Z(1.04)=0.8508
+$$
+$$
+z_l=\frac{393-400}{\sqrt{45.7143}}=-1.04 \Rightarrow \ \ F_Z(-1.04)=1-F_Z(1.04)=1-0.8508=0.1492
+$$
+Therefore, the probability is $P(393\le \bar X\le 407)= F_Z(1.04) - F_Z(-1.04)= 0.8508 - 0.1492 = 0.7016$.
+
+d. $P(\bar X<202)$
+
+$$
+z_{\bar{x}}=\frac{202-400}{\sqrt{45.7143}}=-29.28,\quad 
+P(\bar{x}\le 202)=F_Z(-29.28)=1-F_Z(29.28)=0
+$$
+
+---
+
+# Exercise
+
+The mean selling price of detached houses in Green Valley over a year was \$215,000. The population standard deviation was \$25,000. A random sample of 100 detached house sales was obtained.
+
+a. What is the probability that the sample mean selling price was more than £210,000?  
+
+b. What is the probability that the sample mean selling price was between \$213,000 and \$217,000?  
+
+c. What is the probability that the sample mean selling price was between \$214,000 and \$216,000?
+
+**Answer:**
+
+Given: Population mean \( \mu = \$215{,}000 \), population standard deviation \( \sigma = \$25{,}000 \), sample size \( n = 100 \).
+
+Sampling distribution of the sample mean: 
+$$\bar{X} \sim \mathcal{N}\!\Big(\mu,\ \frac{\sigma}{\sqrt{n}}\Big),
+\qquad \text{so } \mathrm{SE}(\bar{X})=\frac{\sigma}{\sqrt{n}}=\frac{25{,}000}{\sqrt{100}}=\$2{,}500. $$
+
+Standardization: $$Z \;=\; \frac{\bar{X}-\mu}{\sigma/\sqrt{n}}.$$
+
+
+a. $P(\bar{x} > 210{,}000)$
+
+$$P\!\left(Z>\frac{210{,}000-215{,}000}{25{,}000/\sqrt{100}}\right)=P(Z>-2)=0.9772$$
+
+Note: We’re computing \(P(Z>-2)\), the area **to the right** of \(-2\). By normal symmetry, \(P(Z>-2)=P(Z<2)=0.9772\). Use \(1-F(z)\) only for right tails with positive \(z\).
+
+
+b. $P(213{,}000<\bar{x}<217{,}000)$
+
+
+$$ P\!\left(\frac{213{,}000-215{,}000}{2{,}500}<Z<\frac{217{,}000-215{,}000}{2{,}500}\right) = P\!\left(-0.8<Z<0.8\right) $$
+using the standard tables $z=0.8\Rightarrow F(z)=0.7881$
+
+thus $P(-0.8<Z<0.8)=0.7881-(1-0.7881)=0.5763$
+
+
+c. $(P(214{,}000<\bar{x}<216{,}000)$
+$$P\!\left(\frac{214{,}000-215{,}000}{2{,}500}<Z<\frac{216{,}000-215{,}000}{2{,}500}\right) = P\!\left(-0.4<Z<0.4\right) $$
+
+using the standard tables $z=0.4\Rightarrow F(z)=0.6554$
+
+thus $P(-0.4<Z<0.4)=0.6554-(1-0.6554)=0.3108$
+
+---
+
+# Exercise
+
+In 1992, Canadians voted in a referendum on a new constitution. In the province of Quebec, 42.4% of those who voted were in favour of the new constitution. A random sample of 100 voters from the province was taken.
+
+a. What is the mean of the distribution of the sample proportion in favour of a new constitution?  
+
+b. What is the variance of the sample proportion?  
+
+c. What is the standard error of the sample proportion?  
+
+d. What is the probability that the sample proportion is more than 0.5?
+
+**Answer:**
+
+Given $p=0.424$, $n=100$. Let $\hat{p}$ be the sample proportion.
+
+a. $$E(\hat{p})=p=0.424$$
+
+b. $$\mathrm{Var}(\hat p) = \frac{p(1-p)}{n}=\dfrac{(0.424)(0.576)}{100}=0.00244$$
+
+c.$$\mathrm{SE}(\hat p)= \sqrt{\frac{p(1-p)}{n}}=\sqrt{0.00244}=0.0494\qquad $$
+
+d.$$P\!\left(Z>\frac{0.5-0.424}{0.0494}\right)=P(Z>1.54)=0.0618$$
+Using $z=1.54$ the standard tables gives $F_Z=0.9382$, hence $1-0.9382=0.0618$ for the upper tail.
+
+---

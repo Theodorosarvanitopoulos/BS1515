@@ -1,0 +1,766 @@
+---
+title: "Lecture 7: Probability and probability distribution (discrete variables)"
+subtitle: "Mathematics and Statistics BS1515"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  slidy_presentation:
+    font_adjustment: 0
+    footer: "Arvanitopoulos T - Lecture 7"
+css: cardiff.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+
+## Learning objectives
+
+### Probability and uncertainty
+
+- Understand how to describe uncertainty using probability. 
+
+- Distinguish between different types of events (mutually exclusive, independent, etc.). 
+
+- Learn and apply key probability rules (addition, multiplication, conditional probability). 
+
+- Understand and apply Bayes' Theorem.
+
+### Probability distributions (discrete variables)
+
+- Understand the difference between discrete and continuous random variables. 
+
+- Be able to calculate binomial probabilities and use the binomial distribution table. 
+
+- Calculate probabilities and expected values using R. 
+
+
+### 📚 Reading
+
+Newbold et al. (2020), *Statistics for Business and Economics*, Ch. 3–4
+
+
+
+## Concepts in Probability
+
+### What is probability? {.smaller}
+
+Probability measures the likelihood of an outcome. It ranges from 0 (impossible) to 1 (certain). 
+
+$$
+0 \leq P(A) \leq 1\\
+$$
+
+- **Experiment**: a process with uncertain outcomes (e.g. rolling a die) \
+
+- **Sample space (S)**: the collection of all possible outcomes of a random experiment \
+
+- **Event**: any subset of basic outcomes from the sample space \
+
+- **Basic outcome**: a possible outcome of a random experiment  \
+
+```{r}
+# Example using R
+S <- 1:6  # sample space for rolling a die
+A <- c(2, 4, 6)  # event: rolling an even number
+B <- c(4, 5, 6)  # event: rolling an even number
+```
+
+
+## Event relationships 
+
+As discussed on lecture 1, if A and B are two events in a sample space S: 
+
+### Union (A ∪ B)
+
+If A and B are two events in a sample space S, then union, A U B, is the set of all outcomes in S that belong to either A or B
+
+![](union.png){ width=25%}
+
+### Intersection (A ∩ B)
+
+If A and B are two events in a sample space S, then A ∩ B is the set of all outcomes in S that belong to both A and B
+
+![](Interesction.png){ width=21%}
+
+
+## Event relationships 
+
+
+### Mutually exclusive
+A and B cannot both occur - there is no outcome in common, i.e A ∩ B is empty
+
+![](mut-excl.png){ width=21%}
+
+### Complement ($\bar{A}$ or A')
+The Complement of an event A is the set of all basic outcomes in the sample space that do not belong to A.So, it is the set of all outcomes in S not in A. 
+
+![](complement.png){ width=21%}
+
+## Event relationships - R Example  {.smaller}
+
+```{r}
+# Example using R - We use sets A and B 
+
+# Complement of A and B
+A_comp <- setdiff(S, A)
+B_comp <- setdiff(S, B)
+
+# Union (A ∪ B)
+union_AB <- union(A, B)
+
+# Intersection (A ∩ B)
+intersect_AB <- intersect(A, B)
+
+# Output results
+list(
+  "Complement of A (A')" = A_comp,
+  "Complement of B (B')" = B_comp,
+  "Union (A ∪ B)" = union_AB,
+  "Intersection (A ∩ B)" = intersect_AB
+)
+```
+
+
+ <div class="hidden"> 
+    
+    ## Classical Probability {.smaller}
+    
+    Definitions of probability. Assumes all outcomes in the sample space are equally likely to occur.		
+    
+    ### Classical
+    
+    
+    Based on logical reasoning
+    
+    $$
+     P(A)= \frac{N_A}{N}=\frac{number \ of \ outcomes \ that \ satisfy \ the \ event \  A}{total \ number \ of \ outcomes \ in \ the \ sample \ space}
+    \\
+    $$
+    
+    ### Relative frequency
+    
+    Based on observed data. The limit of the proportion of times that an event A occurs in a large number of trial, $n$
+    
+    $$
+     P(A)= \frac{N_A}{N}=\frac{number \ of \ events \ in \ the \ population \ that \ satisfy \  A}{total \ number \ of \ events \ in \ the \ population }
+    \\
+    $$
+    
+    
+    ### Subjective
+    
+    Based on personal judgment. It expresses an individual's opinion or belief about the probability of occurence.
+
+ </div>
+ 
+
+##  Factorial
+
+**Factorial** (!): the total number of possible ways of arranging $x$ objects in order. \
+
+The **factorial** of a positive integer $n$, denoted $n!$, is defined as:
+
+$$
+n! = n \times (n-1) \times (n-2) \times \cdots \times 1
+$$
+
+By convention: $0! = 1$
+
+```{r}
+factorial(5)    # 5!
+choose(5, 2)    # 5C2
+```
+
+
+
+##  Classical Probability - Permutations and combinations
+
+### Permutations 
+
+The number of possible arrangements when $x$ objects are to be selected from a total of $n$ objects and arranged in order (with $n-x$) objects left over
+
+ &rarr;  **order matters**
+
+$$
+P_n^x =\frac{n(n-1)(n-2)...(n-x+1)(n-x)(n-x-1)...(2)(1)}{(n-x)(n-x-1)...(2)(1)} \\
+=\frac{n!}{(n - x)!}
+$$
+
+
+##  Classical Probability - Permutations and combinations
+
+### Combinations 
+
+The number of combinations of $x$ objects chosen from $n$ is the number of possible selections that can be made
+
+ &rarr; **order doesn't matter**  
+
+$$
+C_{x}^n = \frac{P^n_x}{x!} \\ 
+=\frac{n!}{x!(n - x)!}
+$$
+and is some application, the following notation is used
+
+$$
+\binom{n}{x}= C_{x}^n = \frac{n!}{x!(n - x)!}
+$$
+
+
+
+## Probability Rules
+
+### Complement
+
+**Complement rule**: let A be an event and \bar{A} its complement, then:
+
+$$
+P(\bar{A}) = 1 - P(A) 
+$$
+
+i.e. $P(A) + P(\bar{A})=1$
+
+---
+
+## Probability Rules
+
+### Complement 
+
+**Complement rule**: let A be an event and \bar{A} its complement, then:
+
+$$
+P(\bar{A}) = 1 - P(A) 
+$$
+
+i.e. $P(A) + P(\bar{A})=1$
+
+### Example 
+
+For example, a company is hiring candidates for 4 identical positions. 5 candidates are from India and 3 are from the United States. Assuming that every combination of Indian and American is equally likely to be chosen, what is the probability that at least 1
+American will be selected?
+
+$P(\bar{A})=\frac{C_{4}^5}{C_{4}^8}=\frac{1}{14}$
+
+and $P(A)=\frac{13}{14}$
+
+
+## Probability Rules {.smaller}
+
+### Addition
+
+**Addition rule**: the probability of the union of two events is
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+$$
+
+
+![](addition_rule.png){ width=45%}
+
+---
+
+## Probability Rules {.smaller}
+
+### Addition
+
+**Addition rule**: the probability of the union of two events is
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+$$
+
+
+![](addition_rule.png){ width=45%}
+
+### Example
+
+Consider a standard deck of 52 cars with four suits. Let event A be that the card is an Ace, and event B be that the card is a red suit.
+
+$P(red \cup ace) = P(red) + P(ace) - P(red \cap ace) = 26/52 = 4/52 - 2/52 = 28/ 52$
+
+$P(red \cap ace)$ &rarr; we do not count the two red aces twice.
+
+
+## Probability Rules
+
+### Conditional probability
+
+**Conditional probability** is the probability of one event, given that another event has occurred:
+
+$$
+P(A \mid B) = \frac{P(A \cap B)}{P(B)} \ provided \ that \ P(B)>0
+$$
+i.e. the conditional probability of A given that B has occurred
+
+$$
+P(B \mid A) = \frac{P(A \cap B)}{P(A)} \ provided \ that \ P(A)>0
+$$
+i.e. the conditional probability of B given that A has occurred
+
+---
+
+## Probability Rules
+
+### Conditional probability
+
+**Conditional probability** is the probability of one event, given that another event has occurred:
+
+$$
+P(A \mid B) = \frac{P(A \cap B)}{P(B)} \ provided \ that \ P(B)>0
+$$
+i.e. the conditional probability of A given that B has occurred
+
+$$
+P(B \mid A) = \frac{P(A \cap B)}{P(A)} \ provided \ that \ P(A)>0
+$$
+i.e. the conditional probability of B given that A has occurred
+
+### Example
+
+Of the cars on a used car lot, 70% have air conditioning (AC) and 40% have a CD player (CD). 20% of the cars have both.
+
+What is the probability that a car has a CD player, given that it has AC?
+
+$P(CD \mid AC)= \frac{C(CD \cap AC)}{P(AC)}=\frac{0.2}{0.7}=0.2857$
+
+
+## Probability Rules
+
+### Conditional probability - R example
+
+```{r}
+joint_probs <- matrix(c(0.2, 0.1, 0.3, 0.4), nrow = 2,
+                      dimnames = list(Gender = c("M", "F"),
+                                      Outcome = c("Yes", "No")))
+joint_probs
+P_Male_Yes <- joint_probs["M", "Yes"]
+P_Male <- sum(joint_probs["M", ])
+P_Yes_given_Male <- P_Male_Yes / P_Male
+P_Yes_given_Male
+```
+
+
+## Probability Rules {.smaller}
+### Multiplication and independent events
+
+**Multiplication** rule is the probability of their intersection that can be derived from the conditional probability 
+
+$$
+P(A \cap B) = P(A \mid B) P(B) 
+$$
+
+
+$$
+P(A \cap B) = P(B \mid A) P(A) 
+$$
+
+---
+
+
+## Probability Rules {.smaller}
+### Multiplication and independent events
+
+**Multiplication** rule is the probability of their intersection that can be derived from the conditional probability 
+
+$$
+P(A \cap B) = P(A \mid B) P(B) 
+$$
+
+
+$$
+P(A \cap B) = P(B \mid A) P(A) 
+$$
+
+
+
+**Statistical independence**: Two events A and B are statistically independent when the probability of one event is not affected by the other event. Two ways to determine this:
+
+$$
+1. \  P(A \cap B) = P(A)
+$$
+
+$$
+2. \ P(A \cap B) = P(A)P(B)
+$$
+
+---
+
+
+
+## Probability Rules {.smaller}
+### Multiplication and independent events
+
+**Multiplication** rule is the probability of their intersection that can be derived from the conditional probability 
+
+$$
+P(A \cap B) = P(A \mid B) P(B) 
+$$
+
+
+$$
+P(A \cap B) = P(B \mid A) P(A) 
+$$
+
+
+
+**Statistical independence**: Two events A and B are statistically independent when the probability of one event is not affected by the other event. Two ways to determine this:
+
+$$
+1. \  P(A \cap B) = P(A)
+$$
+
+$$
+2. \ P(A \cap B) = P(A)P(B)
+$$
+
+
+### Probability table
+
+Two events A and B. Probabilities are summarised below: 
+
+![](prob_table.png){ width=35%}
+
+## Probability Rules {.smaller}
+
+### Multiplication example
+
+$P(red \cap ace) = P(red \mid ace) P(ace)= (2/4)(4/52)= 2/52$
+
+### Independence example
+
+Of the cars on a used car lot, 70% have air conditioning (AC) and 40% have a CD player (CD). 20% of the cars have both. Are the events AC and CD statistically independent?
+
+P(AC \cap CD) = 0.2
+
+P(AC)P(CD)=(0.7)(0.4)=0.28
+
+So, given  $P(AC \cap CD) \neq P(AC)P(CD)$, then the two events are not statistically independent
+
+
+## Joint and marginal probability {.smaller}
+
+The probability of a joint event, $A \cap  B$:
+$$
+P(A \cap  B)= \frac{number \ \ of \ \ outcomes \ \ satisfying \ \  A \ \  and \ \  B}{total \ \  number \ \  of \ \  elementary \ \  outcomes} 
+$$
+
+Computing the marginal probability:
+
+$$
+P(A)=P(A \cap  B_1)+P(A \cap  B_2)+...+P(A \cap  B_k)
+$$
+
+where $B_1$, $B_2$, ..., $B_k$ are $k$ mutually exclusive and collectively exhaustive events.
+
+---
+
+## Joint and marginal probability {.smaller}
+
+The probability of a joint event, $A \cap  B$:
+$$
+P(A \cap  B)= \frac{number \ \ of \ \ outcomes \ \ satisfying \ \  A \ \  and \ \  B}{total \ \  number \ \  of \ \  elementary \ \  outcomes} 
+$$
+
+Computing the marginal probability:
+
+$$
+P(A)=P(A \cap  B_1)+P(A \cap  B_2)+...+P(A \cap  B_k)
+$$
+
+where $B_1$, $B_2$, ..., $B_k$ are $k$ mutually exclusive and collectively exhaustive events.
+
+
+### Example
+
+![](marg_prob.png){ width=35%}
+
+## Bayes' Theorem
+
+
+Bayes' Theorem is a way of **revising probabilities** when new information becomes available. \
+
+It helps answer:  
+> “Given that B has occurred, what is the updated probability that A is true?”
+
+$$
+P(A \mid B) = \frac{P(B \mid A) P(A)}{P(B)}
+$$
+
+where:  
+
+- \( P(A) \): prior probability of event A  
+
+- \( P(B \mid A) \): likelihood — probability of B given A  
+
+- \( P(A \mid B) \): posterior — revised probability of A given B  
+
+- \( P(B) \): total probability of B
+
+
+
+## Bayes' Theorem 
+### General form
+
+**General form of Bayes' Theorem** 
+
+$$
+P(E_i \mid A) = \frac{P(A \mid E_i) P(E_i)}{\sum_{j=1}^{k} P(A \mid E_j) P(E_j)} \\
+ = \frac{P(A \mid E_i) P(E_i)}{P(A \mid E_1) P(E_1)+ P(A \mid E_2) P(E_2)+ ... + P(A \mid E_k) P(E_k)}
+$$
+
+where 
+
+- $P(E_i)$ is the $i^{th}$ event of $k$ mutually exclusive and collectively exhaustive events 
+
+- $A$ is a new event that might impact  $P(E_i)$
+
+
+
+## Bayes' Theorem  {.smaller}
+
+### Example
+
+ A drilling company estimates a **40%** chance of striking oil for their new well. A detailed test is scheduled. Historically: \
+ 
+ - 60% of successful wells had a test: $P(D \mid S) = 0.6$ \
+ 
+ - 20% of unsuccessful wells had a test: $P(D \mid U) = 0.2$ \
+
+**Question**: What is the probability the well will be **successful given that** a detailed test is scheduled?
+
+
+```{r bayes-drill}
+# Prior probabilities
+P_S <- 0.4    # P(Success)
+P_U <- 0.6    # P(Unsuccessful)
+
+# Likelihoods
+P_D_given_S <- 0.6
+P_D_given_U <- 0.2
+
+# Total probability of D
+P_D <- P_D_given_S * P_S + P_D_given_U * P_U
+
+# Posterior probability using Bayes' Theorem
+P_S_given_D <- (P_D_given_S * P_S) / P_D
+P_S_given_D
+```
+
+So the updated probability that the well is successful, given that a test was scheduled, is **0.667**, or **66.7%**.
+
+This is **higher than the prior** 40% estimate, because a scheduled test is **more common among successful wells**.
+
+
+
+## Probability Distributions (discrete variables) {.smaller}
+
+### Discrete vs Continuous
+
+**Discrete random variables**:  
+
+- Finite or countable values (e.g., number of calls per day, rolling a dice twice)
+
+**Continuous random variables**:  
+
+- Infinite values in an interval (e.g., temperature).   
+
+- So, possible values are measured in a continuum. (examples: weight, temperature, stock price).  
+
+---
+
+## Probability Distributions (discrete variables) {.smaller}
+
+### Discrete vs Continuous
+
+**Discrete random variables**:  
+
+- Finite or countable values (e.g., number of calls per day, rolling a dice twice)
+
+**Continuous random variables**:  
+
+- Infinite values in an interval (e.g., temperature).   
+
+- So, possible values are measured in a continuum. (examples: weight, temperature, stock price).  
+
+### Probability distribution of discrete random variables
+
+Let $X$ be a discrete random variable and $x$ be one of its possible values.
+
+The probability that random variable $X$ takes specific value $x$ is denoted $P(X = x)$.
+
+The probability distribution function of a random variable $x$ is a representation of the probabilities for all the possible outcomes and their corresponding probabilities $P(x)$
+
+$$
+0 \leq P(x) \leq 1
+$$
+Individual probabilities should sum to 1. The notation below indicates summation over all possible $x$ values:
+
+$$
+\sum{P(x)} = 1
+$$
+
+
+## Example using R
+
+```{r}
+# Example: Tossing 2 coins where X = # heads
+x <- 0:2
+Px <- c(0.25, 0.5, 0.25)
+data.frame(x, Px)
+sum(Px)  # Should equal 1
+```
+
+<div class="hidden"> 
+    #remove line above and </div> at the end for slides to appear in html
+    
+    ## Cumulative Distribution Function (CDF)
+    
+    The **Cumulative Distribution Function** (CDF) denoted as $F(x_0)$ shows the probability that the random variable $X$ is less than or equal to a specific value $x_0$
+    
+    $$
+    F(x_0)=P(X \leq x_0)
+    $$
+    
+    where the function is evaluated at all values of $x_0$
+    
+    The derived relationship between between the probability distribution $P(x)$ and the cumulative probability distribution $F(x)$ is 
+    
+    $$
+    F(x_0)=\sum_{x \leq x_0} P(x)
+    $$
+    
+    ### Example using R
+    
+    ```{r}
+    # we use x and Px set in the previous example
+    CDF <- cumsum(Px)
+    data.frame(x, Px, CDF)
+    ```
+</div>
+
+
+## Expected Value and Variance
+
+**Expected value (or mean)** of a discrete random variable $x$
+$$
+E(X) = \mu = \sum_{j=1}^i x_i p(x_i), 
+$$
+
+**Expected variance** of a discrete random variable $x$
+$$
+\quad Var(X) = \sigma^2= E[(X-\mu]^2)] = \sum_{j=1}^i (x_i - \mu)^2 P(x_i) \\
+or \\
+\quad Var(X) = \sigma^2= E[(X^2-\mu^2)] = \sum_{j=1}^i x_i^2P(x_i) - \mu^2 
+$$
+
+
+## Expected standard deviation
+
+**Expected standard deviation** of a discrete random variable $x$
+
+$$
+\quad \sigma = \sqrt{\sigma^2} = \sqrt{\sum_{j=1}^i (x_i - \mu)^2 P(x_i)}
+$$
+
+## Example using R
+
+```{r}
+# Example: Tossing 2 coins where X = # heads
+  # remember from previous example: x <- 0:2
+  # remember from previous example: Px <- c(0.25, 0.5, 0.25)
+  # Probabilities must sum to 1
+# expected mean E(x)=1
+mu <- sum(x * Px)
+#expected variance
+variance <- sum((x - mu)^2 * Px)
+#expected standard deviation
+sd <- sqrt(variance)
+#list results
+mu; variance; sd
+```
+
+so, $\sigma=\sqrt{(0-1)^2(0.25)+(1-1)^2(0.50)+(2-1)^2(0.25)}=\sqrt{0.50}=0.707$
+
+where 0, 1, and 2 are the possible number of heads.
+
+
+## Binomial Distribution
+
+
+Among the **discreet probability distributions** there are the binomial, the Poisson, etc. In this lecture, we will focus on the **binomial** distribution:
+
+### Characteristics 
+
+A fixed number of observations, $n$ 
+
+ -  e.g., 15 tosses of a coin 
+
+Two mutually exclusive and collectively exhaustive categories 
+
+ -  e.g., “success” and “failure” 
+ 
+Constant probability for each observation 
+
+ -  e.g. Probability of getting a tail is the same each time we toss the coin 
+
+  
+Observations are independent 
+
+ -  i.e. outcome of one observation does not affect the outcome of the other 
+
+
+## Binomial Distribution
+
+### Probability
+
+Number of sequences with $x$ successes in $n$ independent trials with success probability $p$:
+
+$$
+P(X = x) =  \frac{n!}{x!(n-x)!}p^x(1-p)^{n - x} \\
+= \binom{n}{x} p^x (1 - p)^{n - x}
+$$
+
+where 
+
+- $P(x)$ is a the probability of $x$ 'successes' ($x=0,1,2,3,..,n$) 
+
+- $n$ trials (our sample here)  
+
+- $P$ probability of "success" in each independent trial 
+
+
+## Binomial Distribution
+
+### Mean and Variance
+
+**Mean** (expected value)
+$$
+\mu = \mathbb{E}[X] = np \qquad  
+$$
+
+**Variance** and **standard deviation**
+$$
+\sigma^2 = \text{Var}(X) = np(1 - p) \qquad \\
+\sigma = \sqrt{np(1-p)} \\
+$$
+where $n$ is the sample size, $P$  is the probability of success, $(1-P)$  is the probability of failure.
+
+
+**Interpretation:** 
+
+- Over many repetitions of the experiment, you *expect* about $np$  successes per set of $n$  trials.  
+
+- The variance captures how much the number of successes varies around that average. 
+
+## Binomial Distribution
+
+### Using binomial tables
+
+Given that we know the sample size $n$, the number of sequences with $x$ successes, and the probability of "success" $P$ in each independent trial,
+
+then we can use the binomial tables that usually can be found in the appendices of Statistics textbooks, so that we find $P(x)$.
+
+![](binomial_tables.png){ width=40%}
+
+In the examples, we will see how one can estimate a similar example using R.

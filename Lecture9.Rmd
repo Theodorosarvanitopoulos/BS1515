@@ -1,0 +1,614 @@
+---
+title: "Lecture 9: Confidence Interval"
+subtitle: "Mathematics and Statistics BS1515"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  slidy_presentation:
+    font_adjustment: 0
+    footer: "Arvanitopoulos T - Lecture 9"
+css: cardiff.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+
+## Learning outcomes
+
+### Confidence intervals
+
+- Understand how sample and population are related through statistical inference
+
+- Distinguish between estimator and estimate
+
+- Understand the desired properties of the estimator
+
+- Understand how to (calculate) use confidence intervals and how to interpret them
+
+- Be able to use the t distribution
+
+### 📚 Reading
+
+Newbold et al. (2020), *Statistics for Business and Economics*, Ch. 7
+
+
+
+## Estimating an unknown population parameter
+
+A **point estimator** of a population parameter is a sample statistic (i.e. random variable) used to estimate the corresponding population parameter.  
+
+A **point** estimate is the value of a point estimator used as an estimate of a population parameter. 
+
+&rarr; So, we can estimate a population parameter with a sample statistics, i.e, a point estimate.
+
+*Example*: estimation of the mean weekly wages of graduates in the UK. 
+
+*Solution*: One possible estimator of the population mean is the sample mean. 
+
+If the mean of a random sample is £800, then £800 is an estimate of the population weekly wages.\
+
+
+---
+
+## Estimating an unknown population parameter
+
+A **point estimator** of a population parameter is a sample statistic (i.e. random variable) used to estimate the corresponding population parameter.  
+
+A **point** estimate is the value of a point estimator used as an estimate of a population parameter. 
+
+&rarr; So, we can estimate a population parameter with a sample statistics, i.e, a point estimate.
+
+*Example*: estimation of the mean weekly wages of graduates in the UK. 
+
+*Solution*: One possible estimator of the population mean is the sample mean. 
+
+If the mean of a random sample is £800, then £800 is an estimate of the population weekly wages.\
+
+### Point Estimates and Population Parameters
+
+We can estimate a population parameter with a sample statistic (point estimate):
+
+| Population Parameter |              | Sample Statistic (Point Estimate) |                |
+|----------------------|--------------|-----------------------------------|----------------|
+| Mean                 | $\mu$        | Sample Mean                       | $\bar{x}$      |
+| Proportion           | $P$         | Sample Proportion                 | $\hat{p}$      |
+
+
+
+
+## Unbiasedness {.smaller}
+
+A point estimator $\hat{\theta}$ is said to be an unbiased estimator of the parameter $\theta$ if its expected value is equal to that parameter \
+
+$$
+E(\hat{\theta}) = \theta
+$$
+
+Examples:
+
+- Sample mean ($\bar{x}$) unbiased estimator of population mean ($\mu$) 
+
+- Sample variance ($s^2$) unbiased estimator of population variance ($\sigma^2$)  
+
+- Sample proportion ($\hat{p}$) unbiased estimator of population proportion ($P$)
+
+---
+
+## Unbiasedness {.smaller}
+
+A point estimator $\hat{\theta}$ is said to be an unbiased estimator of the parameter $\theta$ if its expected value is equal to that parameter \
+
+$$
+E(\hat{\theta}) = \theta
+$$
+
+Examples:
+
+- Sample mean ($\bar{x}$) unbiased estimator of population mean ($\mu$) 
+
+- Sample variance ($s^2$) unbiased estimator of population variance ($\sigma^2$)  
+
+- Sample proportion ($\hat{p}$) unbiased estimator of population proportion ($P$)
+
+
+Example where $\hat{\theta_1}$ is an unbiased estimator of $\theta$, while $\hat{\theta_2}$ is biased
+```{r fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
+set.seed(123)
+
+# True theta
+theta <- 0.5
+
+# Generate two distributions
+theta1_hat <- rnorm(10000, mean = theta, sd = 0.05)           # Unbiased estimator
+theta2_hat <- rnorm(10000, mean = theta + 0.1, sd = 0.05)     # Biased estimator
+
+# Plot
+hist(theta1_hat, breaks = 100, probability = TRUE, col = rgb(0, 0, 1, 0.5),
+     xlim = c(0, 1), ylim = c(0, 9), xlab = expression(theta),
+     main = "Bias in Estimators")
+hist(theta2_hat, breaks = 100, probability = TRUE, col = rgb(1, 0, 0, 0.5), add = TRUE)
+abline(v = theta, col = "black", lty = 2, lwd = 2)
+legend("topright", legend = c(expression(hat(theta)[1] ~ "(Unbiased)"),
+                              expression(hat(theta)[2] ~ "(Biased)"),
+                              expression("True " ~ theta)),
+       col = c("blue", "red", "black"), lwd = 2, lty = c(1, 1, 2))
+```
+
+
+## Bias
+
+Let $\hat{\theta}$ be an estimator of $\theta$ 
+
+The bias in \hat{\theta} is defined as the difference between its mean and \theta
+
+$$
+Bias(\hat{\theta})=E(\hat{\theta})-\theta
+$$
+So, the bias of an unbiased estimator is 0.
+
+
+## Efficiency {.smaller}
+ 
+Suppose there are several unbiased estimators of $\theta$\. 
+
+The most **efficient estimator** or the **minimum variance unbiased estimator** of \theta is the unbiased estimator with the **smallest variance** 
+
+Let  $\hat{\theta}_1$ and $\hat{\theta}_2$ be two unbiased estimators of $\theta$, based on the same number of observations:
+
+- $\hat{\theta}_1$ is more efficient than $\hat{\theta}_2$ if   $\text{Var}(\hat{\theta}_1)<\text{Var}(\hat{\theta}_2)$
+
+- the relative efficiency of $\hat{\theta}_1$ with respect to $\hat{\theta}_2$ is the ratio of their variances $\frac{Var(\hat{\theta}_2)}{Var(\hat{\theta}_1)}$
+
+---
+
+## Efficiency {.smaller}
+ 
+Suppose there are several unbiased estimators of $\theta$\. 
+
+The most **efficient estimator** or the **minimum variance unbiased estimator** of \theta is the unbiased estimator with the **smallest variance** 
+
+Let  $\hat{\theta}_1$ and $\hat{\theta}_2$ be two unbiased estimators of $\theta$, based on the same number of observations:
+
+- $\hat{\theta}_1$ is more efficient than $\hat{\theta}_2$ if   $\text{Var}(\hat{\theta}_1)<\text{Var}(\hat{\theta}_2)$
+
+- the relative efficiency of $\hat{\theta}_1$ with respect to $\hat{\theta}_2$ is the ratio of their variances $\frac{Var(\hat{\theta}_2)}{Var(\hat{\theta}_1)}$
+
+### Efficiency plot - example
+
+Both $\hat{\theta}_1$ and $\hat{\theta}_2$ are unbiased estimators of the population parameter $\theta$
+
+```{r fig.width=6, fig.height=4.5, fig.align='center', echo=FALSE}
+theta <- seq(0, 1, length.out = 1000)
+
+# Two unbiased estimators centered at θ = 0.5
+f1 <- dnorm(theta, mean = 0.5, sd = 0.12)  # Less efficient (wider spread)
+f2 <- dnorm(theta, mean = 0.5, sd = 0.04)  # More efficient (narrower spread)
+
+# Plot the two distributions
+plot(theta, f1, type = "l", col = "blue", lwd = 2,
+     ylab = "Density", xlab = expression(theta),
+     main = "Two Unbiased Estimators of θ",
+     ylim = c(0, max(f1, f2) + 1))
+
+lines(theta, f2, col = "red", lwd = 2)
+
+# Mark the true θ
+abline(v = 0.5, col = "black", lty = 2)
+text(0.5, max(f1, f2) + 0.5, labels = expression(theta), pos = 3)
+
+legend("topright",
+       legend = c(expression(hat(theta)[1] ~ "(Less efficient)"),
+                  expression(hat(theta)[2] ~ "(More efficient)"),
+                  expression("True " ~ theta)),
+       col = c("blue", "red", "black"),
+       lty = c(1, 1, 2), lwd = 2)
+```
+
+
+
+## Confidence intervals {.smaller}
+
+How much uncertainty is associated with a point estimate of a population parameter? 
+
+An interval estimate provides more information information about a population characteristic than does a point estimate. 
+
+Such interval estimates are called confidence interval (CI) estimates, within which we expect the true population parameter to lie.
+
+---
+
+## Confidence intervals {.smaller}
+
+How much uncertainty is associated with a point estimate of a population parameter? 
+
+An interval estimate provides more information information about a population characteristic than does a point estimate. 
+
+Such interval estimates are called confidence interval (CI) estimates, within which we expect the true population parameter to lie.
+
+### Confidence interval estimation
+
+A interval (CI) gives a range of values: 
+
+- takes into consideration variation in sample statistics from sample to sample
+
+- based on observation from 1 sample
+
+- gives information about closeness to unknown population parameters
+
+- stated in terms of level of confidence (one can be 100% confident or less)
+
+
+
+## Confidence interval and confidence level
+
+If $P(a<\theta<b)=1-\alpha$, then the interval from $a$ to $b$ is called a $100(1-\alpha)$ confidence interval of $\theta$.
+
+The quantity $100(1-\alpha)$ is called the confidence level of the internal ($0 \leq \alpha \leq 1$).
+
+In repeated samples of the population, the true value of the parameter $\theta$ would be contained in $100(1 - \alpha)\%$ of intervals calculated this way.  
+
+The confidence interval calculated in this manner is written as $a < \theta < b$ with $100(1 - \alpha)\%$ confidence
+
+
+
+## Confidence level $(1-\alpha)$
+ 
+Suppose confidence level = $95%$, which can also be written as $(1-\alpha)=0.95$.  
+
+**A relative frequency interpretation**:  
+
+From repeated samples, %95\%% of all the confidence intervals that can be constructed of size $n$ will contain the unknown true parameter. \
+
+A specific interval either will contain or will not contain the true parameter  (no probability in specific interval)
+
+**General formula of all confidence intervals** is:
+
+$$\hat{\theta} \pm ME = \text{Point Estimate} \pm \text{Margin of Error}$$
+
+The value of the margin of error depends on the desired level of confidence
+
+
+
+## Confidence interval for $\mu$ ($\sigma^2$ known)
+
+Assumptions: 
+
+- Population variance $\sigma^2$ is known 
+
+- Population is normally distributed 
+
+- If population is not normal, use large sample 
+
+---
+
+## Confidence interval for $\mu$ ($\sigma^2$ known)
+
+Assumptions: 
+
+- Population variance $\sigma^2$ is known 
+
+- Population is normally distributed 
+
+- If population is not normal, use large sample 
+
+**Confidence interval estimate** for the mean is:
+
+$$
+\bar{x} -  z_{\alpha/2}\frac{\sigma}{\sqrt{n}} < \mu < \bar{x} +  z_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+$$
+
+where: 
+
+- $z_{\alpha/2}$ is the normal distribution value for a probability $\alpha/2$ in each tail 
+
+- $\bar{x} - z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$ is the **Lower Confidence Limit (LCL)** 
+
+- $\bar{x} + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$ is the **Upper Confidence Limit (LCL)** 
+
+- $z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$ is the **Margin of Error** or **ME**
+
+
+
+## Reducing the margin of error and finding $z_{\alpha/2}$ {.smaller}
+
+The confidence interval can also be written as $\bar{x} \sim ME$ where $ME$ is the **margin of error**
+
+$$ME=z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$$
+
+---
+
+## Reducing the margin of error and finding $z_{\alpha/2}$ {.smaller}
+
+The confidence interval can also be written as $\bar{x} \sim ME$ where $ME$ is the **margin of error**
+
+$$ME=z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$$
+
+The margin of error can be reduced if:
+
+- the population standard deviation can be reduced ($\sigma$ &darr;) 
+
+- the sample size is increased ($n$ &uarr;)
+
+- the confidence level is decreased $(1-\alpha)$ &darr;) 
+
+
+---
+
+
+## Reducing the margin of error and finding $z_{\alpha/2}$ {.smaller}
+
+The confidence interval can also be written as $\bar{x} \sim ME$ where $ME$ is the **margin of error**
+
+$$ME=z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$$
+
+The margin of error can be reduced if:
+
+- the population standard deviation can be reduced ($\sigma$ &darr;) 
+
+- the sample size is increased ($n$ &uarr;)
+
+- the confidence level is decreased $(1-\alpha)$ &darr;) 
+
+Consider a 95% confidence interval: 
+
+![](conf_interv.png){ width=40%}
+
+Find $z_{0.025}= \pm 1.96$ from the standard normal distribution table.
+
+
+## Finding $z_{\alpha/2}$ {.smaller}
+
+Find $z_{0.025}= \pm 1.96$ from the standard normal distribution table.
+
+Check the corresponding standrad normal distribution table in the textbook appendices (Table 1)  
+
+![](z_a2_distr.png){ width=40%}
+
+
+## Common levels of confidence 
+
+Commonly used confidence levels are **90%, 95%, and 99%** \
+
+![](common_levels_confd.png){ width=40%}
+
+
+
+## Example of intervals and level of confidence 
+
+![](confd_sampl.png){ width=55%}
+
+
+
+## Confidence intervals for $\mu$ ($\sigma^2$ unknown) 
+
+If the population standard deviation $σ$  is unknown, we can substitute the sample standard deviation, $s$. 
+
+This introduces extra uncertainty, since  $s$  is variable from sample to sample.
+
+So, we use the $t$ distribution instead of the normal distribution.
+
+William Sealey Gosset developed the **Student’s $t$ distribution** in the Guinness Brewery in Dublin. 
+
+ 
+
+## Student's t-distribution
+
+If the sample mean $\bar{X}$ ~ $N( \mu, \frac{\sigma^2}{n})$ with known population variance $\sigma^2$, then
+
+$$
+Z= \frac{\bar{X}-\mu}{\sigma_{\bar{x}}} = \frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}} 
+$$
+
+---
+
+## Student's t-distribution
+
+If the sample mean $\bar{X}$ ~ $N( \mu, \frac{\sigma^2}{n})$ with known population variance $\sigma^2$, then
+
+$$
+Z= \frac{\bar{X}-\mu}{\sigma_{\bar{x}}} = \frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}} 
+$$
+
+Now, consider a random sample of $n$ observations 
+
+- with mean $\bar{x}$ and standard deviation $s$ 
+
+- from a normally distributed population with mean $\mu$ 
+
+---
+
+## Student's t-distribution
+
+If the sample mean $\bar{X}$ ~ $N( \mu, \frac{\sigma^2}{n})$ with known population variance $\sigma^2$, then
+
+$$
+Z= \frac{\bar{X}-\mu}{\sigma_{\bar{x}}} = \frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}} 
+$$
+
+Now, consider a random sample of $n$ observations 
+
+- with mean $\bar{x}$ and standard deviation $s$ 
+
+- from a normally distributed population with mean $\mu$ 
+
+So, if the sample mean $\bar{X}$ ~ $N( \mu, \frac{\sigma^2}{n})$ with unknown population variance $\sigma^2$, then
+
+$$
+t= \frac{\bar{x}-\mu}{\frac{s}{\sqrt{n}}} 
+$$
+which follows the **Student’s $t$ distribution** with 14 degrees of freedom
+
+
+## Student's $t$-distribution - confidence intervals {.smaller}
+
+Assumptions:
+
+- Population standard deviation is unknown
+
+- Population is normally distributed
+
+- If population is not normal, use large sample
+
+---
+
+## Student's $t$-distribution - confidence intervals {.smaller}
+
+Assumptions:
+
+- Population standard deviation is unknown
+
+- Population is normally distributed
+
+- If population is not normal, use large sample
+
+
+The, we use the **Student’s $t$ distribution** with confidence interval estimates:
+
+$$
+\bar{x} - t_{n-1, \ \alpha/2} \frac{S}{\sqrt{n}} < \mu < \bar{x} + t_{n-1, \ \alpha/2} \frac{S}{\sqrt{n}}
+$$
+where: 
+
+- $t_{n-1, \ \alpha/2}$ is the critical value of the t distribution with $n-1$ d.f. and an area $\alpha/2$ in each tail 
+
+- $\bar{x} - t_{n-1, \ \alpha/2} \frac{S}{\sqrt{n}}$ is the **Lower Confidence Limit (LCL)** 
+
+- $\bar{x} + t_{n-1, \ \alpha/2} \frac{S}{\sqrt{n}}$ is the **Upper Confidence Limit (LCL)** 
+
+- $t_{n-1, \ \alpha/2} \frac{S}{\sqrt{n}}$ is the **Margin of Error** or **ME**
+
+
+
+## Student's t-distribution
+
+The $t$ is a family of distributions. \
+
+The $t$ value depends on **degrees of freedom (d.f.)**, which is the number of that are free to vary after
+sample mean has been calculated: \
+
+$$ d.f.=n-1 $$
+
+$t$ &rarr; $Z$ as $n$ increases \
+
+```{r fig.asp=0.6, fig.align='center', echo=FALSE}
+# x-axis values
+x <- seq(-6, 6, length.out = 1000)
+
+# Density for t-distributions
+df1 <- 1
+df2 <- 5
+t_df1 <- dt(x, df = df1)
+t_df2 <- dt(x, df = df2)
+
+# Adjusted standard deviation to get a peak near 0.5
+adjusted_sd <- 0.8
+normal <- dnorm(x, mean = 0, sd = adjusted_sd)
+
+# Plot
+plot(x, t_df1, type = "l", col = "blue", lwd = 2,
+     ylim = c(0, 0.55),
+     xlab = "x", ylab = "Density",
+     main = "t-Distributions vs Standard Normal")
+lines(x, t_df2, col = "red", lwd = 2)
+lines(x, normal, col = "black", lwd = 2, lty = 2)
+
+legend("topright",
+       legend = c("t (df = 1)", "t (df = 5)", "Standard Normal"),
+       col = c("blue", "red", "black"),
+       lty = c(1, 1, 2), lwd = 2)
+
+```
+
+$t$ distributions are bell shaped and symmetric, but have ‘fatter’ tails than the normal distribution (with infinite d.f.)
+
+
+
+## Student’s t Distribution {.smaller}
+
+```{r, fig.asp=0.6, echo=FALSE, message=FALSE}
+library(knitr)
+library(kableExtra)
+
+# Data
+df <- c(5, 10, 15, 20, 25, 30)
+t_val <- c(2.571, 2.228, 2.131, 2.086, 2.060, 2.042)
+
+# Create data frame without column names
+t_table <- data.frame(df, t_val)
+
+# Assign readable column names after creation
+colnames(t_table) <- c("Degrees of Freedom", "t-value (α/2) for 95% CI")
+
+# Output table
+kable(t_table, "html", align = 'c', caption = "Critical Values for t Distribution (95% CI)") %>%
+  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "hover"))
+```
+
+
+```{r fig.asp=0.5, fig.align='center', echo=FALSE}
+x <- seq(-4, 4, length.out = 1000)
+df <- 10
+t_dist <- dt(x, df = df)
+crit <- qt(0.975, df = df)
+
+plot(x, t_dist, type = "l", lwd = 2, col = "blue",
+     ylab = "Density", xlab = "t",
+     main = expression(paste("t-distribution with df = 10, 95% CI: ", "\u00B12.228")))
+
+# Shade critical areas
+polygon(c(x[x <= -crit], -crit), c(t_dist[x <= -crit], 0), col = rgb(0,0,1,0.3), border = NA)
+polygon(c(x[x >= crit], crit), c(t_dist[x >= crit], 0), col = rgb(0,0,1,0.3), border = NA)
+
+abline(v = c(-crit, crit), lty = 2)
+```
+
+
+
+
+## Confidence intervals for population proportion {.smaller}
+
+An interval estimate for the population proportion $P$ can be calculated by adding an allowance for uncertainty to the sample proportion $\hat{p}$ 
+
+The distribution of the sample proportion is approximately normal if the sample size is large, with standard deviation
+
+$$
+\sigma_P=\sqrt{\frac{P(1-P)}{n}}
+$$
+
+and we estimate this with sample data $\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+
+---
+
+## Confidence intervals for population proportion {.smaller}
+
+An interval estimate for the population proportion $P$ can be calculated by adding an allowance for uncertainty to the sample proportion $\hat{p}$ 
+
+The distribution of the sample proportion is approximately normal if the sample size is large, with standard deviation
+
+$$
+\sigma_P=\sqrt{\frac{P(1-P)}{n}}
+$$
+
+and we estimate this with sample data $\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+
+
+The confidence interval for population proportion is given by
+
+$$
+\hat{p} \pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+$$
+
+where: 
+
+- $z_{\alpha/2}$ is the standard normal value for the level of confidence desired
+
+- $\hat{p}$ is the sample proportion and $n$ is the sample size
+
+- $z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$ is the Margin of Error
+
+- $nP(1-P) > 5$
+
+

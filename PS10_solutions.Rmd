@@ -1,0 +1,157 @@
+---
+title: "Problem Set 10 - Hypothesis testing - Solutions"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+css: cardiff.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Exercise 
+
+A random sample of 1556 employees at Donigton, Inc., Slough, has been asked to attend an ethics workshop. The employees were asked to rate the following statement from a scale from 1 (strongly disagree) to 7 (strongly agree): Only senior executives play a crucial role in environment sustainability. The sample mean response was 4.04, and the sample standard deviation was 1.22. Test at the 1% significance level, against a two-sided alternative, the null hypothesis that the population mean is 4.
+
+**Answer:**
+
+We test $$H_0:\ \mu = 4 \quad \text{vs} \quad H_1:\ \mu \neq 4.$$
+
+The test statistic is 
+$$t \;=\; \frac{\bar{x}-\mu_0}{s/\sqrt{n}}
+\;=\; \frac{4.04-4}{1.22/\sqrt{1556}}
+\;\approx\; 1.293 \quad \text{with } \text{df}=1555.$$
+
+For a two-sided test at the 1% level, the critical value is 
+
+$$t_{1-\alpha/2,\ \text{df}} \;=\; t_{0.995,\ 1555} \;\approx\; 2.576.$$
+
+
+Since \(|t| = 1.293 < 2.576\), we **do not reject** \(H_0\). There is insufficient evidence, at the 1% significance level, to conclude that the true mean response differs from 4.
+
+
+---
+
+# Exercise
+
+The accounts of a corporation show that, on average, accounts payable are £125.32. An auditor checked a random sample of 16 of these accounts. The sample mean was £140.00 and the sample standard deviation was £25.41. Assume that the population distribution is normal. Test at 5% significance level against a two-sided alternative the null hypothesis that the population mean is £125.32.
+
+**Answer:**
+
+
+Because the population standard deviation is unknown, we use a Student’s \(t\)-test with \(n-1 = 15\) degrees of freedom.
+
+We test $$H_0:\ \mu = 125.32 \quad \text{vs} \quad H_1:\ \mu \neq 125.32.$$
+
+The test statistic is
+$$t \;=\; \frac{\bar{x}-\mu_0}{s/\sqrt{n}}
+\;=\; \frac{140.00 - 125.32}{25.41/\sqrt{16}}
+\;\approx\; 2.303, \quad \text{df}=15.$$
+
+For a two-sided test at the 5% level, the critical value is $$t_{0.975,\,15} \;\approx\; 2.131.$$
+
+Since \(|t| = 2.303 > 2.131\), we **reject \(H_0\)**.   There is sufficient evidence, at the 5% significance level, to conclude that the true mean accounts payable differs from £125.32.
+
+---
+
+# Exercise
+
+A statistics instructor is interested in the ability of students to assess the difficulty of a test they have taken. The test was taken by a large group of students, and the average score was 80.3. A random sample of eight students was asked to predict this average score. Their predictions were: 77, 88, 73, 61, 62, 79, 97, 75. Assuming a normal distribution, test the null hypothesis that the population mean prediction would be 80.3. Use a two-sided alternative and a 10% significance level.
+
+**Answer:**
+
+
+Because the population standard deviation is unknown and the sample is small \((n=8)\), we use a **Student’s \(t\)-test** with \(n-1=7\) degrees of freedom.
+
+We test $$H_0:\ \mu = 80.3 \quad \text{vs} \quad H_1:\ \mu \neq 80.3.$$
+
+From the data, the sample mean and standard deviation are $$\bar{x} = 76.5, \qquad s \approx 12.095.$$
+
+The test statistic is
+$$t \;=\; \frac{\bar{x}-\mu_0}{s/\sqrt{n}}
+\;=\; \frac{76.5 - 80.3}{12.095/\sqrt{8}}
+\;\approx\; -0.889.$$
+
+For a two-sided test at the 10% level, the critical value is $$t_{0.95,\,7} \approx 1.895.$$
+
+Since \(|t| = 0.889 < 1.895\), we **do not reject** \(H_0\). There is insufficient evidence, at the 10% significance level, to conclude that the true mean prediction differs from 80.3.
+
+
+---
+
+# Exercise
+
+A process produces cable for the local telephone company. When the process is operating correctly, cable diameter follows a normal distribution with a mean of 1.8 inches and a standard deviation of 0.03 inch. A random sample of 30 pieces of cable found diameters with a sample mean of 1.806 inches and a sample standard deviation of 0.046 inch. Assuming that the population standard deviation is 0.03 inch, test, at the 10% level against a two-sided alternative, the null hypothesis that the population mean is 1.8 inches. Find also the lowest significance (i.e., the p-value) at which this null hypothesis can be rejected against the two-sided alternative.
+
+**Answer:**
+
+
+Because the exercise states the population standard deviation is known \((\sigma = 0.03)\), the appropriate test is a **z-test** (a *t*-test is used only when \(\sigma\) is unknown and replaced by \(s\)).
+
+We test
+$$
+H_0:\ \mu = 1.8 \quad \text{vs} \quad H_1:\ \mu \neq 1.8 .
+$$
+
+The test statistic is
+$$
+z \;=\; \frac{\bar{x} - \mu_0}{\sigma/\sqrt{n}}
+\;=\; \frac{1.806 - 1.8}{0.03 / \sqrt{30}}
+\;\approx\; 1.095 .
+$$
+
+For a two-sided test at the 10% level, the critical value is
+$$
+z_{1-\alpha/2} \;=\; z_{0.95} \;=\; 1.645 .
+$$
+
+Since \(|z| = 1.095 < 1.645\), we **do not reject** \(H_0\). At the 10% level there is insufficient evidence that the true mean cable diameter differs from 1.8 inches.
+
+The p-value is $$p \;=\; 2(1 - F(|z|) \;\approx\; 0.273.$$
+
+
+---
+
+# Exercise
+
+The following table reports the results of a t-test using a statistical software (STATA or R). The statistics reported are based on the average temperature in the Northern Hemisphere over the period 1881-2016. Group 0 refers to the average temperature over the period 1881-1949 and group 1 refers to the average temperature over the period 1950-2016.  
+
+Test the hypothesis that there is no difference between average temperatures for 1881-1949 and 1950-2016.
+
+i) Carefully discuss how to set up the null and the alternative hypothesis, and the corresponding steps to make the decisions. Please provide a clear conclusion using the p-value.  
+
+ii) Using the information provided above in the table, show how the t-statistic for the test has been calculated.
+
+**Two-sample t test — summary**
+
+| Group | Obs | Mean       | Std. Err. | Std. Dev. | 95% CI Lower | 95% CI Upper |
+|:------|----:|-----------:|----------:|----------:|-------------:|-------------:|
+| 0     |  69 | -0.1972464 | 0.0248232 | 0.2061973 | -0.2467804   | -0.1477124   |
+| 1     |  67 |  0.2886567 | 0.0448521 | 0.3671301 |  0.1991066   |  0.3782068   |
+| **Combined** | **136** | **0.0421324** | **0.0328500** | **0.3830935** | **-0.0228348** | **0.1070995** |
+
+| Difference (0 − 1) | Estimate   | Std. Err. | 95% CI Lower | 95% CI Upper | df  | t       | p-value (two-sided) |
+|:-------------------|:-----------|----------:|-------------:|-------------:|:----|:--------|:--------------------|
+| mean(0) − mean(1)  | -0.4859031 | 0.0508693 | -0.5865137   | -0.3852924   | 134 | -9.5520 | 0.0000              |
+
+**Answer:**
+
+H0: average temperatures in these 2 time periods are the same  
+H1: average temperatures in these 2 time periods are different  
+
+You should check that \(t=-9.5520\) is given by \(-0.4859031/0.0508693\)
+
+And that the standard error of the combined statistics is calculated as follows: \(0.3830935/\sqrt{136}=0.03285\)
+
+The \(t\) critical for 134 d.f. at 95% confidence level is 1.962 hence \(9.5520>1.962\)
+
+We reject the null hypothesis \(H_0\) in favour of the alternative and conclude the average temperatures in these 2 time periods are different.
+
+As we are interested in a two-way test (the alternative is different from) we can look under Ha: diff != 0. The p-value is <0.05 and less than 0.01 so we can conclude we reject the null hypothesis \(H_0\) in favour of the alternative and state the average temperatures in these two time periods are statistically significantly different at 99% (since \(p<0.01\)).

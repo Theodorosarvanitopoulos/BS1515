@@ -1,0 +1,415 @@
+---
+title: "Lecture 7: Examples"
+subtitle: "Mathematics and Statistics BS1515"
+author: "Theodoros Arvanitopoulos"
+date: "`r Sys.Date()`"
+output:
+  slidy_presentation:
+    font_adjustment: 0
+    footer: "Arvanitopoulos T - Lecture 7: Examples"
+css: cardiff.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+if (!requireNamespace("gtools", quietly = TRUE)) {
+  install.packages("gtools")
+}
+library(gtools)
+```
+
+
+
+## Example - Permutation 
+
+### Problem overview
+
+Suppose that two letters are to be selected from A, B, C, D and arranged in order. \
+
+➡️ How many permutations are possible?
+
+---
+
+## Example - Permutation 
+
+### Problem overview
+
+Suppose that two letters are to be selected from A, B, C, D and arranged in order. \
+
+➡️ How many permutations are possible?
+
+### Problem Solution 
+
+We are choosing **2 letters** from a total of **4**, where **order matters**.
+
+$$
+P_2^4 = \frac{4!}{(4 - 2)!} = \frac{4!}{2!} = \frac{24}{2} = 12
+$$
+
+The possible permutations are:  
+
+AB, AC, AD, BA, BC, BD, CA, CB, CD, DA, DB, DC
+
+
+## R Example – Permutations
+
+```{r permutations-example}
+# Generate all ordered permutations of 2 letters from 4
+letters <- c("A", "B", "C", "D")
+perms <- gtools::permutations(n = 4, r = 2, v = letters)
+head(perms)  # Show first few
+nrow(perms)  # Should return 12
+```
+
+
+
+## Example - Combination 
+
+### Problem overview
+
+Now suppose the same two letters are to be selected from A, B, C, D, but **order does not matter**. \
+
+➡️ How many combinations are possible?
+
+
+---
+
+
+## Example - Combination 
+
+### Problem overview
+
+Now suppose the same two letters are to be selected from A, B, C, D, but **order does not matter**. \
+
+➡️ How many combinations are possible?
+
+### Solution
+
+$$
+C_2^4 = \frac{4!}{2!(4 - 2)!} = \frac{24}{2! \cdot 2!} = \frac{24}{4} = 6
+$$
+The possible combinations are:  
+
+AB (same as BA)
+AC (same as CA)
+AD (same as DA)
+BC (same as CB)
+BD (same as DB)
+CD (same as DC)
+
+
+## R Example – Combinations
+
+```{r combinations-example}
+# Generate all combinations of 2 letters from 4
+combs <- combn(letters, 2)
+combs
+ncol(combs)  # Should return 6
+```
+
+
+## 🧑‍💼 Officer Election (Permutation)
+
+### Problem overview
+
+A club has 8 members. They want to elect a **president**, a **secretary**, and a **treasurer**. Each position must be held by a different person.   \
+
+➡️ How many ways can these positions be filled?
+
+---
+
+
+## 🧑‍💼 Officer Election (Permutation)
+
+### Problem overview
+
+A club has 8 members. They want to elect a **president**, a **secretary**, and a **treasurer**. Each position must be held by a different person.   \
+
+➡️ How many ways can these positions be filled?
+
+### Solution
+
+This is a **permutation problem** since  order **matters** (president ≠ treasurer, etc).
+
+We are selecting and arranging 3 people out of 8:
+
+$$
+P_3^8 = \frac{8!}{(8 - 3)!} = \frac{8!}{5!} = 336
+$$
+
+
+## R Example – Officer Election
+
+```{r officer-election}
+# Using factorials directly
+factorial(8) / factorial(8 - 3)
+
+# Alternative approach using gtools
+positions <- gtools::permutations(n = 8, r = 3)
+nrow(positions)  # Should also be 336
+```
+
+
+
+## Probability Rules – Complement
+
+The probability that an event **does not occur** is $P(\bar{A}) = 1 - P(A)$
+
+➡️  Example: If the probability that a student passes an exam is 0.8, then the probability they fail is:
+
+```{r complement-rule}
+P_pass <- 0.8
+P_fail <- 1 - P_pass
+P_fail
+```
+
+
+
+## Probability Rules – Addition
+
+For two events $A$ and $B$ $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+
+➡️  Example: P(A) = 0.6, P(B) = 0.5, P(A and B) = 0.3
+
+```{r addition-rule}
+P_A <- 0.6
+P_B <- 0.5
+P_A_and_B <- 0.3
+P_A_or_B <- P_A + P_B - P_A_and_B
+P_A_or_B
+```
+
+
+
+## Probability Rules – Conditional Probability
+
+➡️  Example: P(A and B) = 0.25, P(B) = 0.5. What is P(A given B)?
+
+$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$
+
+```{r conditional-prob}
+P_A_and_B <- 0.25
+P_B <- 0.5
+P_A_given_B <- P_A_and_B / P_B
+P_A_given_B
+```
+
+
+
+## Bayes' Theorem - Medical Screening Example
+
+### Problem overview
+
+Imagine a rare disease affects 1% of the population.A diagnostic test exists for this disease:\
+
+- If a person **has the disease**, the test gives a **positive** result 95% of the time (true positive). \
+- If a person **does not have the disease**, the test gives a **false positive** 10% of the time. \
+
+➡️  If a patient tests **positive**, what is the **probability they actually have the disease**?
+
+---
+
+## Bayes' Theorem - Medical Screening Example
+
+### Problem overview
+
+Imagine a rare disease affects 1% of the population.A diagnostic test exists for this disease:\
+
+- If a person **has the disease**, the test gives a **positive** result 95% of the time (true positive). \
+- If a person **does not have the disease**, the test gives a **false positive** 10% of the time. \
+
+➡️ If a patient tests **positive**, what is the **probability they actually have the disease**?
+
+
+### Step 1: Define the Given Probabilities
+
+Let:\
+- $P(D) = 0.01$: probability of having the disease \
+- $P(\sim D) = 0.9$: probability of **not** having the disease \
+- $P(Pos \mid D) = 0.95$: probability of testing positive **given disease** \
+- $P(Pos \mid \sim D) = 0.10$: probability of testing positive **given no disease** \
+
+
+
+## Bayes' Theorem - Problem solution
+
+### Step 2: Apply Bayes' Theorem
+
+
+The total probability of testing positive:
+
+$$
+P(Pos) = P(Pos \mid D) \cdot P(D) + P(Pos \mid \sim D) \cdot P(\sim D)= \\
+(0.95)(0.01) + (0.10)(0.99) \\
+=  0.0095 + 0.099 = 0.1085
+$$
+Apply Bayes’ theorem:
+
+$$
+P(D \mid Pos) = \frac{P(Pos \mid D) \cdot P(D)}{P(Pos)}= \frac{(0.95)(0.01)}{0.1085}= \frac{0.0095}{0.1085} \approx 0.0876
+$$
+
+
+
+
+Even though the test is quite accurate, a **positive result only means an 8.76% chance** the person actually has the disease — due to the **low base rate**.
+
+This is a classic case where even with a good test, the **post-test probability** is much lower than intuition may suggest, due to the rarity of the disease.
+
+This highlights the **importance of prior probabilities** in understanding test results — a classic insight from Bayes' Theorem.
+
+
+
+## Bayes' Theorem - Problem solution using R
+
+```{r, message=FALSE}
+# Known probabilities
+P_Disease <- 0.01                         # P(D)
+P_Positive_given_Disease <- 0.95          # P(Pos | D)
+P_Positive_given_NoDisease <- 0.10        # P(Pos | ~D)
+
+# Complementary probability
+P_NoDisease <- 1 - P_Disease              # P(~D)
+
+# Total probability of testing positive
+P_Positive <- P_Positive_given_Disease * P_Disease +
+              P_Positive_given_NoDisease * P_NoDisease
+
+# Apply Bayes' Theorem
+P_Disease_given_Positive <- (P_Positive_given_Disease * P_Disease) / P_Positive
+
+# Output result
+P_Disease_given_Positive
+
+```
+
+
+
+## Binomial Distribution - Example
+
+### Problem overview
+
+- The number of trials $n = 10$ \
+- The probability of success in each trial $p = 0.4$ \
+  
+➡️ What is the probability of 1 success in 10 observations if the probability of success is 0.4?
+
+---
+
+## Binomial Distribution - Example
+
+### Problem overview
+
+- The number of trials $n = 10$ \
+- The probability of success in each trial $p = 0.4$ \
+  
+➡️ What is the probability of 1 success in 10 observations if the probability of success is 0.4?
+
+
+### Problem solution
+
+We model this situation using the **Binomial Distribution**, which gives the probability of $x$ successes in $n$ independent trials:
+
+$$
+P(X = x\mid n, p) = \binom{n}{x} p^x (1 - p)^{n - x}
+$$
+
+
+In our case:
+$$
+P(X = 1) = \binom{10}{1} (0.4)^1 (0.6)^9=\frac{10!}{1!(10-1)!}(0.4)^1 (0.6)^9= 0.0403
+$$
+
+
+
+## Binomial Distribution - Problem solution using R
+
+```{r, echo=TRUE}
+# Compute probability of exactly 1 success
+# P(x = 1 | n = 10, p = 0.4)
+dbinom(1, size = 10, prob = 0.4)
+
+# Create table of probabilities for all possible outcomes (0 to 10)
+x <- 0:10
+prob <- dbinom(x, size = 10, prob = 0.4)
+data.frame(Successes = x, Probability = round(prob, 4))
+```
+
+
+
+## Using a binomial table (n = 10) {.smaller}
+
+### Binomial table (n = 10)
+
+This is a Binomial table for $n = 10$ and a range of $p$ values.  \ 
+Each **row** corresponds to a value of $x$ (number of 'successes'), and each **column** corresponds to a value of the success probability $p$.  \
+
+- **Example 1:** $n = 10, x = 1, p = 0.4$ → expected probability **0.0403**.  \
+- **Example 2:** $n = 10, x = 8, p = 0.45$ → expected probability **0.0229**.
+
+
+```{r build-binom-table, echo=FALSE}
+# Ensure packages
+if (!requireNamespace("kableExtra", quietly = TRUE)) {
+  install.packages("kableExtra")
+}
+library(kableExtra)
+
+n <- 10
+x_vals <- 0:10
+p_vals <- c(0.20, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55)
+
+# Matrix of probabilities
+prob_mat <- sapply(p_vals, function(p) dbinom(x_vals, size = n, prob = p))
+
+# Round for display
+prob_df <- as.data.frame(round(prob_mat, 4))
+colnames(prob_df) <- paste0("p=", p_vals)
+prob_df <- cbind(x = x_vals, prob_df)
+
+prob_df
+```
+
+### Check the Highlighted Values Programmatically 
+
+```{r check-highlighted}
+P_x1_p040 <- dbinom(1, size = 10, prob = 0.40)
+P_x8_p045 <- dbinom(8, size = 10, prob = 0.45)
+c("P(X=1|n=10,p=0.40)" = P_x1_p040,
+  "P(X=8|n=10,p=0.45)" = P_x8_p045)
+```
+
+
+
+## Binomial Distribution — Example 
+
+### Problem overview
+
+The number of trials becomes $n = 12$, with probability of success in each trial $p = 0.45$ \
+  
+➡️ What is the expected success, and what the variance and standard deviation of success.
+  
+ \(X \sim \text{Binomial}(n=12,\ p=0.45)\) 
+ 
+\[
+\mathbb E[X]=np,\qquad \mathrm{Var}(X)=np(1-p),\qquad \mathrm{SD}(X)=\sqrt{np(1-p)}.
+\]
+
+\[
+\mathbb E[X]=12\cdot0.45=5.4,\quad 
+\mathrm{Var}(X)=12\cdot0.45\cdot0.55=2.97,\quad
+\mathrm{SD}(X)=\sqrt{2.97}\approx 1.723.
+\]
+
+```{r, echo=TRUE}
+# Parameters
+n  <- 12
+p  <- 0.45
+
+# Binomial mean, variance, sd
+E_X   <- n * p
+Var_X <- n * p * (1 - p)
+SD_X  <- sqrt(Var_X)
+
+c(Mean = E_X, Variance = Var_X, SD = SD_X)
+```
