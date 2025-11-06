@@ -1,0 +1,81 @@
+<!--
+```{r setup, include=FALSE}
+# knitr::opts_chunk$set(cache=FALSE, dev='pdf')
+knitr::opts_chunk$set(cache=F,
+                      fig.path = 'figs/',
+                      cache.path='cache/',
+                      warning=F,
+                      message=F)
+
+knitr::opts_chunk$set(
+                  fig.process = function(x) {
+                      x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
+                      if (file.rename(x, x2)) x2 else x
+                      }
+                  )
+
+
+options(scipen=999)
+library(tidyverse)
+library(stevemisc)
+library(lubridate)
+```
+-->
+
+# BS1515: Maths & Stats
+
+# Dr Theodoros Arvanitopoulos
+
+# Fall 2025
+
+Contact: ArvanitopoulosT@cardiff.ac.uk
+
+Office: Aberconway S36, office hours by appointment
+
+# Course Description
+
+This module provides students with a basic knowledge of mathematics and statistical tools that are required to understand economics, business, and econometrics taught in Years 1, 2 and 3. This module builds upon and reinforces the knowledge from A-level mathematics and introduces new mathematical and statistical tools to students. Teaching of these tools is combined with practical applications to economics and business.
+
+# Course Objectives
+
+1. 	Explain mathematical and statistical methods.
+2.	Formulate problems using appropriate mathematical and statistical methods.
+3.	Solve problems related to the topics in the module.
+4.	Apply the techniques of mathematics and statistics to economics and business examples.
+
+
+# Required Readings
+
+Newbold, Paul; Carlson, William L.; Thorne, Betty M. (2020). Statistics for Business and Economics. Pearson Education. Available online via the Cardiff University library. Other editions are acceptable too.
+
+
+## Grading Policy
+
+This course consists of two parts, one is taught by me and one taught by Dr Sergey Popov (separate syllabus governs his part).
+
+- **15%** of your grade will be determined by a homework designed by Dr Popov with a deadline on Week 7.
+
+- **15%** of your grade will be determined by a homework designed by me with a deadline on Week 11.
+
+- **70%** of your grade will be determined by a final exam designed by us both.
+
+The marking criteria are provided on Learning Central in a separate document.
+
+## E-mail Policy
+
+Please do not hesitate to contact me with any questions or suggestions. If I did not reply, I probably missed it, please write again.
+
+If you have problems, please write, sometimes I can do/suggest things. The earlier I know about a problem, the more I can do.
+
+## Class Schedule
+
+We meet for 4 hours every week for 3 hours of lectures and 1 hour of Q&A session. Prepare your questions!
+
+Approximate weekly schedule (live document available on Learning Central):
+
+1. Descriptive statistics (expectations, standard deviations, skewness, reading tables/figures)
+2. Probability (distribution functions, Bayes’s Theorem)
+3. Sampling and sample distribution
+4. Confidence intervals
+5. Hypotheses testing
+6. Homework 2
