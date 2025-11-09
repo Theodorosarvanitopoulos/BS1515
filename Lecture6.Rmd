@@ -126,16 +126,16 @@ A **variable** has two characteristics:
 
 Types of variables:
 
-**Qualitative/Categorical** variables take non numerical values (e.g.,
-the colour of a ball).
+**Quantitative/Numerical** variables take numerical values (e.g. the
+number of children per family).
 
 -   *discrete*: (positive) integer values (e.g., number of children per
     household)
 
 -   *continuous*: any real numerical values (e.g., weight)\
 
-**Quantitative/Numerical** variables take numerical values (e.g. the
-number of children per family).
+**Qualitative/Categorical** variables take non numerical values (e.g.,
+the colour of a ball).
 
 -   *nominal*: non-measurable categories (e.g. colours: red, blue,
     yellow, etc)
@@ -544,7 +544,7 @@ $$
 \bar{r}_g=(x_1x_2... x_n)^{1/2}-1
 $$
 
-where $x_i$ is the rare of return in the time period $i$
+where $x_i$ is the rate of return in the time period $i$
 
 ------------------------------------------------------------------------
 
@@ -651,9 +651,9 @@ So $Q_1=12.5$
 
 ## Measures of Variability {.smaller}
 
--   Range (*more info on textbook*)
+-   Range 
 
--   Interquartile range (*more info on textbook*)
+-   Interquartile range 
 
 -   Variance
 
@@ -687,54 +687,55 @@ ggplot(df, aes(x = x, y = Density, color = Distribution)) +
 ```
 
 
-<div class="hidden"> 
-      #remove line above and </div> at the end for slides to appear in html
-      
-      ## Range
-      
-      Simplest measure of variation
-      
-      Difference between the largest and the smallest observations: $$
-      Range = X_{largest} − X_{smallest}
-      $$ 
-      ---
-      
-      ## Range
-      
-      Simplest measure of variation
-      
-      Difference between the largest and the smallest observations: $$
-      Range = X_{largest} − X_{smallest}
-      $$
-      
-      ### Example
-      
-      ![](range.png){width="30%"}
-      
-      Disadvantages of the range:
-      
-      -   it ignores the way in which data are distributed
-      
-      -   is sensitive to outliers
-      
-      ![](range2.png){width="35%"}
-      
-      ## Interquantile range
-      
-      Can eliminate some outlier problems by using the interquartile range.
-      
-      Eliminate high-and low-valued observations and calculate the range of
-      the middle $50\%$ of the data
-      
-      Defined as the difference between the observation at the $3^{rd}$
-      quartile and the observation at the $1^{st}$ quartile
-      
-      $$
-      IQR = Q_3 - Q_1
-      $$
-      
-      The interquartile range (IQR) measures the spread in the middle $50/%$ of the data
-</div>
+---
+  
+## Range
+  
+  Simplest measure of variation
+  
+  Difference between the largest and the smallest observations: $$
+  Range = X_{largest} − X_{smallest}
+  $$ 
+  
+---
+  
+## Range
+  
+  Simplest measure of variation
+  
+  Difference between the largest and the smallest observations: $$
+  Range = X_{largest} − X_{smallest}
+  $$
+  
+### Example
+  
+  ![](range.png){width="30%"}
+  
+  Disadvantages of the range:
+  
+  -   it ignores the way in which data are distributed
+  
+  -   is sensitive to outliers
+  
+  ![](range2.png){width="35%"}
+  
+
+## Interquantile range
+  
+  Can eliminate some outlier problems by using the interquartile range.
+  
+  Eliminate high-and low-valued observations and calculate the range of
+  the middle $50\%$ of the data
+  
+  Defined as the difference between the observation at the $3^{rd}$
+  quartile and the observation at the $1^{st}$ quartile
+  
+  $$
+  IQR = Q_3 - Q_1
+  $$
+  
+  The interquartile range (IQR) measures the spread in the middle $50\%$ of the data
+
 
 
 ## Variance
