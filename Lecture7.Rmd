@@ -125,47 +125,52 @@ list(
 ```
 
 
- <div class="hidden"> 
-    
-    ## Classical Probability {.smaller}
-    
-    Definitions of probability. Assumes all outcomes in the sample space are equally likely to occur.		
-    
-    ### Classical
-    
-    
-    Based on logical reasoning
-    
-    $$
-     P(A)= \frac{N_A}{N}=\frac{number \ of \ outcomes \ that \ satisfy \ the \ event \  A}{total \ number \ of \ outcomes \ in \ the \ sample \ space}
-    \\
-    $$
-    
-    ### Relative frequency
-    
-    Based on observed data. The limit of the proportion of times that an event A occurs in a large number of trial, $n$
-    
-    $$
-     P(A)= \frac{N_A}{N}=\frac{number \ of \ events \ in \ the \ population \ that \ satisfy \  A}{total \ number \ of \ events \ in \ the \ population }
-    \\
-    $$
-    
-    
-    ### Subjective
-    
-    Based on personal judgment. It expresses an individual's opinion or belief about the probability of occurence.
 
- </div>
+## Classical Probability {.smaller}
+    
+Definitions of probability. Assumes all outcomes in the sample space are equally likely to occur.		
+
+### Classical
+
+
+Based on logical reasoning
+
+$$
+ P(A)= \frac{N_A}{N}=\frac{number \ of \ outcomes \ that \ satisfy \ the \ event \  A}{total \ number \ of \ outcomes \ in \ the \ sample \ space}
+\\
+$$
+
+### Relative frequency
+
+Based on observed data. The limit of the proportion of times that an event A occurs in a large number of trial, $n$
+
+$$
+ P(A)= \frac{N_A}{N}=\frac{number \ of \ events \ in \ the \ population \ that \ satisfy \  A}{total \ number \ of \ events \ in \ the \ population }
+\\
+$$
+
+
+### Subjective
+
+Based on personal judgment. It expresses an individual's opinion or belief about the probability of occurence.
+
+
  
 
-##  Factorial
+##  Number of combinations
+
+Formula to compute the number of combinations of $n$ items taken $x$ at a time:
+$$
+C_{x}^n =\frac{n!}{x!(n - x)!}
+$$
+
 
 **Factorial** (!): the total number of possible ways of arranging $x$ objects in order. \
 
-The **factorial** of a positive integer $n$, denoted $n!$, is defined as:
+The **factorial** of a positive integer $x$, denoted $x!$, is defined as:
 
 $$
-n! = n \times (n-1) \times (n-2) \times \cdots \times 1
+x! = x (x-1) (x-2) \cdots (2)  (1)
 $$
 
 By convention: $0! = 1$
@@ -181,12 +186,16 @@ choose(5, 2)    # 5C2
 
 ### Permutations 
 
-The number of possible arrangements when $x$ objects are to be selected from a total of $n$ objects and arranged in order (with $n-x$) objects left over
+The number of possible arrangements when $x$ objects are to be selected from a total of $n$ objects (i.e. $P_x^n$) and arranged in order (with $n-x$) objects left over 
 
- &rarr;  **order matters**
+**order matters**
+ 
+ this means that $n(n-1)(n-2)...(n-x+1)$ so that $(n-x)$ objects are left over,
+ 
+ multiplying and dividing the right hand side by $(n-x)(n-x-1)...(2)(1)=(n-x)!$ give us
 
 $$
-P_n^x =\frac{n(n-1)(n-2)...(n-x+1)(n-x)(n-x-1)...(2)(1)}{(n-x)(n-x-1)...(2)(1)} \\
+P_x^n =\frac{n(n-1)(n-2)...(n-x+1)(n-x)(n-x-1)...(2)(1)}{(n-x)(n-x-1)...(2)(1)} \\
 =\frac{n!}{(n - x)!}
 $$
 
@@ -209,13 +218,18 @@ $$
 \binom{n}{x}= C_{x}^n = \frac{n!}{x!(n - x)!}
 $$
 
+### Example
+
+$$
+\binom{5}{2}= C_{2}^5 = \frac{5!}{2!(5 - 1)!}= \frac{5\times4\times3\times2\times1}{2\times1(3\times2\times1)}=10
+$$
 
 
 ## Probability Rules
 
 ### Complement
 
-**Complement rule**: let A be an event and \bar{A} its complement, then:
+**Complement rule**: let A be an event and $\bar{A}$ its complement, then:
 
 $$
 P(\bar{A}) = 1 - P(A) 
@@ -229,7 +243,7 @@ i.e. $P(A) + P(\bar{A})=1$
 
 ### Complement 
 
-**Complement rule**: let A be an event and \bar{A} its complement, then:
+**Complement rule**: let A be an event and $\bar{A}$ its complement, then:
 
 $$
 P(\bar{A}) = 1 - P(A) 
@@ -242,9 +256,15 @@ i.e. $P(A) + P(\bar{A})=1$
 For example, a company is hiring candidates for 4 identical positions. 5 candidates are from India and 3 are from the United States. Assuming that every combination of Indian and American is equally likely to be chosen, what is the probability that at least 1
 American will be selected?
 
+### Solution
+
+First compute the probability that "no american is selected", and then using complement rule to compute that "at least 1 American is selected".
+
 $P(\bar{A})=\frac{C_{4}^5}{C_{4}^8}=\frac{1}{14}$
 
-and $P(A)=\frac{13}{14}$
+and $P(A)=1-P(\bar{A})=1-1/14=\frac{13}{14}$
+
+
 
 
 ## Probability Rules {.smaller}
@@ -275,9 +295,9 @@ $$
 
 ### Example
 
-Consider a standard deck of 52 cars with four suits. Let event A be that the card is an Ace, and event B be that the card is a red suit.
+Consider a standard deck of 52 cards with four suits. Let event A be that the card is an Ace, and event B be that the card is a red suit.
 
-$P(red \cup ace) = P(red) + P(ace) - P(red \cap ace) = 26/52 = 4/52 - 2/52 = 28/ 52$
+$P(red \cup ace) = P(red) + P(ace) - P(red \cap ace) = 26/52 + 4/52 - 2/52 = 28/ 52 \ (aprox. 54\%) $
 
 $P(red \cap ace)$ &rarr; we do not count the two red aces twice.
 
@@ -431,9 +451,9 @@ $P(red \cap ace) = P(red \mid ace) P(ace)= (2/4)(4/52)= 2/52$
 
 Of the cars on a used car lot, 70% have air conditioning (AC) and 40% have a CD player (CD). 20% of the cars have both. Are the events AC and CD statistically independent?
 
-P(AC \cap CD) = 0.2
+$P(AC \cap CD) = 0.2$
 
-P(AC)P(CD)=(0.7)(0.4)=0.28
+$P(AC)P(CD)=(0.7)(0.4)=0.28$
 
 So, given  $P(AC \cap CD) \neq P(AC)P(CD)$, then the two events are not statistically independent
 
@@ -468,7 +488,7 @@ $$
 P(A)=P(A \cap  B_1)+P(A \cap  B_2)+...+P(A \cap  B_k)
 $$
 
-where $B_1$, $B_2$, ..., $B_k$ are $k$ mutually exclusive and collectively exhaustive events.
+where $B_1$, $B_2$, ..., $B_k$ are $k$ mutually exclusive and collectively exhaustive events $\rightarrow$ equivalent of summing the probabilities for a particular row in the following tabl
 
 
 ### Example
@@ -504,16 +524,31 @@ where:
 
 **General form of Bayes' Theorem** 
 
+
+The conditional probability of $E_i$ given $A$ can be expressed as:
+
 $$
-P(E_i \mid A) = \frac{P(A \mid E_i) P(E_i)}{\sum_{j=1}^{k} P(A \mid E_j) P(E_j)} \\
- = \frac{P(A \mid E_i) P(E_i)}{P(A \mid E_1) P(E_1)+ P(A \mid E_2) P(E_2)+ ... + P(A \mid E_k) P(E_k)}
+P(E_i \mid A) = \frac{P(A \mid E_i) P(E_i)}{P(A) } 
+$$
+and 
+
+$$P(A)=P(A \cap E_1) + P(A \cap E_2) + ... + P(A \cap E_k)  \\
+      = P(A \mid E_1)P(E_1)+P(A \mid E_2)P(E_2)+...+P(A \mid E_k)P(E_k) $$
+      
+then 
+
+$$
+ P(E_i \mid A) = \frac{P(A \mid E_i) P(E_i)}{P(A \mid E_1) P(E_1)+ P(A \mid E_2) P(E_2)+ ... + P(A \mid E_k) P(E_k)} \\
+   = \frac{P(A \mid E_i) P(E_i)}{\sum_{j=1}^{k} P(A \mid E_j) P(E_j)} \\
 $$
 
 where 
 
-- $P(E_i)$ is the $i^{th}$ event of $k$ mutually exclusive and collectively exhaustive events 
+- let  $E_1, E_2, ..., E_k$ be $k$ mutually exclusive and collectively exhaustive events
 
-- $A$ is a new event that might impact  $P(E_i)$
+- $P(E_i)$ is the prior probability of event  $E_i$
+
+- $A$ is new event whose occurrence leads us to update the probability of $E_i$ from $P(E_i)$ to $P(A \mid E_i)$, assuming $P(A)>0$
 
 
 
@@ -546,6 +581,16 @@ P_D <- P_D_given_S * P_S + P_D_given_U * P_U
 P_S_given_D <- (P_D_given_S * P_S) / P_D
 P_S_given_D
 ```
+
+*Total probability*
+$$
+P(D) = P(D \mid S)P(S) + P(D \mid U)P(U)= (0.6)(0.4) + (0.2)(0.6) = 0.24 + 0.12 = 0.36
+$$
+*Bayes' Theorem*
+
+$$
+P(S \mid D) = \frac{P(D \mid S)P(S)}{P(D)} = \frac{(0.6)(0.4)}{0.36} = \frac{0.24}{0.36} = 0.667
+$$
 
 So the updated probability that the well is successful, given that a test was scheduled, is **0.667**, or **66.7%**.
 

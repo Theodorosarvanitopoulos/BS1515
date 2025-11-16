@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Theodoros Arvanitopoulos" />
-  <meta name="date" content="2025-10-03" />
+  <meta name="date" content="2025-11-16" />
   <meta name="copyright" content="Arvanitopoulos T - Lecture 7: Examples" />
   <title>Lecture 7: Examples</title>
   <style type="text/css">
@@ -531,7 +531,7 @@ list-style-type: none;
   <p class="author">
 Theodoros Arvanitopoulos
   </p>
-  <p class="date">2025-10-03</p>
+  <p class="date">2025-11-16</p>
 </div>
 <div id="example---permutation" class="slide section level2">
 <h1>Example - Permutation</h1>
@@ -552,8 +552,9 @@ arranged in order.<br />
 <p>We are choosing <strong>2 letters</strong> from a total of
 <strong>4</strong>, where <strong>order matters</strong>.</p>
 <p><span class="math display">\[
-P_2^4 = \frac{4!}{(4 - 2)!} = \frac{4!}{2!} = \frac{24}{2} = 12
-\]</span></p>
+P_x^n=\frac{n!}{(n-x)!}
+\]</span> so <span class="math display">\[  P_2^4 = \frac{4!}{(4 - 2)!}
+= \frac{4!}{2!} = \frac{24}{2} = 12\]</span></p>
 <p>The possible permutations are:</p>
 <p>AB, AC, AD, BA, BC, BD, CA, CB, CD, DA, DB, DC</p>
 </div>
@@ -590,6 +591,8 @@ but <strong>order does not matter</strong>.<br />
 <p>➡️ How many combinations are possible?</p>
 <h3 id="solution">Solution</h3>
 <p><span class="math display">\[
+C_x^n=\frac{n!}{x!(n-x)!}
+\]</span> so <span class="math display">\[
 C_2^4 = \frac{4!}{2!(4 - 2)!} = \frac{24}{2! \cdot 2!} = \frac{24}{4} =
 6
 \]</span> The possible combinations are:</p>
@@ -681,8 +684,8 @@ B)}{P(B)}\)</span></p>
 <div id="bayes-theorem---medical-screening-example" class="slide section level2">
 <h1>Bayes’ Theorem - Medical Screening Example</h1>
 <h3 id="problem-overview-6">Problem overview</h3>
-<p>Imagine a rare disease affects 1% of the population.A diagnostic test
-exists for this disease:<br />
+<p>Imagine a rare disease affects 1% of the population. A diagnostic
+test exists for this disease:<br />
 </p>
 <ul>
 <li>If a person <strong>has the disease</strong>, the test gives a
@@ -698,8 +701,8 @@ gives a <strong>false positive</strong> 10% of the time.<br />
 <div id="bayes-theorem---medical-screening-example-1" class="slide section level2">
 <h1>Bayes’ Theorem - Medical Screening Example</h1>
 <h3 id="problem-overview-7">Problem overview</h3>
-<p>Imagine a rare disease affects 1% of the population.A diagnostic test
-exists for this disease:<br />
+<p>Imagine a rare disease affects 1% of the population. A diagnostic
+test exists for this disease:<br />
 </p>
 <ul>
 <li>If a person <strong>has the disease</strong>, the test gives a
@@ -716,7 +719,7 @@ Probabilities</h3>
 <p>Let:<br />
 - <span class="math inline">\(P(D) = 0.01\)</span>: probability of
 having the disease<br />
-- <span class="math inline">\(P(\sim D) = 0.9\)</span>: probability of
+- <span class="math inline">\(P(\sim D) = 0.99\)</span>: probability of
 <strong>not</strong> having the disease<br />
 - <span class="math inline">\(P(Pos \mid D) = 0.95\)</span>: probability
 of testing positive <strong>given disease</strong><br />
@@ -858,8 +861,8 @@ probability <span class="math inline">\(p\)</span>.<br />
 ## 9   8 0.0001 0.0004 0.0014 0.0043 0.0106 0.0229 0.0439 0.0763
 ## 10  9 0.0000 0.0000 0.0001 0.0005 0.0016 0.0042 0.0098 0.0207
 ## 11 10 0.0000 0.0000 0.0000 0.0000 0.0001 0.0003 0.0010 0.0025</code></pre>
-<h3 id="check-the-highlighted-values-programmatically">Check the
-Highlighted Values Programmatically</h3>
+<h3 id="check-values-programmatically">Check Values
+Programmatically</h3>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>P_x1_p040 <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.40</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>P_x8_p045 <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.45</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;P(X=1|n=10,p=0.40)&quot;</span> <span class="ot">=</span> P_x1_p040,</span>

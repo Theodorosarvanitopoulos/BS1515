@@ -43,8 +43,10 @@ Suppose that two letters are to be selected from A, B, C, D and arranged in orde
 We are choosing **2 letters** from a total of **4**, where **order matters**.
 
 $$
-P_2^4 = \frac{4!}{(4 - 2)!} = \frac{4!}{2!} = \frac{24}{2} = 12
+P_x^n=\frac{n!}{(n-x)!}
 $$
+so $$  P_2^4 = \frac{4!}{(4 - 2)!} = \frac{4!}{2!} = \frac{24}{2} = 12$$
+
 
 The possible permutations are:  
 
@@ -84,7 +86,10 @@ Now suppose the same two letters are to be selected from A, B, C, D, but **order
 ➡️ How many combinations are possible?
 
 ### Solution
-
+$$
+C_x^n=\frac{n!}{x!(n-x)!} 
+$$
+so
 $$
 C_2^4 = \frac{4!}{2!(4 - 2)!} = \frac{24}{2! \cdot 2!} = \frac{24}{4} = 6
 $$
@@ -200,7 +205,7 @@ P_A_given_B
 
 ### Problem overview
 
-Imagine a rare disease affects 1% of the population.A diagnostic test exists for this disease:\
+Imagine a rare disease affects 1% of the population. A diagnostic test exists for this disease:\
 
 - If a person **has the disease**, the test gives a **positive** result 95% of the time (true positive). \
 - If a person **does not have the disease**, the test gives a **false positive** 10% of the time. \
@@ -213,7 +218,7 @@ Imagine a rare disease affects 1% of the population.A diagnostic test exists for
 
 ### Problem overview
 
-Imagine a rare disease affects 1% of the population.A diagnostic test exists for this disease:\
+Imagine a rare disease affects 1% of the population. A diagnostic test exists for this disease:\
 
 - If a person **has the disease**, the test gives a **positive** result 95% of the time (true positive). \
 - If a person **does not have the disease**, the test gives a **false positive** 10% of the time. \
@@ -225,7 +230,7 @@ Imagine a rare disease affects 1% of the population.A diagnostic test exists for
 
 Let:\
 - $P(D) = 0.01$: probability of having the disease \
-- $P(\sim D) = 0.9$: probability of **not** having the disease \
+- $P(\sim D) = 0.99$: probability of **not** having the disease \
 - $P(Pos \mid D) = 0.95$: probability of testing positive **given disease** \
 - $P(Pos \mid \sim D) = 0.10$: probability of testing positive **given no disease** \
 
@@ -370,7 +375,7 @@ prob_df <- cbind(x = x_vals, prob_df)
 prob_df
 ```
 
-### Check the Highlighted Values Programmatically 
+### Check Values Programmatically 
 
 ```{r check-highlighted}
 P_x1_p040 <- dbinom(1, size = 10, prob = 0.40)
