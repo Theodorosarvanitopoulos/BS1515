@@ -297,7 +297,7 @@ $$
 
 Consider a standard deck of 52 cards with four suits. Let event A be that the card is an Ace, and event B be that the card is a red suit.
 
-$P(red \cup ace) = P(red) + P(ace) - P(red \cap ace) = 26/52 + 4/52 - 2/52 = 28/ 52 \ (aprox. 54\%) $
+$P(red \cup ace) = P(red) + P(ace) - P(red \cap ace) = 26/52 + 4/52 - 2/52 = 28/ 52 \ (aprox. 54\%)$
 
 $P(red \cap ace)$ &rarr; we do not count the two red aces twice.
 
