@@ -105,7 +105,7 @@ Year 2: \(31500 \times 1.15 = 36225\)
 The average salary increase is given by the geometric mean – not the arithmetic one  
 
 \[
-GM =  \big((1.05) (1.15)\big)^{1/2}-1=1.09886-1=0.09886=9.886\% \ per \ year \ approx 
+GM =  \big((1.05) (1.15)\big)^{1/2}=1.09886\% \ per \ year \ approx 
 \]
 
 You can check that \(30000 \times 1.09886 = 32965.80;\ 32965.8 \times 1.09886 = 36224.80\) – almost equal to $36225$ calculated above.

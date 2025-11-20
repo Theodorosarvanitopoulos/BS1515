@@ -541,7 +541,7 @@ $$ The geometric mean rate of return measures the status of an
 investment over time
 
 $$
-\bar{r}_g=(x_1x_2... x_n)^{1/2}-1
+\bar{r}_g=(x_1x_2... x_n)^{1/n}-1
 $$
 
 where $x_i$ is the rate of return in the time period $i$
@@ -554,12 +554,12 @@ Geometric mean is used to measure the rate of change of a variable over
 time
 
 $$
-\bar{x}_g=\sqrt[n]{x_1x_2... x_n}=(x_1x_2... x_n)^{1/2}
+\bar{x}_g=\sqrt[n]{x_1x_2... x_n}=(x_1x_2... x_n)^{1/n}
 $$ The geometric mean rate of return measures the status of an
 investment over time
 
 $$
-\bar{r}_g=(x_1x_2... x_n)^{1/2}-1
+\bar{r}_g=(x_1x_2... x_n)^{1/n}-1
 $$
 
 where $x_i$ is the rare of return in the time period $i$
@@ -576,7 +576,7 @@ $\bar{X} = \frac{(50\%)+(20\%)}{2}=35%$
 
 **Accurate results**: Geometric mean rate of return → 
 $$
-\bar{r}_g=(x_1x_2... x_n)^{1/2}-1= [(50)(20)]^{1/2}-1=(1000)^{1/2}-1=31.623-1=30.623% 
+\bar{r}_g=(x_1x_2... x_n)^{1/n}-1= [(50)(20)]^{1/2}-1=(1000)^{1/2}-1=31.623-1=30.623% 
 $$
 
 ## Percentiles and quartiles {.smaller}
