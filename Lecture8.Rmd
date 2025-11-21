@@ -55,7 +55,7 @@ curve(dnorm(x, mean = 0, sd = 1), from = -4, to = 4, main = "Standard Normal PDF
 
 ## Cumulative Distribution Function (CDF) {.smaller}
 
-The **CDF** of a continuous random variable X, denoted $F(x)$, gives the probability that $X$ does not exceed the value of $x$:
+The **CDF** of a continuous random variable $X$, denoted $F(x)$, gives the probability that $X$ does not exceed the value of $x$:
 
 $$
 F(x) = P(X \leq x)
@@ -65,23 +65,23 @@ $$
 
 ## Cumulative Distribution Function (CDF) {.smaller}
 
-The **CDF** of a continuous random variable X, denoted $F(x)$, gives the probability that $X$ does not exceed the value of $x$:
+The **CDF** of a continuous random variable $X$, denoted $F(x)$, gives the probability that $X$ does not exceed the value of $x$:
 
 $$
 F(x) = P(X \leq x)
 $$
 
-So, if a and b are two possible values for $X$, with $a<b$, then the probability that $X$ lies between $a$ and $b$ is 
+So, if $a$ and $b$ are two possible values for $X$, with $a<b$, then the probability that $X$ lies between $a$ and $b$ is 
 
 $$
-P(a<X<b)=F(b)-F(a)=\int_{-\infty}^{b}f(x)dx
+P(a<X<b)=F(b)-F(a)=\int_{a}^{b}f(x)dx
 $$
 
 ---
 
 ## Cumulative Distribution Function (CDF) {.smaller}
 
-The **CDF** of a continuous random variable X, denoted $F(x)$, gives the probability that $X$ does not exceed the value of $x$:
+The **CDF** of a continuous random variable $X$, denoted $F(x)$, gives the probability that $X$ does not exceed the value of $x$:
 
 $$
 F(x) = P(X \leq x)
@@ -90,14 +90,14 @@ $$
 So, if a and b are two possible values for $X$, with $a<b$, then the probability that $X$ lies between $a$ and $b$ is 
 
 $$
-P(a<X<b)=F(b)-F(a)=\int_{-\infty}^{b}f(x)dx
+P(a<X<b)=F(b)-F(a)=\int_{a}^{b}f(x)dx
 $$
 
 For discrete variables, this is a step function. 
 
-For continuous variables, it's the **integral of the PDF**, and computes the area under the probability density function f(x) over all values of the random variable X within its range, is equal to 1.0. \
+For continuous variables, it's the **integral of the PDF**, and computes the area under the probability density function $f(x)$ over all values of the random variable X within its range. \
 
-Thus, the cumulative function $F(x_0$) is the area under the probability density function $f(x)$ from the minimum value $x_m$  up to maximum value $x_0$
+Thus, the cumulative distribution function $F(x_0$) is the area under the probability density function $f(x)$ from the minimum value $x_m$  up to maximum value $x_0$
 
 
 $$
@@ -116,7 +116,7 @@ $$
 
 ### CDF plot using R
 
-```{r plot-cdf,  fig.width=8, fig.height=4.5, echo=FALSE}
+```{r plot-cdf,  fig.width=8, fig.height=4.5}
 x <- seq(-4, 4, length = 1000)
 cdf_vals <- pnorm(x)
 plot(x, cdf_vals, type = "l", col = "blue", lwd = 2,
@@ -160,9 +160,11 @@ pnorm(1) - pnorm(-1)
 
 Standard Normal Distribution is continuous, bell-shaped, and symmetric. It is often used to model natural phenomena due to its characteristics.
 
-**Measures of Central Tendency**: 
+**Properties of the Normal Distribution**: 
 
-- central location is determined by the mean $\mu$ 
+- central location is determined by the mean $\mu$: $E[X]=\mu$
+
+- variance of the random variable is $\sigma^2$: $Var(X)=E[(X-\mu)^2]=\sigma^2$
 
 - spread is determined by the standard deviation $\sigma$ 
 
@@ -170,8 +172,10 @@ Standard Normal Distribution is continuous, bell-shaped, and symmetric. It is of
 
 - mean, median, and mode are **equal** 
 
+- PDF is symmetric bell-shaped curve centered on the mean $\mu$
 
-Given the mean $\mu$ and variance $\sigma^2$, we define the normal distribution using the following notation: $X$ sim $N(\mu, \sigma^2)$ 
+
+Given the mean $\mu$ and variance $\sigma^2$, we define the normal distribution using the following notation: $X$ \sim $N(\mu, \sigma^2)$ 
 
 
 For example, a **normal distribution** with $\mu = 0$, $\sigma = 1$ looks like this:
@@ -226,7 +230,7 @@ ggplot(df_long, aes(x = x, y = Density, color = Distribution)) +
 
 ##  Shading Area Under Normal Curve
 
-For a normal random variable $X$ with mean $\mu$ and variance $\sigma^2$, i.e $X$ sim $N(\mu,\sigma^2)$, the cumulative distribution function (CDF) is:
+For a normal random variable $X$ with mean $\mu$ and variance $\sigma^2$, i.e $X$ $\sim$ $N(\mu,\sigma^2)$, the cumulative distribution function (CDF) is:
 
 $$
 F(x_0)=P(X \leq x_0)
@@ -286,7 +290,7 @@ ggplot(df, aes(x, y)) +
 
 ## Z-scores
 
-Any normal distribution (with any mean and variance combination) can be transformed into the standardized normal distribution (Z), with mean $\mu=0$ and variance $\sigma=1$, denoted as:
+Any normal distribution (with any mean and variance combination) can be transformed into the standardised normal distribution (Z), with mean $\mu=0$ and variance $\sigma=1$, denoted as:
 
 $$  
 Z \sim N(0,1)
@@ -411,7 +415,7 @@ mean(sample)
 
 ## Sampling Distribution of the Mean
 
-A **sampling distribution** is a probability distribution of a **sample statistic** across many random samples $X_1. X_2. X_3,..., X_n from a population.
+A **sampling distribution** is a probability distribution of a **sample statistic** across many random samples $X_1, X_2, X_3,..., X_n$ from a population.
 
 If you take many samples of size $n$, then the sample mean value for these observations is 
 
@@ -421,7 +425,7 @@ $$ \bar{X}=\frac 1 n \sum_{i=1}^{n}X_i $$
 
 ## Sampling Distribution of the Mean
 
-A **sampling distribution** is a probability distribution of a **sample statistic** across many random samples $X_1. X_2. X_3,..., X_n from a population.
+A **sampling distribution** is a probability distribution of a **sample statistic** across many random samples $X_1, X_2, X_3,..., X_n$ from a population.
 
 If you take many samples of size $n$, then the sample mean value for these observations is 
 
@@ -437,7 +441,7 @@ $$ E(\bar{X}) = \mu $$
 
 ## Sampling Distribution of the Mean
 
-A **sampling distribution** is a probability distribution of a **sample statistic** across many random samples $X_1. X_2. X_3,..., X_n from a population.
+A **sampling distribution** is a probability distribution of a **sample statistic** across many random samples $X_1, X_2, X_3,..., X_n$ from a population.
 
 If you take many samples of size $n$, then the sample mean value for these observations is 
 
@@ -448,7 +452,7 @@ $$ E(\bar{X}) = \mu $$
 
 Different samples of the same size from the same population will yield different sample means. 
 
-The standard error of the mean is a measure of the variability in the mean from sample to sample:
+The **standard error of the mean** is a measure of the variability in the mean from sample to sample:
 
 $$ \sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}} $$
 
@@ -487,11 +491,11 @@ par(mfrow = c(1, 1))  # reset layout
 ```
 
 
-The two histograms above show the sampling distribution of the mean for two different sample sizes: n = 10 and n = 50.
+The two histograms above show the sampling distribution of the mean for two different sample sizes: $n = 10$ and $n = 50$.
 
-Notice how the distribution with larger sample size (n = 50) is narrower. 
+Notice how the distribution with larger sample size ($n = 50$) is narrower. 
 
-&rarr; This is because the standard error decreases as n increases, making our estimate of the population mean more precise.
+&rarr; This is because the standard error decreases as $n$ increases, making our estimate of the population mean more precise.
 
 
 ## Central Limit Theorem (CLT) {.smaller}
@@ -564,7 +568,7 @@ Even if the population is not normal, sample means from the population will be a
 
 $$\bar{X} \sim N(\mu,\frac{\sigma^2}{n})$$
 
-As $n$ becomes large, the central limit theorem states that the $Z$ transformation for \bar{X} approaches the standard normal distribution.
+As $n$ becomes large, the central limit theorem states that the $Z$ transformation for $\bar{X}$ approaches the standard normal distribution.
 
 $$
 Z=\frac{\bar{X}-\mu}{\sqrt{\sigma^2/n}} \sim N(0,1)
@@ -580,7 +584,7 @@ $$
 \bar{X} \sim N(\mu,\frac{\sigma^2}{n})
 $$
 
-As $n$ becomes large, the central limit theorem states that the $Z$ transformation for \bar{X} approaches the standard normal distribution.
+As $n$ becomes large, the central limit theorem states that the $Z$ transformation for $\bar{X}$ approaches the standard normal distribution.
 
 $$
 Z=\frac{\bar{X}-\mu}{\sqrt{\sigma^2/n}} \sim N(0,1)
@@ -669,13 +673,13 @@ Given sample size is large enough, and based on CLT,
 $$
 Z = \frac{\hat{p}-P}{\sqrt{ \frac{P(1 - P)}{n}}} = \frac{\hat{p}-P}{\sigma_\hat{p}}
 $$
-So, the \hat{p} has binomial distribution, but can be approximated by a standard normal distribution when $nP(1 – P) > 5$
+So, the $\hat{p}$ has binomial distribution, but can be approximated by a standard normal distribution when $nP(1 – P) > 5$
 
 
 ## Sampling Distribution of the Proportion - R Example {.smaller}
 
 > In a population, 40% support a policy. Sample size = 200.  
-> What is the probability that less than 35% in the sample support th epolicy ?
+> What is the probability that less than 35% in the sample support the policy ?
 
 So, $P(\hat{p}<0.35)$ where $\hat{p}$ is the sample proportion
 

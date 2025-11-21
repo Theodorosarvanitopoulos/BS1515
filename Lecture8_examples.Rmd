@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Problem Overview
 
-An electrical firm makes light bulbs with lives which are normally distributed. \
+An electrical firm makes light bulbs with lifetimes which are normally distributed. \
 
 The firm claims they have a mean life of 800 hours and a standard deviation of 40 hours . \
 
@@ -40,7 +40,7 @@ The firm claims they have a mean life of 800 hours and a standard deviation of 4
 
 ### Problem Overview
 
-An electrical firm makes light bulbs with lives which are normally distributed. \
+An electrical firm makes light bulbs with lifetimes which are normally distributed. \
 
 The firm claims they have a mean life of 800 hours and a standard deviation of 40 hours . \
 
@@ -48,12 +48,15 @@ The firm claims they have a mean life of 800 hours and a standard deviation of 4
 
 ### Problem solution 
 
+$X \sim N(\mu, \sigma^2)$, then $\bar{X}  \sim N(\mu, \frac{\sigma^2}{n})$
+
 Since $X \sim N(800, 40^2)$, then $\bar{X}  \sim N(800, \frac{40^2}{16})$
 
 Hence
 
 $$
-P(\bar{X}<775) = P(Z< \frac{775-800} {\sqrt{\frac{40^2}{16}}} ) \\
+P(\bar{X}<775) = P(Z< \frac{\bar{X}-\mu} {\sqrt{\frac{\sigma^2}{n}}} ) \\ 
+P(Z< \frac{775-800} {\sqrt{\frac{40^2}{16}}} ) \\
 =P(Z<-25/10)=P(Z<-2.5)
 $$
 
@@ -63,7 +66,7 @@ So, we need to look up at the Standard Normal Table for the value of 2.5, which 
 
 ### Using Standard Normal Table (textbook appendix)
 
-So, if $Z = -2.50$, from Z-table in the textbook appendix: $(P(Z < -2.50) = 0.9938$
+So, if $Z = -2.50$, from Z-table in the textbook appendix: $P(Z < -2.50) = 0.9938$
 
 To get the probability: $1 - 0.9938=0.0062$
 
@@ -109,7 +112,7 @@ list(
 
 Suppose a large population has mean $\mu = 8$, and standard deviation $\sigma = 3$. Suppose a random sample of size $n = 36$ is selected. \
 
-> What is the probability that the sample ena is between 7.8 and 8.2 &rarr; $(P(7.8 \leq \bar{X} \leq 8.2)$? \
+> What is the probability that the sample mean is between 7.8 and 8.2 &rarr; $(P(7.8 \leq \bar{X} \leq 8.2)$? \
 
 ---
 
@@ -119,7 +122,7 @@ Suppose a large population has mean $\mu = 8$, and standard deviation $\sigma = 
 
 Suppose a large population has mean $\mu = 8$, and standard deviation $\sigma = 3$. Suppose a random sample of size $n = 36$ is selected. \
 
-> What is the probability that the sample ena is between 7.8 and 8.2  &rarr; $(P(7.8 \leq \bar{X} \leq 8.2)$? \
+> What is the probability that the sample mean is between 7.8 and 8.2  &rarr; $(P(7.8 \leq \bar{X} \leq 8.2)$? \
 
 ### Problem solution
 
@@ -127,7 +130,7 @@ We do not know whether the population is normally distributed, but sample size l
 
 
 $$
-P(7.8<\bar(X)<8.2)=P(\frac{7.8-8}{3/\sqrt{36}}<\frac{\bar{X}-\mu}{{\sigma}{/\sqrt{n}}}<\frac{8.2-8}{{3}{/\sqrt{36}}}) \\
+P(7.8< \bar{X} <8.2)=P(\frac{7.8-8}{3/\sqrt{36}}<\frac{\bar{X}-\mu}{{\sigma}{/\sqrt{n}}}<\frac{8.2-8}{{3}{/\sqrt{36}}}) \\
 P(-0.4<Z<0.4)=0.3108
 $$
 
