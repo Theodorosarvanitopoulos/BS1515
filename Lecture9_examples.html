@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Theodoros Arvanitopoulos" />
-  <meta name="date" content="2025-10-03" />
+  <meta name="date" content="2025-11-23" />
   <meta name="copyright" content="Arvanitopoulos T - Lecture 9: Examples" />
   <title>Lecture 9: Examples</title>
   <style type="text/css">
@@ -531,7 +531,7 @@ list-style-type: none;
   <p class="author">
 Theodoros Arvanitopoulos
   </p>
-  <p class="date">2025-10-03</p>
+  <p class="date">2025-11-23</p>
 </div>
 <div id="example-1---confidence-intervals-when-sigma-known" class="slide section level2 smaller">
 <h1 class="smaller">Example 1 - Confidence intervals when <span class="math inline">\(\sigma\)</span> known</h1>
@@ -556,9 +556,11 @@ the population.</p>
 <p>We use the formula for the confidence interval of the population mean
 when <span class="math inline">\(\sigma\)</span> is known</p>
 <p><span class="math display">\[
-\bar{x} \pm \frac{\sigma}{\sqrt{n}} \\
-= 2.20 \pm 1.96 (0.35 / \sqrt{11}) \\
-= 2.20 \pm 0.2068 \\
+\bar{x} - z_{\alpha/2}\frac{\sigma}{\sqrt{n}} &lt; \mu &lt; \bar{x} +
+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\\
+= 2.20 - 1.96 (0.35 / \sqrt{11}) &lt; \mu &lt; 2.20 + 1.96 (0.35 /
+\sqrt{11})\\
+= 2.20 - 0.2068  &lt; \mu &lt; 2.20 + 0.2068 \\
 \]</span></p>
 <p>So, the interval is <span class="math display">\[
 1.9932 &lt; \mu &lt; 2.4068
@@ -577,9 +579,11 @@ the population.</p>
 <p>We use the formula for the confidence interval of the population mean
 when <span class="math inline">\(\sigma\)</span> is known</p>
 <p><span class="math display">\[
-\bar{x} \pm \frac{\sigma}{\sqrt{n}} \\
-= 2.20 \pm 1.96 (0.35 / \sqrt{11}) \\
-= 2.20 \pm 0.2068 \\
+\bar{x} - z_{\alpha/2}\frac{\sigma}{\sqrt{n}} &lt; \mu &lt; \bar{x} +
+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\\
+= 2.20 - 1.96 (0.35 / \sqrt{11}) &lt; \mu &lt; 2.20 + 1.96 (0.35 /
+\sqrt{11})\\
+= 2.20 - 0.2068  &lt; \mu &lt; 2.20 + 0.2068 \\
 \]</span></p>
 <p>So, the interval is <span class="math display">\[
 1.9932 &lt; \mu &lt; 2.4068
@@ -621,7 +625,7 @@ intervals would contain the true population mean.</p>
 <h1 class="smaller">Example 2 - Confidence Interval when <span class="math inline">\(\sigma\)</span> unknown</h1>
 <h3 id="problem-overview-3">Problem overview</h3>
 <p>A random sample of 16 gas grills has a mean ignition time of 0.51
-seconds and a sample standard deviation of 0.08 seconds.Assume ignition
+seconds and a sample standard deviation of 0.08 seconds. Assume ignition
 time is approximately normally distributed.</p>
 <p>Construct a 95% confidence interval for the true mean ignition
 time.</p>
@@ -630,21 +634,18 @@ time.</p>
 <h1 class="smaller">Example 2 - Confidence Interval when <span class="math inline">\(\sigma\)</span> unknown</h1>
 <h3 id="problem-overview-4">Problem overview</h3>
 <p>A random sample of 16 gas grills has a mean ignition time of 0.51
-seconds and a sample standard deviation of 0.08 seconds.Assume ignition
+seconds and a sample standard deviation of 0.08 seconds. Assume ignition
 time is approximately normally distributed.</p>
 <p>Construct a 95% confidence interval for the true mean ignition
 time.</p>
 <h3 id="problem-solution-2">Problem solution</h3>
 <p>Since <span class="math inline">\(\sigma\)</span> is not known, we
-given this is approximately normally distributed, we use the
-t-distribution. Degrees of freedom: <span class="math inline">\(df = n -
-1 = 15\)</span> and thus <span class="math inline">\(t_{df=15, \
-\alpha/2} = 2.131\)</span> from t-table</p>
+given this is approximately normally distributed, we use the <span class="math inline">\(t\)</span>-distribution. Degrees of freedom: <span class="math inline">\(df = n - 1 = 15\)</span> and thus <span class="math inline">\(t_{df=15, \ \alpha/2} = 2.131\)</span> from <span class="math inline">\(t\)</span>-distribution table</p>
 <p>We use the formula for the confidence interval :<br />
 </p>
 <p><span class="math display">\[
-\bar{x} - t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} &lt; \mu &lt;
-\bar{x} + t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} \\
+\bar{x} - t_{15, \ \alpha/2} \cdot \frac{s}{\sqrt{n}} &lt; \mu &lt;
+\bar{x} + t_{15, \ \alpha/2} \cdot \frac{s}{\sqrt{n}} \\
 0.51-(2.131) \frac{0.08}{4} &lt; \mu &lt; 0.51+(2.131) \frac{0.08}{4} \\
 \]</span></p>
 <p>So, the interval is <span class="math display">\[
@@ -655,21 +656,18 @@ t-distribution. Degrees of freedom: <span class="math inline">\(df = n -
 <h1 class="smaller">Example 2 - Confidence Interval when <span class="math inline">\(\sigma\)</span> unknown</h1>
 <h3 id="problem-overview-5">Problem overview</h3>
 <p>A random sample of 16 gas grills has a mean ignition time of 0.51
-seconds and a sample standard deviation of 0.08 seconds.Assume ignition
+seconds and a sample standard deviation of 0.08 seconds. Assume ignition
 time is approximately normally distributed.</p>
 <p>Construct a 95% confidence interval for the true mean ignition
 time.</p>
 <h3 id="problem-solution-3">Problem solution</h3>
 <p>Since <span class="math inline">\(\sigma\)</span> is not known, we
-given this is approximately normally distributed, we use the
-t-distribution. Degrees of freedom: <span class="math inline">\(df = n -
-1 = 15\)</span> and thus <span class="math inline">\(t_{df=15, \
-\alpha/2} = 2.131\)</span> from t-table</p>
+given this is approximately normally distributed, we use the <span class="math inline">\(t\)</span>-distribution. Degrees of freedom: <span class="math inline">\(df = n - 1 = 15\)</span> and thus <span class="math inline">\(t_{df=15, \ \alpha/2} = 2.131\)</span> from <span class="math inline">\(t\)</span>-distribution table</p>
 <p>We use the formula for the confidence interval :<br />
 </p>
 <p><span class="math display">\[
-\bar{x} - t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} &lt; \mu &lt;
-\bar{x} + t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} \\
+\bar{x} - t_{15, \ \alpha/2} \cdot \frac{s}{\sqrt{n}} &lt; \mu &lt;
+\bar{x} + t_{15, \ \alpha/2} \cdot \frac{s}{\sqrt{n}} \\
 0.51-(2.131) \frac{0.08}{4} &lt; \mu &lt; 0.51+(2.131) \frac{0.08}{4} \\
 \]</span></p>
 <p>So, the interval is <span class="math display">\[
@@ -727,9 +725,9 @@ proportion of left-handers in the population.</p>
 <h3 id="problem-solution-4">Problem solution</h3>
 <p>We use the formula for the confidence interval for population
 proportions: <span class="math display">\[
-\hat{p} - z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} &lt; P &lt;
-\hat{p} + z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} \\
-(or \  \hat{p} \pm z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n})  \\
+\hat{p} - z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} &lt; P &lt;
+\hat{p} + z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \\
+(or \  \hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}})  \\
 25/100 - 1.96 \sqrt{ \frac{0.25(0.75)}{100}} &lt; P &lt; 25/100 + 1.96
 \sqrt{ \frac{0.25(0.75)}{100}}  \\
 0.1651 &lt; P &lt; 0.3349
@@ -745,9 +743,9 @@ proportion of left-handers in the population.</p>
 <h3 id="problem-solution-5">Problem solution</h3>
 <p>We use the formula for the confidence interval for population
 proportions: <span class="math display">\[
-\hat{p} - z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} &lt; P &lt;
-\hat{p} + z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} \\
-(or \  \hat{p} \pm z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n})  \\
+\hat{p} - z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} &lt; P &lt;
+\hat{p} + z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \\
+(or \  \hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}})  \\
 25/100 - 1.96 \sqrt{ \frac{0.25(0.75)}{100}} &lt; P &lt; 25/100 + 1.96
 \sqrt{ \frac{0.25(0.75)}{100}}  \\
 0.1651 &lt; P &lt; 0.3349

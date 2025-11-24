@@ -82,7 +82,7 @@ We can estimate a population parameter with a sample statistic (point estimate):
 
 ## Unbiasedness {.smaller}
 
-A point estimator $\hat{\theta}$ is said to be an unbiased estimator of the parameter $\theta$ if its expected value is equal to that parameter \
+A point estimator $\hat{\theta}$ is said to be an unbiased estimator of the population parameter $\theta$ if its expected value is equal to that parameter \
 
 $$
 E(\hat{\theta}) = \theta
@@ -90,17 +90,17 @@ $$
 
 Examples:
 
-- Sample mean ($\bar{x}$) unbiased estimator of population mean ($\mu$) 
+- Sample mean ($\bar{x}$) is an unbiased estimator of population mean ($\mu$) 
 
-- Sample variance ($s^2$) unbiased estimator of population variance ($\sigma^2$)  
+- Sample variance ($s^2$) is an unbiased estimator of population variance ($\sigma^2$)  
 
-- Sample proportion ($\hat{p}$) unbiased estimator of population proportion ($P$)
+- Sample proportion ($\hat{p}$) is an unbiased estimator of population proportion ($P$)
 
 ---
 
 ## Unbiasedness {.smaller}
 
-A point estimator $\hat{\theta}$ is said to be an unbiased estimator of the parameter $\theta$ if its expected value is equal to that parameter \
+A point estimator $\hat{\theta}$ is said to be an unbiased estimator of the population parameter $\theta$ if its expected value is equal to that parameter \
 
 $$
 E(\hat{\theta}) = \theta
@@ -108,11 +108,11 @@ $$
 
 Examples:
 
-- Sample mean ($\bar{x}$) unbiased estimator of population mean ($\mu$) 
+- Sample mean ($\bar{x}$) is an unbiased estimator of population mean ($\mu$) 
 
-- Sample variance ($s^2$) unbiased estimator of population variance ($\sigma^2$)  
+- Sample variance ($s^2$) is an unbiased estimator of population variance ($\sigma^2$)  
 
-- Sample proportion ($\hat{p}$) unbiased estimator of population proportion ($P$)
+- Sample proportion ($\hat{p}$) is an unbiased estimator of population proportion ($P$)
 
 
 Example where $\hat{\theta_1}$ is an unbiased estimator of $\theta$, while $\hat{\theta_2}$ is biased
@@ -143,7 +143,7 @@ legend("topright", legend = c(expression(hat(theta)[1] ~ "(Unbiased)"),
 
 Let $\hat{\theta}$ be an estimator of $\theta$ 
 
-The bias in \hat{\theta} is defined as the difference between its mean and \theta
+The bias in $\hat{\theta}$ is defined as the difference between its mean and $\theta$
 
 $$
 Bias(\hat{\theta})=E(\hat{\theta})-\theta
@@ -155,7 +155,7 @@ So, the bias of an unbiased estimator is 0.
  
 Suppose there are several unbiased estimators of $\theta$\. 
 
-The most **efficient estimator** or the **minimum variance unbiased estimator** of \theta is the unbiased estimator with the **smallest variance** 
+The most **efficient estimator** or the **minimum variance unbiased estimator** of $\theta$ is the unbiased estimator with the **smallest variance** 
 
 Let  $\hat{\theta}_1$ and $\hat{\theta}_2$ be two unbiased estimators of $\theta$, based on the same number of observations:
 
@@ -169,7 +169,7 @@ Let  $\hat{\theta}_1$ and $\hat{\theta}_2$ be two unbiased estimators of $\theta
  
 Suppose there are several unbiased estimators of $\theta$\. 
 
-The most **efficient estimator** or the **minimum variance unbiased estimator** of \theta is the unbiased estimator with the **smallest variance** 
+The most **efficient estimator** or the **minimum variance unbiased estimator** of $\theta$ is the unbiased estimator with the **smallest variance** 
 
 Let  $\hat{\theta}_1$ and $\hat{\theta}_2$ be two unbiased estimators of $\theta$, based on the same number of observations:
 
@@ -214,9 +214,9 @@ legend("topright",
 
 How much uncertainty is associated with a point estimate of a population parameter? 
 
-An interval estimate provides more information information about a population characteristic than does a point estimate. 
+An **interval estimate** provides more information about a population characteristic than does a **point estimate**. 
 
-Such interval estimates are called confidence interval (CI) estimates, within which we expect the true population parameter to lie.
+Such interval estimates are called **confidence interval (CI) estimates**, within which we expect the true population parameter to lie.
 
 ---
 
@@ -224,13 +224,13 @@ Such interval estimates are called confidence interval (CI) estimates, within wh
 
 How much uncertainty is associated with a point estimate of a population parameter? 
 
-An interval estimate provides more information information about a population characteristic than does a point estimate. 
+An **interval estimate** provides more information about a population characteristic than does a **point estimate**. 
 
-Such interval estimates are called confidence interval (CI) estimates, within which we expect the true population parameter to lie.
+Such interval estimates are called **confidence interval (CI) estimates**, within which we expect the true population parameter to lie.
 
 ### Confidence interval estimation
 
-A interval (CI) gives a range of values: 
+A interval gives a **range** of values: 
 
 - takes into consideration variation in sample statistics from sample to sample
 
@@ -238,15 +238,17 @@ A interval (CI) gives a range of values:
 
 - gives information about closeness to unknown population parameters
 
-- stated in terms of level of confidence (one can be 100% confident or less)
+- stated in terms of **level of confidence** (one can be 100% confident or less)
 
 
 
 ## Confidence interval and confidence level
 
-If $P(a<\theta<b)=1-\alpha$, then the interval from $a$ to $b$ is called a $100(1-\alpha)$ confidence interval of $\theta$.
+Let $\theta$ be an unknown parameter.
 
-The quantity $100(1-\alpha)$ is called the confidence level of the internal ($0 \leq \alpha \leq 1$).
+If **$P(a<\theta<b)=1-\alpha$**, where $0 \leq \alpha \leq 1$, then the interval from $a$ to $b$ is called a $100(1-\alpha)\%$ **confidence interval** of $\theta$.
+
+The quantity $100(1-\alpha)\%$ is called the **confidence level** of the interval.
 
 In repeated samples of the population, the true value of the parameter $\theta$ would be contained in $100(1 - \alpha)\%$ of intervals calculated this way.  
 
@@ -260,7 +262,7 @@ Suppose confidence level = $95%$, which can also be written as $(1-\alpha)=0.95$
 
 **A relative frequency interpretation**:  
 
-From repeated samples, %95\%% of all the confidence intervals that can be constructed of size $n$ will contain the unknown true parameter. \
+From repeated samples, $95\%$ of all the confidence intervals that can be constructed of size $n$ will contain the unknown true parameter. \
 
 A specific interval either will contain or will not contain the true parameter  (no probability in specific interval)
 
@@ -280,7 +282,7 @@ Assumptions:
 
 - Population is normally distributed 
 
-- If population is not normal, use large sample 
+- If population is not normal, use large sample   (CLT)
 
 ---
 
@@ -292,7 +294,7 @@ Assumptions:
 
 - Population is normally distributed 
 
-- If population is not normal, use large sample 
+- If population is not normal, use large sample  (CLT)
 
 **Confidence interval estimate** for the mean is:
 
@@ -314,7 +316,7 @@ where:
 
 ## Reducing the margin of error and finding $z_{\alpha/2}$ {.smaller}
 
-The confidence interval can also be written as $\bar{x} \sim ME$ where $ME$ is the **margin of error**
+So, the confidence interval can also be written as $\bar{x} \pm ME$ where $ME$ is the **margin of error**
 
 $$ME=z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$$
 
@@ -322,17 +324,17 @@ $$ME=z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$$
 
 ## Reducing the margin of error and finding $z_{\alpha/2}$ {.smaller}
 
-The confidence interval can also be written as $\bar{x} \sim ME$ where $ME$ is the **margin of error**
+So, the confidence interval can also be written as $\bar{x} \pm ME$ where $ME$ is the **margin of error**
 
 $$ME=z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$$
 
 The margin of error can be reduced if:
 
-- the population standard deviation can be reduced ($\sigma$ &darr;) 
+- the population standard deviation can be reduced ($\sigma$ &darr;) $\rightarrow$ e.g. reduce variability in measurements
 
-- the sample size is increased ($n$ &uarr;)
+- the sample size is increased ($n$ &uarr;) $\rightarrow$ more information, more precise inference about the mean
 
-- the confidence level is decreased $(1-\alpha)$ &darr;) 
+- the confidence level is decreased $(1-\alpha)$ &darr; $\rightarrow$ $95\%$ CI shorter than $99\%$ CI
 
 
 ---
@@ -340,17 +342,19 @@ The margin of error can be reduced if:
 
 ## Reducing the margin of error and finding $z_{\alpha/2}$ {.smaller}
 
-The confidence interval can also be written as $\bar{x} \sim ME$ where $ME$ is the **margin of error**
+So, the confidence interval can also be written as $\bar{x} \pm ME$ where $ME$ is the **margin of error**
 
 $$ME=z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$$
 
+
 The margin of error can be reduced if:
 
-- the population standard deviation can be reduced ($\sigma$ &darr;) 
+- the population standard deviation can be reduced ($\sigma$ &darr;) $\rightarrow$ e.g. reduce variability in measurements
 
-- the sample size is increased ($n$ &uarr;)
+- the sample size is increased ($n$ &uarr;) $\rightarrow$ more information, more precise inference about the mean
 
-- the confidence level is decreased $(1-\alpha)$ &darr;) 
+- the confidence level is decreased $(1-\alpha)$ &darr; $\rightarrow$ $95\%$ CI shorter than $99\%$ CI
+
 
 Consider a 95% confidence interval: 
 
@@ -363,7 +367,7 @@ Find $z_{0.025}= \pm 1.96$ from the standard normal distribution table.
 
 Find $z_{0.025}= \pm 1.96$ from the standard normal distribution table.
 
-Check the corresponding standrad normal distribution table in the textbook appendices (Table 1)  
+Check the corresponding standard normal distribution table in the textbook appendices (Table 1)  
 
 ![](z_a2_distr.png){ width=40%}
 
@@ -394,7 +398,7 @@ William Sealey Gosset developed the **Student’s $t$ distribution** in the Guin
 
  
 
-## Student's t-distribution
+## Student's *$t$* Distribution
 
 If the sample mean $\bar{X}$ ~ $N( \mu, \frac{\sigma^2}{n})$ with known population variance $\sigma^2$, then
 
@@ -404,7 +408,7 @@ $$
 
 ---
 
-## Student's t-distribution
+## Student's *$t$* Distribution
 
 If the sample mean $\bar{X}$ ~ $N( \mu, \frac{\sigma^2}{n})$ with known population variance $\sigma^2$, then
 
@@ -420,7 +424,7 @@ Now, consider a random sample of $n$ observations
 
 ---
 
-## Student's t-distribution
+## Student's *$t$* Distribution
 
 If the sample mean $\bar{X}$ ~ $N( \mu, \frac{\sigma^2}{n})$ with known population variance $\sigma^2$, then
 
@@ -439,10 +443,10 @@ So, if the sample mean $\bar{X}$ ~ $N( \mu, \frac{\sigma^2}{n})$ with unknown po
 $$
 t= \frac{\bar{x}-\mu}{\frac{s}{\sqrt{n}}} 
 $$
-which follows the **Student’s $t$ distribution** with 14 degrees of freedom
+which follows the **Student’s *$t$* Distribution** with 14 degrees of freedom
 
 
-## Student's $t$-distribution - confidence intervals {.smaller}
+## Student's *$t$* Distribution - confidence intervals {.smaller}
 
 Assumptions:
 
@@ -450,11 +454,11 @@ Assumptions:
 
 - Population is normally distributed
 
-- If population is not normal, use large sample
+- If population is not normal, use large sample (CLT)
 
 ---
 
-## Student's $t$-distribution - confidence intervals {.smaller}
+## Student's *$t$* Distribution - confidence intervals {.smaller}
 
 Assumptions:
 
@@ -462,32 +466,31 @@ Assumptions:
 
 - Population is normally distributed
 
-- If population is not normal, use large sample
+- If population is not normal, use large sample (CLT)
 
 
-The, we use the **Student’s $t$ distribution** with confidence interval estimates:
+The, we use the **Student’s *$t$* Distribution** with confidence interval estimates:
 
 $$
-\bar{x} - t_{n-1, \ \alpha/2} \frac{S}{\sqrt{n}} < \mu < \bar{x} + t_{n-1, \ \alpha/2} \frac{S}{\sqrt{n}}
+\bar{x} - t_{n-1, \ \alpha/2} \frac{s}{\sqrt{n}} < \mu < \bar{x} + t_{n-1, \ \alpha/2} \frac{s}{\sqrt{n}}
 $$
 where: 
 
 - $t_{n-1, \ \alpha/2}$ is the critical value of the t distribution with $n-1$ d.f. and an area $\alpha/2$ in each tail 
 
-- $\bar{x} - t_{n-1, \ \alpha/2} \frac{S}{\sqrt{n}}$ is the **Lower Confidence Limit (LCL)** 
+- $\bar{x} - t_{n-1, \ \alpha/2} \frac{s}{\sqrt{n}}$ is the **Lower Confidence Limit (LCL)** 
 
-- $\bar{x} + t_{n-1, \ \alpha/2} \frac{S}{\sqrt{n}}$ is the **Upper Confidence Limit (LCL)** 
+- $\bar{x} + t_{n-1, \ \alpha/2} \frac{s}{\sqrt{n}}$ is the **Upper Confidence Limit (LCL)** 
 
-- $t_{n-1, \ \alpha/2} \frac{S}{\sqrt{n}}$ is the **Margin of Error** or **ME**
+- $t_{n-1, \ \alpha/2} \frac{s}{\sqrt{n}}$ is the **Margin of Error** or **ME**
 
 
 
-## Student's t-distribution
+## Student's *$t$* Distribution
 
 The $t$ is a family of distributions. \
 
-The $t$ value depends on **degrees of freedom (d.f.)**, which is the number of that are free to vary after
-sample mean has been calculated: \
+The $t$ value depends on **degrees of freedom (d.f.)**, which is the number of observations that are free to vary after the sample mean has been calculated: \
 
 $$ d.f.=n-1 $$
 
@@ -526,7 +529,7 @@ $t$ distributions are bell shaped and symmetric, but have ‘fatter’ tails tha
 
 
 
-## Student’s t Distribution {.smaller}
+## Student’s *$t$* Distribution {.smaller}
 
 ```{r, fig.asp=0.6, echo=FALSE, message=FALSE}
 library(knitr)

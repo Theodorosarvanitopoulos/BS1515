@@ -38,10 +38,11 @@ Determine a 95% confidence interval for the true mean resistance of the populati
 
 We use the formula for the confidence interval of the population mean when $\sigma$ is known
 
+
 $$
-\bar{x} \pm \frac{\sigma}{\sqrt{n}} \\
-= 2.20 \pm 1.96 (0.35 / \sqrt{11}) \\
-= 2.20 \pm 0.2068 \\
+\bar{x} - z_{\alpha/2}\frac{\sigma}{\sqrt{n}} < \mu < \bar{x} + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\\
+= 2.20 - 1.96 (0.35 / \sqrt{11}) < \mu < 2.20 + 1.96 (0.35 / \sqrt{11})\\
+= 2.20 - 0.2068  < \mu < 2.20 + 0.2068 \\
 $$
 
 So, the interval is 
@@ -64,9 +65,9 @@ Determine a 95% confidence interval for the true mean resistance of the populati
 We use the formula for the confidence interval of the population mean when $\sigma$ is known
 
 $$
-\bar{x} \pm \frac{\sigma}{\sqrt{n}} \\
-= 2.20 \pm 1.96 (0.35 / \sqrt{11}) \\
-= 2.20 \pm 0.2068 \\
+\bar{x} - z_{\alpha/2}\frac{\sigma}{\sqrt{n}} < \mu < \bar{x} + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\\
+= 2.20 - 1.96 (0.35 / \sqrt{11}) < \mu < 2.20 + 1.96 (0.35 / \sqrt{11})\\
+= 2.20 - 0.2068  < \mu < 2.20 + 0.2068 \\
 $$
 
 So, the interval is 
@@ -113,7 +114,7 @@ cat(sprintf("Upper bound: %.4f\n", ci_upper))
 
 ### Problem overview
 
-A random sample of 16 gas grills has a mean ignition time of 0.51 seconds and a sample standard deviation of 0.08 seconds.Assume ignition time is approximately normally distributed. 
+A random sample of 16 gas grills has a mean ignition time of 0.51 seconds and a sample standard deviation of 0.08 seconds. Assume ignition time is approximately normally distributed. 
 
 Construct a 95% confidence interval for the true mean ignition time.
 
@@ -123,18 +124,18 @@ Construct a 95% confidence interval for the true mean ignition time.
 
 ### Problem overview
 
-A random sample of 16 gas grills has a mean ignition time of 0.51 seconds and a sample standard deviation of 0.08 seconds.Assume ignition time is approximately normally distributed. 
+A random sample of 16 gas grills has a mean ignition time of 0.51 seconds and a sample standard deviation of 0.08 seconds. Assume ignition time is approximately normally distributed. 
 
 Construct a 95% confidence interval for the true mean ignition time.
 
 ### Problem solution
 
-Since $\sigma$ is not known, we given this is approximately normally distributed, we use the t-distribution. Degrees of freedom: $df = n - 1 = 15$ and thus $t_{df=15, \ \alpha/2} = 2.131$ from t-table
+Since $\sigma$ is not known, we given this is approximately normally distributed, we use the $t$-distribution. Degrees of freedom: $df = n - 1 = 15$ and thus $t_{df=15, \ \alpha/2} = 2.131$ from $t$-distribution table
 
 We use the formula for the confidence interval : \
 
 $$
-\bar{x} - t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} < \mu < \bar{x} + t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} \\
+\bar{x} - t_{15, \ \alpha/2} \cdot \frac{s}{\sqrt{n}} < \mu < \bar{x} + t_{15, \ \alpha/2} \cdot \frac{s}{\sqrt{n}} \\
 0.51-(2.131) \frac{0.08}{4} < \mu < 0.51+(2.131) \frac{0.08}{4} \\
 $$
 
@@ -149,18 +150,18 @@ $$
 
 ### Problem overview
 
-A random sample of 16 gas grills has a mean ignition time of 0.51 seconds and a sample standard deviation of 0.08 seconds.Assume ignition time is approximately normally distributed. 
+A random sample of 16 gas grills has a mean ignition time of 0.51 seconds and a sample standard deviation of 0.08 seconds. Assume ignition time is approximately normally distributed. 
 
 Construct a 95% confidence interval for the true mean ignition time.
 
 ### Problem solution
 
-Since $\sigma$ is not known, we given this is approximately normally distributed, we use the t-distribution. Degrees of freedom: $df = n - 1 = 15$ and thus $t_{df=15, \ \alpha/2} = 2.131$ from t-table
+Since $\sigma$ is not known, we given this is approximately normally distributed, we use the $t$-distribution. Degrees of freedom: $df = n - 1 = 15$ and thus $t_{df=15, \ \alpha/2} = 2.131$ from $t$-distribution table
 
 We use the formula for the confidence interval : \
 
 $$
-\bar{x} - t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} < \mu < \bar{x} + t_{15, \ \alpha/2} \cdot \frac{S}{\sqrt{n}} \\
+\bar{x} - t_{15, \ \alpha/2} \cdot \frac{s}{\sqrt{n}} < \mu < \bar{x} + t_{15, \ \alpha/2} \cdot \frac{s}{\sqrt{n}} \\
 0.51-(2.131) \frac{0.08}{4} < \mu < 0.51+(2.131) \frac{0.08}{4} \\
 $$
 
@@ -229,8 +230,8 @@ We are asked to construct a 95% confidence interval for the true proportion of l
 
 We use the formula for the confidence interval for population proportions:
 $$
-\hat{p} - z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} < P < \hat{p} + z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} \\
-(or \  \hat{p} \pm z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n})  \\
+\hat{p} - z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} < P < \hat{p} + z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \\
+(or \  \hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}})  \\
 25/100 - 1.96 \sqrt{ \frac{0.25(0.75)}{100}} < P < 25/100 + 1.96 \sqrt{ \frac{0.25(0.75)}{100}}  \\
 0.1651 < P < 0.3349
 $$
@@ -249,8 +250,8 @@ We are asked to construct a 95% confidence interval for the true proportion of l
 
 We use the formula for the confidence interval for population proportions:
 $$
-\hat{p} - z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} < P < \hat{p} + z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n} \\
-(or \  \hat{p} \pm z_{\alpha/2} \frac{\sqrt{\hat{p}(1-\hat{p})}}{n})  \\
+\hat{p} - z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} < P < \hat{p} + z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \\
+(or \  \hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}})  \\
 25/100 - 1.96 \sqrt{ \frac{0.25(0.75)}{100}} < P < 25/100 + 1.96 \sqrt{ \frac{0.25(0.75)}{100}}  \\
 0.1651 < P < 0.3349
 $$
