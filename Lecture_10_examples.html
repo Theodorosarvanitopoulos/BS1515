@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Theodoros Arvanitopoulos" />
-  <meta name="date" content="2025-10-03" />
+  <meta name="date" content="2025-11-24" />
   <meta name="copyright" content="Arvanitopoulos T - Lecture 10: Examples" />
   <title>Lecture 10: Examples</title>
   <style type="text/css">
@@ -531,25 +531,26 @@ list-style-type: none;
   <p class="author">
 Theodoros Arvanitopoulos
   </p>
-  <p class="date">2025-10-03</p>
+  <p class="date">2025-11-24</p>
 </div>
 <div id="example-1---student-test-scores" class="slide section level2 smaller">
 <h1 class="smaller">Example 1 - student test scores</h1>
 <h3 id="problem-overview">Problem overview</h3>
-<p>A sample of 49 student test scores from a large class has a sample
-mean of 76.4 and a standard deviation of 6.2.</p>
-<p>➡️ We want to test whether the true population mean score is 75.</p>
+<p>A sample of <span class="math inline">\(49\)</span> student test
+scores from a large class has a sample mean of <span class="math inline">\(76.4\)</span> and a standard deviation of <span class="math inline">\(6.2\)</span>.</p>
+<p>➡️ We want to test whether the true population mean score is <span class="math inline">\(75\)</span>.</p>
 <p><span class="math display">\[
 H_0: \mu = 75 \\
 H_1: \mu \neq 75
-\]</span> This is a <strong>two-tailed test</strong> at the <span class="math inline">\(\alpha = 0.05\)</span> significance level.</p>
+\]</span></p>
+<p>This is a <strong>two-tailed test</strong> at the <span class="math inline">\(\alpha = 0.05\)</span> significance level.</p>
 </div>
 <div id="example-1---student-test-scores-1" class="slide section level2 smaller">
 <h1 class="smaller">Example 1 - student test scores</h1>
 <h3 id="problem-overview-1">Problem overview</h3>
-<p>A sample of 49 student test scores from a large class has a sample
-mean of 76.4 and a standard deviation of 6.2.</p>
-<p>➡️ We want to test whether the true population mean score is 75.</p>
+<p>A sample of <span class="math inline">\(49\)</span> student test
+scores from a large class has a sample mean of <span class="math inline">\(76.4\)</span> and a standard deviation of <span class="math inline">\(6.2\)</span>.</p>
+<p>➡️ We want to test whether the true population mean score is <span class="math inline">\(75\)</span>.</p>
 <p><span class="math display">\[
 H_0: \mu = 75 \\
 H_1: \mu \neq 75
@@ -561,14 +562,15 @@ t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} = \frac{76.4 - 75}{6.2 /
 \sqrt{49}} = 1.58
 \]</span></p>
 <p><strong>Determine the critical value</strong></p>
-<p>From the t-distribution table <span class="math inline">\(t_{0.025,
+<p>From the t-distribution table <span class="math inline">\(t_{0.025, \
 48} \approx 2.01\)</span>. So, we reject the null hypothesis if <span class="math inline">\(t&lt;-2.01 \quad \text{or} \quad
 t&gt;2.01\)</span>.</p>
 <p><strong>Make a decision</strong></p>
 <p>Since <span class="math inline">\(t = 1.57\)</span> falls
-<strong>between</strong> -2.01 and 2.01, we <strong>do not
+<strong>between</strong> <span class="math inline">\(-2.01\)</span> and
+<span class="math inline">\(2.01\)</span>, we <strong>do not
 reject</strong> the null hypothesis. There is <strong>insufficient
-evidence</strong> to conclude that the true mean differs from 75.</p>
+evidence</strong> to conclude that the true mean differs from <span class="math inline">\(75\)</span>.</p>
 </div>
 <div id="example-1---distribution-plot" class="slide section level2">
 <h1>Example 1 - distribution plot</h1>
@@ -595,14 +597,16 @@ evidence</strong> to conclude that the true mean differs from 75.</p>
 <pre><code>## [1] 2.010635</code></pre>
 </div>
 <div id="example-2---two-tailed-t-test---average-hotel-room-cost" class="slide section level2 smaller">
-<h1 class="smaller">Example 2 - two-tailed t-test - average hotel room
-cost</h1>
+<h1 class="smaller">Example 2 - two-tailed <em>t</em>-test - average
+hotel room cost</h1>
 <h3 id="problem-overview-2">Problem overview</h3>
 <p>A travel website claims the average cost of a hotel room in Chicago
-is $130 per night. A sample of 25 hotels shows an average rate of $132
-with a standard deviation of $9.20.</p>
-<p>➡️ Test whether the true average cost differs from $135 using a
-significance level of <strong>α = 0.05</strong>.</p>
+is <span class="math inline">\(£130\)</span> per night. A sample of
+<span class="math inline">\(£25\)</span> hotels shows an average rate of
+<span class="math inline">\(£132\)</span> with a standard deviation of
+<span class="math inline">\(£9.20\)</span>.</p>
+<p>➡️ Test whether the true average cost differs from <span class="math inline">\(£135\)</span> using a significance level of
+<strong>α = 0.05</strong>.</p>
 <p><span class="math display">\[
 H_0: \mu = 130 \\
 H_1: \mu \neq 130
@@ -610,14 +614,16 @@ H_1: \mu \neq 130
 </p>
 </div>
 <div id="example-2---two-tailed-t-test---average-hotel-room-cost-1" class="slide section level2 smaller">
-<h1 class="smaller">Example 2 - two-tailed t-test - average hotel room
-cost</h1>
+<h1 class="smaller">Example 2 - two-tailed <em>t</em>-test - average
+hotel room cost</h1>
 <h3 id="problem-overview-3">Problem overview</h3>
 <p>A travel website claims the average cost of a hotel room in Chicago
-is $130 per night. A sample of 25 hotels shows an average rate of $132
-with a standard deviation of $9.20.</p>
-<p>➡️ Test whether the true average cost differs from $135 using a
-significance level of <strong>α = 0.05</strong>.</p>
+is <span class="math inline">\(£130\)</span> per night. A sample of
+<span class="math inline">\(£25\)</span> hotels shows an average rate of
+<span class="math inline">\(£132\)</span> with a standard deviation of
+<span class="math inline">\(£9.20\)</span>.</p>
+<p>➡️ Test whether the true average cost differs from <span class="math inline">\(£135\)</span> using a significance level of
+<strong>α = 0.05</strong>.</p>
 <p><span class="math display">\[
 H_0: \mu = 130 \\
 H_1: \mu \neq 130
@@ -630,11 +636,11 @@ t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} = \frac{130 - 135}{9.2 /
 \sqrt{25}} = \frac{-5}{1.84} \approx -2.72
 \]</span></p>
 <p><strong>Determine the critical value</strong></p>
-<p>From the t-distribution table <span class="math inline">\(t_{\alpha/2, df} = t_{0.025, 24} \approx
+<p>From the t-distribution table <span class="math inline">\(t_{\alpha/2, \ df} = t_{0.025, \ 24} \approx
 2.064\)</span>. So, we reject the null hypothesis if <span class="math inline">\(t &lt; -2.064 \quad \text{or} \quad t &gt;
 2.064\)</span></p>
 <p><strong>Make a decision</strong></p>
-<p>Since <span class="math inline">\(t = -2.72\)</span> &lt; -2.064, we
+<p>Since <span class="math inline">\(t = -2.72 &lt; -2.064\)</span>, we
 reject the null hypothesis.</p>
 </div>
 <div id="example-2---distribution-plot" class="slide section level2">
@@ -662,22 +668,26 @@ reject the null hypothesis.</p>
 <pre><code>## [1] 2.063899</code></pre>
 </div>
 <div id="example-3---two-tailed-z-test-using-p-value" class="slide section level2 smaller">
-<h1 class="smaller">Example 3 - two-tailed Z-test using p-value</h1>
+<h1 class="smaller">Example 3 - two-tailed <em>z</em>-test using
+p-value</h1>
 <h3 id="problem-overview-4">Problem overview</h3>
 <p>Assume the population standard deviation is <span class="math inline">\(\sigma=0.8\)</span> and a sample of size <span class="math inline">\(n = 100\)</span> results in a sample mean <span class="math inline">\(\bar{x} = 2.84\)</span>.</p>
 <p>➡️ We want to test whether the average number of TV sets in US homes
-is equal to 3 test at significance level <span class="math inline">\(\aplha = 0.05\)</span>.</p>
+is equal to <span class="math inline">\(3\)</span> test at significance
+level <span class="math inline">\(\alpha = 0.05\)</span>.</p>
 <p><span class="math display">\[
 H_0 : \mu = 3 \\
 H_1 : \mu \neq 3
 \]</span> This is a <strong>two-tailed test</strong> at the <span class="math inline">\(\alpha = 0.05\)</span> significance level.</p>
 </div>
 <div id="example-3---two-tailed-z-test-using-p-value-1" class="slide section level2 smaller">
-<h1 class="smaller">Example 3 - two-tailed Z-test using p-value</h1>
+<h1 class="smaller">Example 3 - two-tailed <em>z</em>-test using
+p-value</h1>
 <h3 id="problem-overview-5">Problem overview</h3>
 <p>Assume the population standard deviation is <span class="math inline">\(\sigma=0.8\)</span> and a sample of size <span class="math inline">\(n = 100\)</span> results in a sample mean <span class="math inline">\(\bar{x} = 2.84\)</span>.</p>
 <p>➡️ We want to test whether the average number of TV sets in US homes
-is equal to 3 test at significance level <span class="math inline">\(\aplha = 0.05\)</span>.</p>
+is equal to <span class="math inline">\(3\)</span> test at significance
+level <span class="math inline">\(\alpha = 0.05\)</span>.</p>
 <p><span class="math display">\[
 H_0 : \mu = 3 \\
 H_1 : \mu \neq 3
@@ -687,18 +697,20 @@ H_1 : \mu \neq 3
 Z=\frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}}=\frac{2.84-3}{\frac{0.8}{\sqrt{100}}}=-0.16/0.08=-2.0
 \]</span></p>
 <p><strong>Determine the critical value</strong></p>
-<p>From the z-distribution table, we reject the null hypothesis if <span class="math inline">\(z&lt;-1.96\)</span> or <span class="math inline">\(Z&gt;1.96\)</span>; otherwise, do not reject the
+<p>From the <span class="math inline">\(z\)</span>-distribution table,
+we reject the null hypothesis if <span class="math inline">\(z&lt;-1.96\)</span> or <span class="math inline">\(z&gt;1.96\)</span>; otherwise, do not reject the
 null.</p>
 <p><strong>Make a decision</strong></p>
 <p>Here, <span class="math inline">\(z=-2.0&lt;-1.96\)</span>, so the
 test statistics is in rejection area. Thus, we reject the null and
 conclude that there is sufficient evidence that the mean number of TVs
-in US homes is not equal to 3.</p>
+in US homes is not equal to <span class="math inline">\(3\)</span>.</p>
 </div>
 <div id="example-3---calculate-the-p-value" class="slide section level2 smaller">
 <h1 class="smaller">Example 3 - calculate the <em>p</em>-value</h1>
-<p>➡️ How likely is it to see a sample mean of 2.84 (or something
-further from the mean, in either direction) if the true mean is <span class="math inline">\(\mu = 3.0\)</span>?</p>
+<p>➡️ How likely is it to see a sample mean of <span class="math inline">\(2.84\)</span> (or something further from the mean,
+in either direction) if the true mean is <span class="math inline">\(\mu
+= 3.0\)</span>?</p>
 <p><span class="math inline">\(\bar{x} = 2.84\)</span> is translated to
 a <span class="math inline">\(z\)</span> score of <span class="math inline">\(z = -2.0\)</span>:</p>
 <p><span class="math display">\[

@@ -21,14 +21,15 @@ library(dplyr)
 
 ### Problem overview
 
-A sample of 49 student test scores from a large class has a sample mean of 76.4 and a standard deviation of 6.2.  
+A sample of $49$ student test scores from a large class has a sample mean of $76.4$ and a standard deviation of $6.2$.  
 
-➡️ We want to test whether the true population mean score is 75.
+➡️ We want to test whether the true population mean score is $75$.
 
 $$
 H_0: \mu = 75 \\
 H_1: \mu \neq 75
 $$
+
 This is a **two-tailed test** at the  $\alpha = 0.05$ significance level. 
 
 ---
@@ -37,9 +38,9 @@ This is a **two-tailed test** at the  $\alpha = 0.05$ significance level.
 
 ### Problem overview
 
-A sample of 49 student test scores from a large class has a sample mean of 76.4 and a standard deviation of 6.2.  
+A sample of $49$ student test scores from a large class has a sample mean of $76.4$ and a standard deviation of $6.2$.  
 
-➡️ We want to test whether the true population mean score is 75.
+➡️ We want to test whether the true population mean score is $75$.
 
 $$
 H_0: \mu = 75 \\
@@ -56,11 +57,11 @@ $$
 
 **Determine the critical value**
 
-From the t-distribution table  $t_{0.025, 48} \approx 2.01$. So, we reject the null hypothesis if $t<-2.01 \quad \text{or} \quad t>2.01$. 
+From the t-distribution table  $t_{0.025, \ 48} \approx 2.01$. So, we reject the null hypothesis if $t<-2.01 \quad \text{or} \quad t>2.01$. 
 
 **Make a decision**
 
-Since $t = 1.57$ falls **between** -2.01 and 2.01, we **do not reject** the null hypothesis. There is **insufficient evidence** to conclude that the true mean differs from 75.
+Since $t = 1.57$ falls **between** $-2.01$ and $2.01$, we **do not reject** the null hypothesis. There is **insufficient evidence** to conclude that the true mean differs from $75$.
 
 
 ## Example 1 - distribution plot 
@@ -142,13 +143,12 @@ t_crit <- qt(1 - alpha / 2, df)
 t_crit
 ```
 
-## Example 2 - two-tailed t-test - average hotel room cost {.smaller}
+## Example 2 - two-tailed *t*-test - average hotel room cost {.smaller}
 
 ### Problem overview
+A travel website claims the average cost of a hotel room in Chicago is $£130$ per night. A sample of $£25$ hotels shows an average rate of $£132$ with a standard deviation of $£9.20$.  
 
-A travel website claims the average cost of a hotel room in Chicago is $130 per night. A sample of 25 hotels shows an average rate of $132 with a standard deviation of $9.20.  
-
-➡️ Test whether the true average cost differs from $135 using a significance level of **α = 0.05**. 
+➡️ Test whether the true average cost differs from $£135$ using a significance level of **α = 0.05**. 
 
 $$
 H_0: \mu = 130 \\
@@ -159,13 +159,13 @@ This is a **two-tailed test** at the  $\alpha = 0.05$ significance level. \
 
 ---
 
-## Example 2 - two-tailed t-test - average hotel room cost {.smaller}
+## Example 2 - two-tailed *t*-test - average hotel room cost {.smaller}
 
 ### Problem overview
 
-A travel website claims the average cost of a hotel room in Chicago is $130 per night. A sample of 25 hotels shows an average rate of $132 with a standard deviation of $9.20.  
+A travel website claims the average cost of a hotel room in Chicago is $£130$ per night. A sample of $£25$ hotels shows an average rate of $£132$ with a standard deviation of $£9.20$.  
 
-➡️ Test whether the true average cost differs from $135 using a significance level of **α = 0.05**. 
+➡️ Test whether the true average cost differs from $£135$ using a significance level of **α = 0.05**. 
 
 $$
 H_0: \mu = 130 \\
@@ -183,11 +183,11 @@ $$
 
 **Determine the critical value**
 
-From the t-distribution table $t_{\alpha/2, df} = t_{0.025, 24} \approx 2.064$. So, we reject the null hypothesis if $t < -2.064 \quad \text{or} \quad t > 2.064$
+From the t-distribution table $t_{\alpha/2, \ df} = t_{0.025, \ 24} \approx 2.064$. So, we reject the null hypothesis if $t < -2.064 \quad \text{or} \quad t > 2.064$
 
 **Make a decision**
 
-Since $t = -2.72$ < -2.064,  we reject the null hypothesis.
+Since $t = -2.72 < -2.064$,  we reject the null hypothesis.
 
 
 ## Example 2  - distribution plot 
@@ -261,13 +261,13 @@ t_crit
 
 
 
-## Example 3 - two-tailed Z-test using p-value {.smaller}
+## Example 3 - two-tailed *z*-test using p-value {.smaller}
 
 ### Problem overview
 
 Assume the population standard deviation is $\sigma=0.8$ and a sample of size $n = 100$ results in a sample mean $\bar{x} = 2.84$.
 
-➡️ We want to test whether the average number of TV sets in US homes is equal to 3 test at significance level $\aplha = 0.05$.
+➡️ We want to test whether the average number of TV sets in US homes is equal to $3$ test at significance level $\alpha = 0.05$.
 
 $$
 H_0 : \mu = 3 \\
@@ -277,13 +277,13 @@ This is a **two-tailed test** at the  $\alpha = 0.05$ significance level.
 
 ---
 
-## Example 3 - two-tailed Z-test using p-value {.smaller}
+## Example 3 - two-tailed *z*-test using p-value {.smaller}
 
 ### Problem overview
 
 Assume the population standard deviation is $\sigma=0.8$ and a sample of size $n = 100$ results in a sample mean $\bar{x} = 2.84$.
 
-➡️ We want to test whether the average number of TV sets in US homes is equal to 3 test at significance level $\aplha = 0.05$.
+➡️ We want to test whether the average number of TV sets in US homes is equal to $3$ test at significance level $\alpha = 0.05$.
 
 $$
 H_0 : \mu = 3 \\
@@ -300,16 +300,16 @@ $$
 
 **Determine the critical value**
 
-From the z-distribution table, we reject the null hypothesis if $z<-1.96$ or $Z>1.96$; otherwise, do not reject the null.
+From the $z$-distribution table, we reject the null hypothesis if $z<-1.96$ or $z>1.96$; otherwise, do not reject the null.
 
 **Make a decision**
 
-Here, $z=-2.0<-1.96$, so the test statistics is in rejection area. Thus, we reject the null  and conclude that there is sufficient evidence that the mean number of TVs in US homes is not equal to 3.
+Here, $z=-2.0<-1.96$, so the test statistics is in rejection area. Thus, we reject the null  and conclude that there is sufficient evidence that the mean number of TVs in US homes is not equal to $3$.
 
 
 ## Example 3 - calculate the *p*-value {.smaller}
 
-➡️ How likely is it to see a sample mean of 2.84 (or something further from the mean, in either direction) if the true mean is $\mu = 3.0$?
+➡️ How likely is it to see a sample mean of $2.84$ (or something further from the mean, in either direction) if the true mean is $\mu = 3.0$?
 
 $\bar{x} = 2.84$ is translated to a $z$ score of $z = -2.0$:
 
