@@ -61,7 +61,7 @@ From the t-distribution table  $t_{0.025, \ 48} \approx 2.01$. So, we reject the
 
 **Make a decision**
 
-Since $t = 1.57$ falls **between** $-2.01$ and $2.01$, we **do not reject** the null hypothesis. There is **insufficient evidence** to conclude that the true mean differs from $75$.
+Since $t = 1.58$ falls **between** $-2.01$ and $2.01$, we **do not reject** the null hypothesis. There is **insufficient evidence** to conclude that the true mean differs from $75$.
 
 
 ## Example 1 - distribution plot 
@@ -146,15 +146,16 @@ t_crit
 ## Example 2 - two-tailed *t*-test - average hotel room cost {.smaller}
 
 ### Problem overview
-A travel website claims the average cost of a hotel room in Chicago is $£130$ per night. A sample of $£25$ hotels shows an average rate of $£132$ with a standard deviation of $£9.20$.  
 
-➡️ Test whether the true average cost differs from $£135$ using a significance level of **α = 0.05**. 
+A travel website claims the average cost of a hotel room in London is $£130$ per night. A sample of $25$ hotels shows an average rate of $£135$ with a standard deviation of $£9.20$.  
+
+➡️ Test whether the true average cost differs from $£130$ using a significance level of **α = 0.05**. 
 
 $$
 H_0: \mu = 130 \\
 H_1: \mu \neq 130
 $$
-This is a **two-tailed test** at the  $\alpha = 0.05$ significance level. \
+This is a **two-tailed test** at the  $\alpha = 0.05$ significance level.
 
 
 ---
@@ -163,9 +164,9 @@ This is a **two-tailed test** at the  $\alpha = 0.05$ significance level. \
 
 ### Problem overview
 
-A travel website claims the average cost of a hotel room in Chicago is $£130$ per night. A sample of $£25$ hotels shows an average rate of $£132$ with a standard deviation of $£9.20$.  
+A travel website claims the average cost of a hotel room in London is $£130$ per night. A sample of $25$ hotels shows an average rate of $£135$ with a standard deviation of $£9.20$.  
 
-➡️ Test whether the true average cost differs from $£135$ using a significance level of **α = 0.05**. 
+➡️ Test whether the true average cost differs from $£130$ using a significance level of **α = 0.05**. 
 
 $$
 H_0: \mu = 130 \\
@@ -178,23 +179,23 @@ This is a **two-tailed test** at the  $\alpha = 0.05$ significance level. \
 
 Use the formula to compute the test statistic with degrees of freedom $df = n - 1 = 24$
 $$
-t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} = \frac{130 - 135}{9.2 / \sqrt{25}} = \frac{-5}{1.84} \approx -2.72 
+t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} = \frac{135 - 130}{9.2 / \sqrt{25}} = \frac{5}{1.84} \approx 2.72 
 $$
 
 **Determine the critical value**
 
-From the t-distribution table $t_{\alpha/2, \ df} = t_{0.025, \ 24} \approx 2.064$. So, we reject the null hypothesis if $t < -2.064 \quad \text{or} \quad t > 2.064$
+From the *t*-distribution table  $t_{0.025, \ 24} \approx 2.064$. So, we reject the null hypothesis if $t < -2.064 \quad \text{or} \quad t > 2.064$
 
 **Make a decision**
 
-Since $t = -2.72 < -2.064$,  we reject the null hypothesis.
+Since $t = 2.72 > 2.064$,  we reject the null hypothesis.
 
 
 ## Example 2  - distribution plot 
 
 ```{r example2_two_tail_ttest, fig.align='center', echo=FALSE, message=FALSE, warning=FALSE}
-x_bar <- 130
-mu_0 <- 135
+x_bar <- 135
+mu_0 <- 130
 s <- 9.2
 n <- 25
 df <- n - 1
@@ -240,14 +241,14 @@ legend("bottom", legend = c("t-distribution", sprintf("t = %.2f", t_stat)),
 
 ```{r t-test-example, echo=TRUE}
 # Given values
-x_bar <- 130     # Sample mean
-mu_0 <- 135      # Hypothesized population mean
+x_bar <- 135     # Sample mean
+mu_0 <- 130      # Hypothesized population mean
 s <- 9.2         # Sample standard deviation
 n <- 25          # Sample size
 df <- n - 1      # Degrees of freedom
 alpha <- 0.05    # Significance level
 
-# Calculate z statistic
+# Calculate test statistic
 t_stat <- (x_bar - mu_0) / (s / sqrt(n))
 t_stat
 ```
@@ -265,7 +266,7 @@ t_crit
 
 ### Problem overview
 
-Assume the population standard deviation is $\sigma=0.8$ and a sample of size $n = 100$ results in a sample mean $\bar{x} = 2.84$.
+Assume the population standard deviation is $\sigma=0.8$. We have a sample of size $n = 100$ with sample mean $\bar{x} = 2.84$.
 
 ➡️ We want to test whether the average number of TV sets in US homes is equal to $3$ test at significance level $\alpha = 0.05$.
 
@@ -281,7 +282,7 @@ This is a **two-tailed test** at the  $\alpha = 0.05$ significance level.
 
 ### Problem overview
 
-Assume the population standard deviation is $\sigma=0.8$ and a sample of size $n = 100$ results in a sample mean $\bar{x} = 2.84$.
+Assume the population standard deviation is $\sigma=0.8$. We have a sample of size $n = 100$ with sample mean $\bar{x} = 2.84$.
 
 ➡️ We want to test whether the average number of TV sets in US homes is equal to $3$ test at significance level $\alpha = 0.05$.
 
@@ -295,7 +296,7 @@ This is a **two-tailed test** at the  $\alpha = 0.05$ significance level.
 
 Use the formula to compute the test statistic:
 $$
-Z=\frac{\bar{X}-\mu}{\frac{\sigma}{\sqrt{n}}}=\frac{2.84-3}{\frac{0.8}{\sqrt{100}}}=-0.16/0.08=-2.0
+Z=\frac{\bar{x}-\mu}{\frac{\sigma}{\sqrt{n}}}=\frac{2.84-3}{\frac{0.8}{\sqrt{100}}}=-0.16/0.08=-2.0
 $$
 
 **Determine the critical value**
@@ -304,7 +305,7 @@ From the $z$-distribution table, we reject the null hypothesis if $z<-1.96$ or $
 
 **Make a decision**
 
-Here, $z=-2.0<-1.96$, so the test statistics is in rejection area. Thus, we reject the null  and conclude that there is sufficient evidence that the mean number of TVs in US homes is not equal to $3$.
+Here, $z=-2.0<-1.96$, so the test statistic is in rejection area. Thus, we reject the null  and conclude that there is sufficient evidence that the mean number of TVs in US homes is not equal to $3$.
 
 
 ## Example 3 - calculate the *p*-value {.smaller}
