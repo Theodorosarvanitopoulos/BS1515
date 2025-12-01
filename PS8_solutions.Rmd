@@ -50,7 +50,7 @@ a. \(P(X > 11)\)
 
 **Answer:** 
 
-$z=11-10)/3 = 0.33 \Rightarrow P(X > 11) = P(Z>0.33)=1-F_z(0.33)=1-0.6293 = 0.3707$
+$z=(11-10)/3 = 0.33 \Rightarrow P(X > 11) = P(Z>0.33)=1-F_z(0.33)=1-0.6293 = 0.3707$
 
 b. \(P(X < 7)\)  
 
@@ -64,7 +64,7 @@ c. \(P(8 < X < 15)\)
 
 **Answer:** 
 
-$$(P(8 < X < 15) =(P(\frac{8-10}{3} < X < \frac{15-10}{{3}}) = (P(-0.67 < X < 1.67) $$
+$$P(8 < X < 15) =P(\frac{8-10}{3} < Z < \frac{15-10}{{3}}) = P(-0.67 < Z < 1.67) $$
 $$F_z(1.67)-F_z(-0.67)=F_z(1.67)-(1-F_z(0.67))=0.9525-(1-0.7486)=0.9525−0.2514 \Rightarrow P=0.7011$$
 
 
@@ -104,7 +104,7 @@ c) Less than £15.00 per hour
 
 **Answer:** 
 
-$$Pr(x<15) = P(z< \frac{15-16.5}{3.5}= P(z< -0.43) = 1-0.6664 = 0.3336$$
+$$Pr(x<15) = P(z< \frac{15-16.5}{3.5})= P(z< -0.43) = 1-0.6664 = 0.3336$$
 
 
 ---
@@ -161,7 +161,7 @@ $$
 
 The mean selling price of detached houses in Green Valley over a year was \$215,000. The population standard deviation was \$25,000. A random sample of 100 detached house sales was obtained.
 
-a. What is the probability that the sample mean selling price was more than £210,000?  
+a. What is the probability that the sample mean selling price was more than \$210,000?  
 
 b. What is the probability that the sample mean selling price was between \$213,000 and \$217,000?  
 
@@ -223,9 +223,9 @@ a. $$E(\hat{p})=p=0.424$$
 
 b. $$\mathrm{Var}(\hat p) = \frac{p(1-p)}{n}=\dfrac{(0.424)(0.576)}{100}=0.00244$$
 
-c.$$\mathrm{SE}(\hat p)= \sqrt{\frac{p(1-p)}{n}}=\sqrt{0.00244}=0.0494\qquad $$
+c. $$\mathrm{SE}(\hat p)= \sqrt{\frac{p(1-p)}{n}}=\sqrt{0.00244}=0.0494\qquad $$
 
-d.$$P\!\left(Z>\frac{0.5-0.424}{0.0494}\right)=P(Z>1.54)=0.0618$$
+d. $$P\!\left(Z>\frac{0.5-0.424}{0.0494}\right)=P(Z>1.54)=0.0618$$
 Using $z=1.54$ the standard tables gives $F_Z=0.9382$, hence $1-0.9382=0.0618$ for the upper tail.
 
 ---
