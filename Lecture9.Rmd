@@ -443,7 +443,7 @@ So, if the sample mean $\bar{X}$ ~ $N( \mu, \frac{\sigma^2}{n})$ with unknown po
 $$
 t= \frac{\bar{x}-\mu}{\frac{s}{\sqrt{n}}} 
 $$
-which follows the **Student’s *$t$* Distribution** with 14 degrees of freedom
+which follows the **Student’s *$t$* Distribution** with $\nu$ degrees of freedom
 
 
 ## Student's *$t$* Distribution - confidence intervals {.smaller}
@@ -469,7 +469,7 @@ Assumptions:
 - If population is not normal, use large sample (CLT)
 
 
-The, we use the **Student’s *$t$* Distribution** with confidence interval estimates:
+Then, we use the **Student’s *$t$* Distribution** with confidence interval estimates:
 
 $$
 \bar{x} - t_{n-1, \ \alpha/2} \frac{s}{\sqrt{n}} < \mu < \bar{x} + t_{n-1, \ \alpha/2} \frac{s}{\sqrt{n}}
