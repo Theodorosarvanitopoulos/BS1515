@@ -43,14 +43,14 @@ i. Number of close friends.
 
 # Exercise 
 
-In June an investor purchased 300 shares of Oracle at $20 a share. In August she purchased an additional 400 shares at $25 per share. In November she purchased another 400 shares at $23. What is the mean price paid for shares by this investor?
+In June an investor purchased 300 shares of Oracle at \$20 a share. In August she purchased an additional 400 shares at \$25 per share. In November she purchased another 400 shares at \$23. What is the mean price paid for shares by this investor?
 
 **Answer:**  
 
 Purchased shares:  
-- 300 shares at £20  
-- 400 shares at £25  
-- 400 shares at £23 
+- 300 shares at \$20  
+- 400 shares at \$25  
+- 400 shares at \$23 
 
 Mean Price Paid:
 $$
@@ -85,7 +85,7 @@ Taking the mid-point of this interval, median = ((22.6+25.4)/2 = 24).
 
 The arithmetic mean = $\sum(r)/6 = 23.88$    
 
-Geometric mean: $\bar{r_g}={(x_1 x_2  x_3...x_n)}^{1/n}=(28.5*17.2*25.4*28.6*22.6*21)^{1/6}=1690054851^{1/6}=23.51$
+Geometric mean: $\bar{r_g}={(x_1 x_2  x_3...x_n)}^{1/n}=(28.5*17.2*25.4*28.6*22.6*21)^{1/6}=169005481^{1/6}=23.51$
   
 Mean<median => the distribution is negatively skewed.
 
@@ -105,7 +105,7 @@ Year 2: \(31500 \times 1.15 = 36225\)
 The average salary increase is given by the geometric mean – not the arithmetic one  
 
 \[
-GM =  \big((1.05) (1.15)\big)^{1/2}=1.09886\% \ per \ year \ approx 
+GM =  \big((1.05) (1.15)\big)^{1/2}=1.09886 \ per \ year \ approx 
 \]
 
 You can check that \(30000 \times 1.09886 = 32965.80;\ 32965.8 \times 1.09886 = 36224.80\) – almost equal to $36225$ calculated above.
@@ -137,7 +137,7 @@ $$
 Sample standard deviation
 
 $$
-s^2 \;=\; \sqrt{\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})^2} = \sqrt{\frac{381.7355}{14}}  =\sqrt{27.2668} =5.224
+s \;=\; \sqrt{\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})^2} = \sqrt{\frac{381.7355}{14}}  =\sqrt{27.2668} =5.224
 $$
 
 Skewness 
