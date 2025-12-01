@@ -178,7 +178,7 @@ Pr(\text{Both Irish or Welsh}) = \frac{221}{984} \times \frac{220}{983} = 0.05
 \[
 Pr(\text{At least one Scottish}) = 1 - Pr(\text{No Scottish})
 \]
-as the two events are complements. But, Pr(No Scottish) = Pr(2 nd not Scottish | 1st not Scottish) * Pr(1 st not Scottish), so that,
+as the two events are complements. But, Pr(No Scottish) = Pr(2nd not Scottish | 1stnot Scottish) * Pr(1st not Scottish), so that,
 
 \[
 Pr(\text{No Scottish}) = \frac{753}{984} \times \frac{752}{983} = 0.585
@@ -187,7 +187,7 @@ Pr(\text{No Scottish}) = \frac{753}{984} \times \frac{752}{983} = 0.585
 Therefore,
 
 \[
-Pr(\text{At least one Scottish}) = 1 - 0.585 = 0.42
+Pr(\text{At least one Scottish}) = 1 - 0.585 = 0.415
 \]
 
 **e)** One is Welsh and one is American  
@@ -333,13 +333,13 @@ For \(P(X=0)\):
 
 $$P(X=0) = \binom{16}{0}(0.05)^0(0.95)^{16} = 1 \times 1 \times (0.95)^{16} = 0.4401$$
 
-[or $P(X=0)=\frac{16!}{0!(16-0)}0.05^0(1-0.05)^{16-0}$]
+[or $P(X=0)=\frac{16!}{0!(16-0)!}0.05^0(1-0.05)^{16-0}$]
 
 For \(P(X=1)\):  
 
 $$P(X=1) = \binom{16}{1}(0.05)^1(0.95)^{15} = 16 \times 0.05 \times (0.95)^{15} = 0.3707$$
 
-[or $P(X=0)=\frac{16!}{0!(16-1)}0.05^1(1-0.05)^{16-1}$]
+[or $P(X=1)=\frac{16!}{0!(16-1)!}0.05^1(1-0.05)^{16-1}$]
 
 Thus,  $P(\text{accept shipment}) = P(X=0)+P(X=1)=0.4401+0.3707=0.8108$
 
