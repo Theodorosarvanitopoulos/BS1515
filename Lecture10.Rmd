@@ -54,9 +54,9 @@ e.g. The proportion of adults in this city with cell phones is $P=0.88$
 We use our **sample** to assess the truth or validity of some assertion about the population.
 
 
-## The Null Hypothesis ($H_0$) vs the Alternative Hypothesis ($H_1$) 
+## The Null Hypothesis $(H_0)$ vs the Alternative Hypothesis $(H_1)$ 
 
-**Null Hypothesis ($H_0$)**
+**Null Hypothesis $(H_0)$**
  
 - States the **assumption** (numerical) to be tested &rarr; always about a population parameter not a sample statistic
 
@@ -70,9 +70,9 @@ We use our **sample** to assess the truth or validity of some assertion about th
 
 ---
 
-## The Null Hypothesis ($H_0$) vs the Alternative Hypothesis ($H_1$) 
+## The Null Hypothesis $(H_0)$ vs the Alternative Hypothesis $(H_1)$  
 
-**Null Hypothesis ($H_0$)**
+**Null Hypothesis $(H_0)$**
  
 - States the **assumption** (numerical) to be tested &rarr; always about a population parameter not a sample statistic
 
@@ -84,7 +84,7 @@ We use our **sample** to assess the truth or validity of some assertion about th
 
 - May or may not be **rejected**
 
-**Alternative Hypothesis ($H_1$)**
+**Alternative Hypothesis $(H_1)$ **
 
 - Opposite of the null hypothesis  
 
@@ -113,7 +113,7 @@ We use our **sample** to assess the truth or validity of some assertion about th
  
 2. Set the significance level $\alpha$ &rarr; provides critical values of the test 
 
-  e.g. to reject the null, traditionally researchers choose $\alpha=5%$ (or $1-\alpha=95\%$) 
+  e.g. to reject the null, traditionally researchers choose $\alpha=5\%$ (or $1-\alpha=95\%$) 
   
 ---
 
@@ -125,7 +125,7 @@ We use our **sample** to assess the truth or validity of some assertion about th
  
 2. Set the significance level $\alpha$ &rarr; provides critical values of the test 
 
-  e.g. to reject the null, traditionally researchers choose $\alpha=5%$ (or $1-\alpha=95\%$) 
+  e.g. to reject the null, traditionally researchers choose $\alpha=5\%$ (or $1-\alpha=95\%$) 
 
 3. Collect a random sample and compute test statistic  
 
@@ -141,7 +141,7 @@ We use our **sample** to assess the truth or validity of some assertion about th
  
 2. Set the significance level $\alpha$ &rarr; provides critical values of the test 
 
-  e.g. to reject the null, traditionally researchers choose $\alpha=5%$ (or $1-\alpha=95\%$) 
+  e.g. to reject the null, traditionally researchers choose $\alpha=5\%$ (or $1-\alpha=95\%$) 
 
 3. Collect a random sample and compute test statistic  
 
@@ -169,7 +169,7 @@ The level of significance defines the unlikely values of the sample statistic if
 
 In other words, it defines **rejection region** of the sampling distribution.
 
-So, rejection areas is designated by the level of significance &rarr; typical values of $\alpha$ : $0.01, 0.05, 0.10$. 
+So, rejection areas are designated by the level of significance &rarr; typical values of $\alpha$ : $0.01, 0.05, 0.10$. 
 
 $\alpha$ provides the critical values of the test the inform the research of when to reject the null $H_0$ and accept the alternative $H_1$
 
@@ -185,7 +185,7 @@ The level of significance defines the unlikely values of the sample statistic if
 
 In other words, it defines **rejection region** of the sampling distribution.
 
-So, rejection areas is designated by the level of significance &rarr; typical values of $\alpha$ : $0.01, 0.05, 0.10$. 
+So, rejection areas are designated by the level of significance &rarr; typical values of $\alpha$ : $0.01, 0.05, 0.10$ 
 
 $\alpha$ provides the critical values of the test the inform the research of when to reject the null $H_0$ and accept the alternative $H_1$
 
@@ -279,7 +279,7 @@ If Type I error probability ($\alpha$) &uarr;, then Type II error probability ($
 
 Ceteris Paribus (all else equal)
 
-- $\beta$ &uarr; when the differnece between hypothesised parameters and its true value &darr;
+- $\beta$ &uarr; when the difference between hypothesised parameters and its true value &darr;
 
 - $\beta$ &uarr;when $\alpha$ &darr;
 
@@ -319,52 +319,15 @@ $$Power = P \ ( \ Reject \ \ H_0 \  | \ H_1 \ \ is \ \ true)$$
 Test statistics for the mean differs when $\sigma$ is known ($Z$ statistic) vs when is unknown ($t$ statistic).
 
 
-
-## $Z$-Test for the mean ($\sigma$ known)
-
-We start with the case that $\sigma$ is known. \
-
-This means that we convert sample statistic $\bar{x}$ to a $Z-stat$ test statistic. \
-
-Assume the population is normal and consider the test: \
-
-$H_0$: $\mu=\mu_0$ \
-
-$H_1$: $\mu>\mu_0$ \
-
-The decision rule is:
-
-Reject $H_0$ if  $Z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}> z_{\alpha}$
-
-
-
-## $t$-Test for the mean ($\sigma$ uknown)
-
-What if $\sigma$ is unknown? \
-
-This means that we convert sample statistic $\bar{x}$ to a $t-stat$ test statistic. \
-
-Assume the population is normal and consider the test: \
-
-$H_0$: $\mu=\mu_0$ \
-
-$H_1$: $\mu>\mu_0$ \
-
-The decision rule is:
-
-Reject $H_0$ if  $t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}> t_{n-1, \ \alpha}$
-
-
-
 ## Two-tailed type of test
 
 Two-tailed test ($t$-stat or $z$-stat):  
 
  $H_0: \mu = \mu_0$ vs. $H_1: \mu \neq \mu_0$
  
-- We assign half of $\alpha$ to testing the statistical significance in either direction. 
+- We assign half of $\alpha$ to test the statistical significance in either direction. 
 
-- This means that 0.025 in each tail of the distribution of the test statistic. 
+- This means that $0.025$ in each tail of the distribution of the test statistic. 
 
 - Regardless of the direction of the relationship hypothesised, the test is for the possibility of the relationship in both directions. 
 
@@ -414,6 +377,45 @@ ggplot(df_plot, aes(x = x, y = Density, color = Distribution, linetype = Distrib
 ```
   
 
+## $Z$-Test for the mean ($\sigma$ known)
+
+We start with the case that $\sigma$ is known. \
+
+This means that we convert sample statistic $\bar{x}$ to a $Z-stat$ test statistic. \
+
+Assume the population is normal and consider the test: \
+
+$H_0$: $\mu=\mu_0$ \
+
+$H_1$: $\mu \neq \mu_0$ \
+
+The decision rule is:
+
+Reject $H_0$ if $Z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}< -z_{\alpha/2}$ or  $Z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}> z_{\alpha/2}$
+
+where $z_{\alpha}$ is the critical value for $\alpha$ significance level
+
+
+## $t$-Test for the mean ($\sigma$ uknown)
+
+What if $\sigma$ is unknown? \
+
+This means that we convert sample statistic $\bar{x}$ to a $t-stat$ test statistic. \
+
+Assume the population is normal and consider the test: \
+
+$H_0$: $\mu=\mu_0$ \
+
+$H_1$: $\mu \neq \mu_0$ \
+
+The decision rule is:
+
+Reject $H_0$ if  $t=\frac{\bar{x} - \mu_0}{s / \sqrt{n}}<- t_{n-1, \ \alpha/2}$ or  $t= \frac{\bar{x} - \mu_0}{s / \sqrt{n}}> t_{n-1, \ \alpha/2}$
+
+where $t_{n-1, \ \alpha}$ is the critical value for d.f. $n-1$ and $\alpha$ significance level
+
+
+
 
 ## One-tailed  type of test {.smaller}
 
@@ -428,7 +430,7 @@ ggplot(df_plot, aes(x = x, y = Density, color = Distribution, linetype = Distrib
 
 - We assign all $\alpha$ to testing the statistical significance in one direction. 
 
-- This means that  0.05 is in one tail of the distribution of the test statistic. 
+- This means that  $0.05$ is in one tail of the distribution of the test statistic. 
 
 - For one tailed test, you disregard the possibility of a relationship in the other direction.  
 
@@ -540,7 +542,7 @@ $$
 
 ## $p$-value approach to testing
 
-**$p$-value** is the probability of obtaining a test statistics equal to or more extreme than the observed sample value given $H_0$ is true.
+**$p$-value** is the probability of obtaining a test statistic equal to or more extreme than the observed sample value given $H_0$ is true.
 
 It is also called observed level of significance &rarr; researchers often say they found *"statistically significant findings"*.
 
@@ -552,7 +554,7 @@ In practice, this is the most common approach for deciding whether $H_0$ can be 
 
 ## $p$-value approach to testing
 
-**$p$-value** is the probability of obtaining a test statistics equal to or more extreme than the observed sample value given $H_0$ is true.
+**$p$-value** is the probability of obtaining a test statistic equal to or more extreme than the observed sample value given $H_0$ is true.
 
 It is also called observed level of significance &rarr; researchers often say they found *"statistically significant findings"*.
 
