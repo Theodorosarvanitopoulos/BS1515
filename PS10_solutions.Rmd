@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Exercise 
 
-A random sample of 1556 employees at Donigton, Inc., Slough, has been asked to attend an ethics workshop. The employees were asked to rate the following statement from a scale from 1 (strongly disagree) to 7 (strongly agree): Only senior executives play a crucial role in environment sustainability. The sample mean response was 4.04, and the sample standard deviation was 1.22. Test at the 1% significance level, against a two-sided alternative, the null hypothesis that the population mean is 4.
+A random sample of 1556 employees at Donigton, Inc., Slough, has been asked to attend an ethics workshop. The employees were asked to rate the following statement from a scale from 1 (strongly disagree) to 7 (strongly agree): Only senior executives play a crucial role in environmental sustainability. The sample mean response was 4.04, and the sample standard deviation was 1.22. Test at the 1% significance level, against a two-sided alternative, the null hypothesis that the population mean is 4.
 
 **Answer:**
 
@@ -117,6 +117,7 @@ Since \(|z| = 1.095 < 1.645\), we **do not reject** \(H_0\). At the 10% level th
 The p-value is $$p \;=\; 2(1 - F(|z|) \;\approx\; 0.273.$$
 
 
+
 ---
 
 # Exercise
@@ -146,12 +147,20 @@ ii) Using the information provided above in the table, show how the t-statistic 
 H0: average temperatures in these 2 time periods are the same  
 H1: average temperatures in these 2 time periods are different  
 
+or 
+
+$$
+H_0:\ \mu_0 = \mu_1
+\qquad\text{vs}\qquad
+H_1:\ \mu_0 \neq \mu_1.
+$$
+
 You should check that \(t=-9.5520\) is given by \(-0.4859031/0.0508693\)
 
 And that the standard error of the combined statistics is calculated as follows: \(0.3830935/\sqrt{136}=0.03285\)
 
-The \(t\) critical for 134 d.f. at 95% confidence level is 1.962 hence \(9.5520>1.962\)
+The critical value for a two-sided test at the $5\%$ significance level ($95\%$ confidence) with 134 d.f. is $t_{0.975,134} \approx 1.96$, and $|t| = 9.552 > 1.96$, so we reject $H_0$.
 
 We reject the null hypothesis \(H_0\) in favour of the alternative and conclude the average temperatures in these 2 time periods are different.
 
-As we are interested in a two-way test (the alternative is different from) we can look under Ha: diff != 0. The p-value is <0.05 and less than 0.01 so we can conclude we reject the null hypothesis \(H_0\) in favour of the alternative and state the average temperatures in these two time periods are statistically significantly different at 99% (since \(p<0.01\)).
+  As we are interested in a two-sided test (the alternative is different from) we can look under $Ha: \ diff \neq 0$. The p-value is less than 0.05 and also less than 0.01, so we reject the null hypothesis \(H_0\) in favour of the alternative. We therefore conclude that the average temperatures in these two time periods are statistically significantly different at at $1\%$ level (since \(p<0.01\)).

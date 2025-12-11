@@ -116,7 +116,7 @@ a. Calculate the margin of error for a 90% confidence interval
 
   **Answer:**  
   
-  $n=25, \bar{x}=42,740,  s=4,780, s=df=24, t_{.05, 24}=1.711$.
+  $n=25, \bar{x}=42,740, \ s=4,780, \ df=24, \ t_{.05, 24}=1.711$.
   
   Population \(\sigma\) unknown ⇒ use \(t\) with \(df=n-1=24\).  
   
@@ -128,7 +128,7 @@ a. Calculate the margin of error for a 90% confidence interval
 
 
  
-b)  Find the UCL and LCL of a 90% confidence interval estimate. .  
+b)  Find the UCL and LCL of a 90% confidence interval estimate. 
 
 **Answer:**  
 
@@ -157,7 +157,7 @@ $$
 \hat{p}=320/400=0.80,\ n=400,\ z_{\alpha/2}=2.326
 $$
 $$
-LCL = \hat{p} - z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = .80-2.326 \sqrt{\frac{0.8(1-80)}{400}}= 0.75348
+LCL = \hat{p} - z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = .80-2.326 \sqrt{\frac{0.8(1-0.8)}{400}}= 0.75348
 $$
 
 b. Calculate the width of a 90% confidence interval estimate for the population proportion.  
@@ -167,7 +167,7 @@ b. Calculate the width of a 90% confidence interval estimate for the population 
 The width is the total distance from the lower bound to the upper bound. Margin of error is equal to half-width, while width is the full length of the interval. So, the width of a 90% confidence interval is:
 
 $$
-width=2ME=2 z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}=2(1.645)(0.0329)=0.0658
+width=2ME=2 z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}=2(1.645)(0.02)=2(0.0329)=0.0658
 $$
 
 ---
